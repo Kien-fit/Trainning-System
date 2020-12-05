@@ -1,0 +1,108 @@
+﻿/*Các xử lý định dạng cho layout */
+
+/*========== HEADER ==========*/
+/*==========  ==========*/
+.logo {
+	height: 10vh;
+	background-color: rgba(0,0,0,0.1);
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	margin-top: 1vh;
+}
+
+/*==========  ==========*/
+.account {
+	height: 10vh;
+	background-color: rgba(0,0,0,0.03);
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	margin-top: 1vh;
+}
+
+.account i{
+	text-align: center;
+	font-size: 8vh;
+	margin: 1vh 0 0 1vw;
+}
+
+.account h6{
+	margin-top: 1vh;
+}
+
+/*==========  ==========*/
+.menu {
+	margin-top: 3vh;
+	height: auto;
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+}
+
+/*==========  ==========*/
+.col-md-9 nav{
+	margin-top: 3vh;
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+}
+
+.col-md-9 nav i {
+	margin-top: 6px;
+}
+
+.mysearch {
+	margin-top: 3.5vh;
+	margin-bottom: 2vh;
+}
+
+/*==========  ==========*/
+.view {
+	/*margin-top: 3vh;*/
+	height: auto;
+	background-color: rgba(0,0,0,0.03);
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+}
+.view table {
+	width: 100%;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+}
+.view table th, .view table td {
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;
+}
+.view table th{
+	padding: 10px 0;
+	text-align: center;
+	background: #c7c7c7;
+	color: #ffffff;	
+}
+.view table td{
+	padding: 5px 1px;
+}
+.view table .even{
+	background: rgba(0,0,0,0.08);
+}
+.view table .NO, .view table .ED, .view table .ID {
+	width: 3vw;
+	text-align: center;
+}
+.view table .NAME{
+	width: 10vw;
+	font-weight: bold;
+}
+.view table .ADDRESS{
+	width: 20vw;
+}
+.view table .PHONE, .view table .LOGINED{
+	text-align: center;
+}
+
+/*========== FOOTER ==========*/
+.footer-left {
+	margin: 3vh 0;
+	height: 15vh;
+	background-color: rgba(0,0,0,0.1);
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+}
+
+.footer-right {
+	margin-top: 3vh;
+	height: 15vh;
+	background-color: rgba(0,0,0,0.1);
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+}

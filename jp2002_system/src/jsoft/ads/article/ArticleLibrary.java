@@ -1,0 +1,49 @@
+package jsoft.ads.article;
+
+import java.util.*;
+
+import jsoft.objects.*;
+
+public class ArticleLibrary {
+
+	public static String viewArticles(ArrayList<ArticleObject> items) {
+		String tmp = "<table cellspacing=0>";
+
+		//Dòng tiêu đề
+		tmp += "<tr>";
+		tmp += "<th>STT</th>";
+		tmp += "<th>Ngày tạo</th>";
+		tmp += "<th>Tiêu đề</th>";
+		tmp += "<th>Tên thể loại</th>";
+		tmp += "<th>Tên chuyên  mục</th>";
+		tmp += "<th>Tác giả</th>";
+		tmp += "<th>Lượt xem</th>";
+//		tmp += "<th></th>";
+//		tmp += "<th></th>";
+		tmp += "<th colspan=2>Thực hiện</th>";
+		tmp += "<th>ID</th>";
+		tmp += "</tr>";
+
+		//Dòng nội dung
+		int NO = 0;
+		for (ArticleObject item : items) {
+			NO++;
+			tmp += (NO%2==0)?"<tr class=\"even\">":"<tr>";
+			tmp += "<td class=\"NO\">"+NO+"</td>";
+			tmp += "<td class=\"CREATED_DATE\">"+item.getArticle_created_date()+"</td>";
+			tmp += "<td class=\"TITLE\">"+item.getArticle_title()+"</td>";
+			tmp += "<td class=\"CATEGORY_NAME\">"+item.getCategory_name()+"</td>";
+			tmp += "<td class=\"SECTION_NAME\">"+item.getSection_name()+"</td>";
+			tmp += "<td class=\"AUTHOR\">"+item.getArticle_author_name()+"</td>";
+			tmp += "<td class=\"VISITED\">"+item.getArticle_visited()+"</td>";
+			tmp += "<td class=\"ED\">Sửa</td>";
+			tmp += "<td class=\"ED\">Xóa</td>";
+			tmp += "<td class=\"ID\">"+item.getArticle_id()+"</td>";
+			tmp += "</tr>";
+		}
+		
+		tmp += "</table>";
+
+		return tmp;
+	}
+}
