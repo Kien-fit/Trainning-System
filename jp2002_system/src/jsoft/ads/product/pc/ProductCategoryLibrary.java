@@ -31,8 +31,8 @@ public class ProductCategoryLibrary {
 			tmp += "<td class=\"NAME\">" + item.getPc_name() + "</td>";
 			tmp += "<td class=\"CREATED_DATE\">" + item.getPc_created_date() + "</td>";
 			tmp += "<td class=\"NOTES\">" + item.getPc_notes() + "</td>";
-			tmp += "<td class=\"ED\">Sửa</td>";
-			tmp += "<td class=\"ED\">Xóa</td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/pc/ae?id="+item.getPc_id()+"\">Sửa</a></td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/pc/ae?id="+item.getPc_id()+"\">Xóa</a></td>";
 			tmp += "<td class=\"ID\">" + item.getPc_id() + "</td>";
 			tmp += "</tr>";
 		}

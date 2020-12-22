@@ -9,8 +9,8 @@ public class ArticleControl {
 	//
 	private ArticleModel am;
 
-	public ArticleControl(ConnectionPool cp) {
-		this.am = new ArticleModel(cp);
+	public ArticleControl(ConnectionPool cp, String objectName) {
+		this.am = new ArticleModel(cp, objectName);
 	}
 
 	protected void finalize() throws Throwable {

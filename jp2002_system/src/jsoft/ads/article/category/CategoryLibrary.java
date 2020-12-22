@@ -27,12 +27,12 @@ public class CategoryLibrary {
 			tmp += (NO%2==0)? "<tr  class=\"even\">" : "<tr>";
 			tmp += "<td class=\"NO\">"+NO+"</td>";
 			tmp += "<td class=\"CREATED_DATE\">"+item.getCategory_created_date()+"</td>";
-			tmp += "<td class=\"SECTION_ID\">"+item.getSection_name()+"</td>";
 			tmp += "<td class=\"NAME\">"+item.getCategory_name()+"</td>";
+			tmp += "<td class=\"SECTION_NAME\">"+item.getSection_name()+"</td>";
 			tmp += "<td class=\"NOTES\">"+item.getCategory_notes()+"</td>";
 //			tmp += "<td>"++"</td>";
-			tmp += "<td class=\"ED\">Sửa</td>";
-			tmp += "<td class=\"ED\">Xóa</td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/category/ae?id="+item.getCategory_id()+"\">Sửa</a></td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/category/ae?id="+item.getCategory_id()+"\">Xóa</a></td>";
 			tmp += "<td class=\"ID\">"+item.getCategory_id()+"</td>";
 			tmp += "<tr>";
 			

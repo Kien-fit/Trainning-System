@@ -10,8 +10,8 @@ public class ArticleModel {
 	//
 	private Article art;
 
-	public ArticleModel(ConnectionPool cp) {
-		this.art = new ArticleImpl(cp);
+	public ArticleModel(ConnectionPool cp, String objectName) {
+		this.art = new ArticleImpl(cp, objectName);
 	}
 
 	protected void finalize() throws Throwable {

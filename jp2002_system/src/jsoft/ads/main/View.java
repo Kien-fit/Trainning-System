@@ -67,7 +67,7 @@ public class View extends HttpServlet {
 		}
 
 		out.print("<div class=\"col-md-10\">");
-		out.print("<div class=\"row mt-flex\">");
+		out.print("<div class=\"row mt-flex view-header\">");
 		out.print("<div class=\"col-md-9\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
@@ -76,12 +76,11 @@ public class View extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3 mysearch\">");
+		out.print("<div class=\"col-md-3 view-search\">");
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-//		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
+		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
 		out.print("</div>");
 		out.print("</form>");
 		out.print("</div>");
@@ -89,7 +88,7 @@ public class View extends HttpServlet {
 
 		out.print("<div class=\"row\">");
 		out.print("<div class=\"col-md-12\">");
-		out.print("<div class=\"view\"></div>");
+		out.print("<div class=\"view-content\"></div>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");

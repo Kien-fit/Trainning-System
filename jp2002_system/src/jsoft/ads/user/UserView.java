@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import jsoft.objects.*;
 import jsoft.*;
 
-
 /**
  * Servlet implementation class View
  */
@@ -69,7 +68,7 @@ public class UserView extends HttpServlet {
 		}
 
 		out.print("<div class=\"col-md-10\">");
-		out.print("<div class=\"row mt-flex\">");
+		out.print("<div class=\"row mt-flex view-header\">");
 		out.print("<div class=\"col-md-9\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
@@ -79,12 +78,13 @@ public class UserView extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3 mysearch\">");
+		out.print("<div class=\"col-md-3 view-search\">");
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
 //		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
+		out.print(
+				"<input type=\"text\" id=\"inputKeyword\" class=\"form-control\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
 		out.print("</div>");
 		out.print("</form>");
 		out.print("</div>");
@@ -92,24 +92,40 @@ public class UserView extends HttpServlet {
 
 		out.print("<div class=\"row\">");
 		out.print("<div class=\"col-md-12\">");
-		
-		//Tìm bộ quản lý kết nối
-		ConnectionPool cp = (ConnectionPool)getServletContext().getAttribute("CPool");
-		//Tạo đối tượng thực thi chức năng
+
+		// Tìm bộ quản lý kết nối
+		ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
+		// Tạo đối tượng thực thi chức năng
 		UserControl uc = new UserControl(cp);
 
 		// Lấy cấu trúc trình bày
-		String view = uc.viewUsers(null, (short)1, (byte)10);
-		
-		//Trả lại kết nối
+		String view = uc.viewUsers(null, (short) 1, (byte) 10);
+
+		// Trả lại kết nối
 		uc.releaseConnection();
-		
-		
-		out.print("<div class=\"view\">"+view+"</div>");
-		
+
+		out.print("<div class=\"view-content\">" + view + "</div>");
+
+		out.print("<div class=\"view-pagination\">");
+		out.print("<nav aria-label=\"...\">");
+		out.print("<ul class=\"pagination justify-content-center\">");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\"><<</a></li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\"><</a></li>");
+		out.print("<li class=\"page-item active\" aria-current=\"page\">");
+		out.print("<span class=\"page-link\">1");
+		out.print("<span class=\"sr-only\">(current)</span>");
+		out.print("</span>");
+		out.print("</li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\">></a></a></li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\">>></a></a></a></li>");
+		out.print("</ul>");
+		out.print("</nav>");
+		out.print("</div>");
+
 		out.print("</div>");
 		out.print("</div>");
-		
+
 		out.print("</div>");
 		out.print("</div>");
 

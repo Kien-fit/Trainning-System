@@ -69,7 +69,7 @@ public class ProductCategoryView extends HttpServlet {
 		}
 
 		out.print("<div class=\"col-md-10\">");
-		out.print("<div class=\"row mt-flex\">");
+		out.print("<div class=\"row mt-flex view-header\">");
 		out.print("<div class=\"col-md-9\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
@@ -80,7 +80,7 @@ public class ProductCategoryView extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3 mysearch\">");
+		out.print("<div class=\"col-md-3 view-search\">");
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
@@ -106,8 +106,25 @@ public class ProductCategoryView extends HttpServlet {
 		sc.releaseConnection();
 		
 		
-		out.print("<div class=\"view\">"+view+"</div>");
-		
+		out.print("<div class=\"view-content\">"+view+"</div>");
+
+		out.print("<div class=\"view-pagination\">");
+		out.print("<nav aria-label=\"...\">");
+		out.print("<ul class=\"pagination justify-content-center\">");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\"><<</a></li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\"><</a></li>");
+		out.print("<li class=\"page-item active\" aria-current=\"page\">");
+		out.print("<span class=\"page-link\">1");
+		out.print("<span class=\"sr-only\">(current)</span>");
+		out.print("</span>");
+		out.print("</li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\">></a></a></li>");
+		out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"#\">>></a></a></a></li>");
+		out.print("</ul>");
+		out.print("</nav>");
+		out.print("</div>");
+
 		out.print("</div>");
 		out.print("</div>");
 		

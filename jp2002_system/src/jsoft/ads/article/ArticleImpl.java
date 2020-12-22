@@ -8,9 +8,9 @@ import jsoft.ads.article.section.*;;
 
 public class ArticleImpl extends SectionImpl implements Article {
 
-	public ArticleImpl(ConnectionPool cp) {
-		//super(cp, objectName);
-		super(cp, "Article");
+	public ArticleImpl(ConnectionPool cp, String objectName) {
+		super(cp, objectName);
+		//super(cp, "Article");
 	}
 
 	@Override
@@ -287,7 +287,7 @@ public class ArticleImpl extends SectionImpl implements Article {
 		ConnectionPool cp = new ConnectionPoolImpl();
 
 		// Tạo đối tượng thực thi chức năng vào CSDL mức Giao tiếp (interface)
-		Article art = new ArticleImpl(cp);
+		Article art = new ArticleImpl(cp, "Article");
 
 		// Lấy tập kết quả
 		ResultSet rs = art.getArticles(null, 0, (byte) 10);

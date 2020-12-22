@@ -27,8 +27,8 @@ public class ProductSystemLibrary {
 			tmp += "<td class=\"NAME\">"+item.getPs_name()+"</td>";
 			tmp += "<td class=\"CREATED_DATE\">"+item.getPs_created_date()+"</td>";
 			tmp += "<td class=\"NOTES\">"+item.getPs_notes()+"</td>";
-			tmp += "<td class=\"ED\">Sửa</td>";
-			tmp += "<td class=\"ED\">Xóa</td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/ps/ae?id="+item.getPs_id()+"\">Sửa</a></td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/ps/ae?id="+item.getPs_id()+"\">Xóa</a></td>";
 			tmp += "<td class=\"ID\">"+item.getPs_id()+"</td>";
 			tmp += "</tr>";
 		}

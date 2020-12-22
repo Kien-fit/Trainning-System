@@ -64,8 +64,14 @@ public class Header extends HttpServlet {
 		out.print("<link href=\"/adv/adcss/user.css\" rel=\"stylesheet\" type=\"text/css\" />");
 
 		out.print("<script language=\"javascript\" src=\"/adv/ckeditor/ckeditor.js\"></script>");	
-//		out.print("<script language=\"javascript\" src=\"/adv/adjs/layout.js\"></script>");
 		out.print("<script language=\"javascript\" src=\"/adv/adjs/user.js\"></script>");
+		out.print("<script language=\"javascript\" src=\"/adv/adjs/section.js\"></script>");
+		out.print("<script language=\"javascript\" src=\"/adv/adjs/category.js\"></script>");
+		out.print("<script language=\"javascript\" src=\"/adv/adjs/article.js\"></script>");
+		out.print("<script language=\"javascript\" src=\"/adv/adjs/ps.js\"></script>");
+		out.print("<script language=\"javascript\" src=\"/adv/adjs/pg.js\"></script>");
+		out.print("<script language=\"javascript\" src=\"/adv/adjs/pc.js\"></script>");
+		out.print("<script language=\"javascript\" src=\"/adv/adjs/product.js\"></script>");
 		out.print("</head>");
 
 		out.print("<body>");

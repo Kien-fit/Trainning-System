@@ -28,8 +28,8 @@ public class SectionLibrary {
 			tmp += "<td class=\"CREATED_DATE\">"+item.getSection_created_date()+"</td>";
 			tmp += "<td class=\"NAME\">"+item.getSection_name()+"</td>";
 			tmp += "<td class=\"NOTES\">"+item.getSection_notes()+"</td>";
-			tmp += "<td class=\"ED\">Sửa</td>";
-			tmp += "<td class=\"ED\">Xóa</td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/section/ae?id="+item.getSection_id()+"\">Sửa</a></td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/section/ae?id="+item.getSection_id()+"\">Xóa</a></td>";
 			tmp += "<td class=\"ID\">"+item.getSection_id()+"</td>";
 			tmp += "";
 			tmp += "</tr>";

@@ -29,8 +29,8 @@ public class ProductGroupLibrary {
 			tmp += "<td class=\"NAME\">" + item.getPg_name() + "</td>";
 			tmp += "<td class=\"CREATED_DATE\">" + item.getPg_created_date() + "</td>";
 			tmp += "<td class=\"NOTES\">" + item.getPg_notes() + "</td>";
-			tmp += "<td class=\"ED\">Sửa</td>";
-			tmp += "<td class=\"ED\">Xóa</td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/pg/ae?id="+item.getPg_id()+"\">Sửa</a></td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/pg/ae?id="+item.getPg_id()+"\">Xóa</a></td>";
 			tmp += "<td class=\"ID\">" + item.getPg_id() + "</td>";
 			tmp += "</tr>";
 		}

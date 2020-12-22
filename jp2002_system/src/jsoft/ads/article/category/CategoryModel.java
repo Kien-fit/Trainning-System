@@ -9,8 +9,8 @@ public class CategoryModel {
 	
 	private Category cat;
 	
-	public CategoryModel(ConnectionPool cp, String objectname) {
-		this.cat = new CategoryImpl(cp, objectname);
+	public CategoryModel(ConnectionPool cp, String objectName) {
+		this.cat = new CategoryImpl(cp, objectName);
 	}
 	
 	protected void finalize() throws Throwable{

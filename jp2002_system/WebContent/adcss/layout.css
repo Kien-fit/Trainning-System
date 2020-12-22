@@ -4,7 +4,7 @@
 /*==========  ==========*/
 .logo {
 	height: 10vh;
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.08);
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
 	margin-top: 1vh;
 }
@@ -35,74 +35,65 @@
 }
 
 /*==========  ==========*/
-.col-md-9 nav{
+.view-header {
 	margin-top: 3vh;
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
 }
 
-.col-md-9 nav i {
-	margin-top: 6px;
+.view-search {
+	padding: 0.28rem 0;
+    margin-bottom: 1rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
 }
 
-.mysearch {
-	margin-top: 3.5vh;
-	margin-bottom: 2vh;
-}
-
-/*==========  ==========*/
-.view {
-	/*margin-top: 3vh;*/
+.view-content {
 	height: auto;
-	background-color: rgba(0,0,0,0.03);
+	background-color: rgba(225,255,255,0.2);
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
 }
-.view table {
+.view-content table {
 	width: 100%;
 	border-top: 1px solid white;
 	border-left: 1px solid white;
 }
-.view table th, .view table td {
+.view-content table th, .view table td {
 	border-right: 1px solid white;
 	border-bottom: 1px solid white;
 }
-.view table th{
+.view-content table th{
 	padding: 10px 0;
 	text-align: center;
-	background: #c7c7c7;
+	background: rgba(0,0,0,0.3);
 	color: #ffffff;	
 }
-.view table td{
+.view-content table td{
 	padding: 5px 1px;
 }
-.view table .even{
+.view-content table .even{
 	background: rgba(0,0,0,0.08);
 }
-.view table .NO, .view table .ED, .view table .ID {
-	width: 3vw;
-	text-align: center;
-}
-.view table .NAME{
-	width: 10vw;
-	font-weight: bold;
-}
-.view table .ADDRESS{
-	width: 20vw;
-}
-.view table .PHONE, .view table .LOGINED{
-	text-align: center;
-}
+.view-content table .NO, .view table .ED, .view table .ID { width: 3vw; text-align: center; }
+.view-content table .NAME{ width: 10vw; font-weight: bold; }
+.view-content table .ADDRESS{ width: 20vw; }
+.view-content table .PHONE, .view table .LOGINED{ text-align: center; }
+.view-content table .IMAGE{ width: 10vw; }
 
+
+.view-pagination{
+	margin-top: 1rem;
+}
 /*========== FOOTER ==========*/
 .footer-left {
 	margin: 3vh 0;
 	height: 15vh;
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.05);
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
 }
 
 .footer-right {
 	margin-top: 3vh;
 	height: 15vh;
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.05);
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
 }

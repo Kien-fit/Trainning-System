@@ -36,8 +36,8 @@ public class ArticleLibrary {
 			tmp += "<td class=\"SECTION_NAME\">"+item.getSection_name()+"</td>";
 			tmp += "<td class=\"AUTHOR\">"+item.getArticle_author_name()+"</td>";
 			tmp += "<td class=\"VISITED\">"+item.getArticle_visited()+"</td>";
-			tmp += "<td class=\"ED\">Sửa</td>";
-			tmp += "<td class=\"ED\">Xóa</td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/article/ae?id="+item.getArticle_id()+"\">Sửa</a></td>";
+			tmp += "<td class=\"ED\"><a href=\"/adv/article/ae?id="+item.getArticle_id()+"\">Xóa</a></td>";
 			tmp += "<td class=\"ID\">"+item.getArticle_id()+"</td>";
 			tmp += "</tr>";
 		}

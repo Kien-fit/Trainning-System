@@ -8,8 +8,8 @@ public class CategoryControl {
 
 	private CategoryModel cm;
 
-	public CategoryControl(ConnectionPool cp, String objectname) {
-		this.cm = new CategoryModel(cp, objectname);
+	public CategoryControl(ConnectionPool cp, String objectName) {
+		this.cm = new CategoryModel(cp, objectName);
 	}
 
 	protected void finalize() throws Throwable {
