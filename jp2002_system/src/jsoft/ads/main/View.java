@@ -76,13 +76,15 @@ public class View extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3 view-search\">");
+		out.print("<div class=\"col-md-3\">");
+		out.print("<div class=\"view-search\">");
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
 		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
 		out.print("</div>");
 		out.print("</form>");
+		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
 

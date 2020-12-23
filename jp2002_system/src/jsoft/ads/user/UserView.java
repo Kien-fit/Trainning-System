@@ -46,13 +46,13 @@ public class UserView extends HttpServlet {
 
 		// Kiểm tra
 		if (user != null) {
-			view(request, response);
+			view(request, response, user);
 		} else {
 			response.sendRedirect("/adv/user/login");
 		}
 	}
 
-	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void view(HttpServletRequest request, HttpServletResponse response, UserObject user) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
 		// xác định kiểu nội dung xuất về trình khách
@@ -78,15 +78,15 @@ public class UserView extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3 view-search\">");
+		out.print("<div class=\"col-md-3\">");
+		out.print("<div class=\"view-search\">");
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-//		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
-		out.print(
-				"<input type=\"text\" id=\"inputKeyword\" class=\"form-control\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
+		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
 		out.print("</div>");
 		out.print("</form>");
+		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -97,9 +97,21 @@ public class UserView extends HttpServlet {
 		ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
 		// Tạo đối tượng thực thi chức năng
 		UserControl uc = new UserControl(cp);
-
+		
+		if(cp==null) {
+			getServletContext().setAttribute("CPool", uc.getCP());
+		}
+		
+		//Tạo đối tượng bộ lọc
+		UserObject similar = new UserObject();
+		//Truyền thông tin tai khoản đăng nhập
+		//id
+		similar.setUser_id(user.getUser_id());
+		//truyền thực thi của tài khoản đăng nhập
+		similar.setUser_permission(user.getUser_permission());
+		
 		// Lấy cấu trúc trình bày
-		String view = uc.viewUsers(null, (short) 1, (byte) 10);
+		String view = uc.viewUsers(similar, (short) 1, (byte) 30, user);
 
 		// Trả lại kết nối
 		uc.releaseConnection();

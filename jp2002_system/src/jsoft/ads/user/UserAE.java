@@ -80,7 +80,11 @@ public class UserAE extends HttpServlet {
 
 			// Tạo đối tượng thực thi
 			UserControl uc = new UserControl(cp);
-
+			
+			if(cp==null) {
+				getServletContext().setAttribute("CPool", uc.getCP());
+			}
+			
 			// Xác định đối tượng để sửa
 			UserObject eUser = uc.getUserObject(id);
 
@@ -124,13 +128,15 @@ public class UserAE extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3 view-search\">");
+		out.print("<div class=\"col-md-3\">");
+		out.print("<div class=\"view-search\">");
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
 		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
 		out.print("</div>");
 		out.print("</form>");
+		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -166,7 +172,7 @@ public class UserAE extends HttpServlet {
 		out.print("</div>");
 
 		out.print(
-				"<label for=\"inputPass2\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Confirn</label>");
+				"<label for=\"inputPass2\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Confirm</label>");
 		out.print("<div class=\"col-md-3\">");
 		out.print(
 				"<input type=\"password\" class=\"form-control-file\" id=\"inputPass2\" name=\"txtUserPassConfirm\" onkeyup=\"checkPass(this.form)\">");
@@ -290,9 +296,8 @@ public class UserAE extends HttpServlet {
 
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputAddress\" class=\"col-md-2 col-form-label text-right\">Address</label>");
-		out.print("<div class=\"col-md-10\">");
-		out.print(
-				"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.4556912349094!2d105.73295331540258!3d21.05445439227537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345457e292d5bf%3A0x20ac91c94d74439a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1592396080575!5m2!1svi!2s\" width=\"100%\" height=\"600px\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>");
+		out.print("<div class=\"col-md-12\">");
+		out.print("<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.4556912349094!2d105.73295331540258!3d21.05445439227537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345457e292d5bf%3A0x20ac91c94d74439a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1592396080575!5m2!1svi!2s\" width=\"100%\" height=\"600px\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -305,11 +310,8 @@ public class UserAE extends HttpServlet {
 
 		out.print("<div class=\"form-group row\">");
 		out.print("<div class=\"col-sm-12 text-center\">");
-		out.print(
-				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveUser(this.form)\"><i class=\"fas fa-sign-in-alt\"></i> "
-						+ lblReg + "</button>&nbsp;");
-		out.print(
-				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i> Exit</button>");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveUser(this.form)\"><i class=\"fas fa-sign-in-alt\"></i> " + lblReg + "</button>&nbsp;");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i> Exit</button>");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -404,6 +406,10 @@ public class UserAE extends HttpServlet {
 
 				UserControl uc = new UserControl(cp);
 
+				if(cp==null) {
+					getServletContext().setAttribute("CPool", uc.getCP());
+				}
+				
 				boolean result;
 
 				if (id > 0) {

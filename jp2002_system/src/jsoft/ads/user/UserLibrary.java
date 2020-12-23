@@ -5,7 +5,7 @@ import jsoft.objects.*;
 
 public class UserLibrary {
 
-	public static String viewUsers(ArrayList<UserObject> items) {
+	public static String viewUsers(ArrayList<UserObject> items, UserObject user) {
 		String tmp = "<table cellspacing=0>";
 
 		// Dòng tiêu đề
@@ -40,8 +40,13 @@ public class UserLibrary {
 			tmp += "<td class=\"PHONE\">" + item.getUser_homephone() + "</td>";
 //			tmp += "<td class=\"LOGINED\">" + item.getUser_last_logined() + "</td>";
 			tmp += "<td class=\"LOGINED\">" + item.getUser_logined() + "</td>";
+			
 			tmp += "<td class=\"ED\"><a href=\"/adv/user/ae?id="+item.getUser_id()+"\">Sửa</a></td>";
-			tmp += "<td class=\"ED\"><a href=\"/adv/user/ae\">Xóa</a></td>";
+			if(item.getUser_id()==user.getUser_id()) {
+				tmp += "<td class=\"ED\">...</td>";								
+			}else {
+				tmp += "<td class=\"ED\"><a href=\"javascript:confirmDel('/adv/user/del?id="+item.getUser_id()+"'); void(0);\">Xóa</a></td>";				
+			}
 			tmp += "<td class=\"ID\">" + item.getUser_id() + "</td>";
 			tmp += "</tr>";
 		}

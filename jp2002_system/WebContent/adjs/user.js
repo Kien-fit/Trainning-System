@@ -255,3 +255,12 @@ function saveUser(fn) {
 		fn.submit();
 	}
 }
+
+function confirmDel(url){
+	var msg = "Bạn có thực sự muôn xóa người sử dụng này?";
+	if(window.confirm(msg)){
+		window.location.href = url;
+	}else{
+		return false;
+	}
+}

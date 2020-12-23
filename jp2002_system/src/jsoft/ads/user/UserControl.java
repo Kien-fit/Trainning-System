@@ -48,14 +48,14 @@ public class UserControl {
 	}
 	
 	// **************************************************
-	public String viewUsers(UserObject similar, short page, byte total) {
+	public String viewUsers(UserObject similar, short page, byte total,UserObject user) {
 		// Lấy danh sách đối tượng
 		ArrayList<UserObject> items = this.um.getUserObjects(similar, page, total);
-
+		
 		// Trả về cấu trúc HTML
-		return UserLibrary.viewUsers(items);
+		return UserLibrary.viewUsers(items,user);
 	}
-
+/*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ConnectionPool cp = new ConnectionPoolImpl();
@@ -68,5 +68,5 @@ public class UserControl {
 
 		System.out.print(view);
 	}
-
+*/
 }
