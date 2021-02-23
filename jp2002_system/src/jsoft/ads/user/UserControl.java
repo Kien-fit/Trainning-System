@@ -48,7 +48,7 @@ public class UserControl {
 	}
 	
 	// **************************************************
-	public String viewUsers(UserObject similar, short page, byte total,UserObject user) {
+	public String viewUsers(UserObject similar, short page, byte total, UserObject user) {
 		// Lấy danh sách đối tượng
 		ArrayList<UserObject> items = this.um.getUserObjects(similar, page, total);
 		

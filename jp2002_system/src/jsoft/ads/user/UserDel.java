@@ -41,26 +41,29 @@ public class UserDel extends HttpServlet {
 
 		// Kiểm tra
 		if (user != null) {
-			//Tim id nguoi su dung
+			// Tim id nguoi su dung
 			int id = jsoft.library.Utilities.getIntParam(request, "id");
-			if(id>0) {
-				ConnectionPool cp = (ConnectionPool)getServletContext().getAttribute("CPool");
+			if (id > 0 && id != user.getUser_id()) {
+				ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
 				UserControl uc = new UserControl(cp);
-				if(cp==null) {
+				if (cp == null) {
 					getServletContext().setAttribute("CPool", uc.getCP());
 				}
+				
 				UserObject delUser = new UserObject();
-				delUser.getUser_id();
+				delUser.setUser_id(id);
+				delUser.setUser_parent_id(user.getUser_id());
+				
 				boolean result = uc.delUser(delUser);
 				uc.releaseConnection();
-				
-				if(result) {
+
+				if (result) {
 					response.sendRedirect("/adv/user/view");
-				}else {
-					response.sendRedirect("/adv/user/view?err=notok");					
-				}		
-			}else {
-				response.sendRedirect("/adv/user/view?err=value");									
+				} else {
+					response.sendRedirect("/adv/user/view?err=notok");
+				}
+			} else {
+				response.sendRedirect("/adv/user/view?err=value");
 			}
 		} else {
 			response.sendRedirect("/adv/user/login");

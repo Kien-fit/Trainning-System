@@ -188,7 +188,30 @@ public class SectionImpl extends BasicImpl implements Section {
 	public ResultSet getSections(SectionObject similar, int at, byte total) {
 		// TODO Auto-generated method stub
 
+/*		//
+		String conds = "";
+		if (similar != null) {
+			int id = similar.getUser_id();
+			byte permis = similar.getUser_permission();
+
+			conds = "(user_permission<=" + permis + ")";
+			conds += " AND ((user_parent_id = " + id + ") OR (user_id=" + id + "))";
+			
+			//Lấy từ khóa tìm kiếm
+			String key = similar.getUser_name();
+			if(key!=null && !key.equalsIgnoreCase("")) {
+				conds += " AND (";
+				conds += "(user_name LIKE '%"+key+"%' ) OR ";
+				conds += "(user_fullname LIKE '%"+key+"%' ) OR ";
+				conds += "(user_email LIKE '%"+key+"%' ) OR ";
+				conds += "(user_address LIKE '%"+key+"%' ) OR ";
+				conds += "(user_notes LIKE '%"+key+"%' )";
+				conds += ")";
+			}
+		}
+*/		
 		String sql = "SELECT *FROM tblsection ";
+		
 		sql += "";
 		sql += "ORDER BY section_name ASC ";
 		sql += "LIMIT " + at + ", " + total;

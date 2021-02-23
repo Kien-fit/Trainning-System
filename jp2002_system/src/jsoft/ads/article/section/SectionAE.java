@@ -44,7 +44,7 @@ public class SectionAE extends HttpServlet {
 		// Tham chiếu phiên làm việc để tìm thông tin đăng nhập
 		HttpSession session = request.getSession();
 
-		// Tim thông tin đăng nhập trong phiên làm việc
+		// Tìm thông tin đăng nhập trong phiên làm việc
 		UserObject user = (UserObject) session.getAttribute("userLogined");
 
 		// Kiểm tra
@@ -64,7 +64,7 @@ public class SectionAE extends HttpServlet {
 		// Tạo đối tượng xuất nội dung về trình khách
 		PrintWriter out = response.getWriter();
 		
-		//Tìm id để sủa nếu có
+		// Tìm id để sửa nếu có
 		short id = Utilities.getShortParam(request, "id");
 		String name="", notes="", nameEng="";
 		
@@ -83,7 +83,7 @@ public class SectionAE extends HttpServlet {
 			// Xác định đối tượng sửa
 			SectionObject eSec = new SectionObject();
 			
-			// Trả lại kết nối
+			// Trả lại kết nốil
 			sc.releaseConnection();
 			
 			//kiểm tra
@@ -190,7 +190,7 @@ public class SectionAE extends HttpServlet {
 		out.print("</div>");
 		
 		if(isEdit) {
-			//truyền giá trị của id cho doPost theo cơ chế form ẩn
+			// Truyền giá trị của id cho doPost theo cơ chế form ẩn
 			out.print("<input type=\"hidden\" id=\"idForPost\" value=\""+id+"\" />");		
 		}
 		
@@ -221,13 +221,13 @@ public class SectionAE extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//Xác định tập ký tự cần lấy
+		// Xác định tập ký tự cần lấy
 		request.setCharacterEncoding("UTF-8");
 		
-		//Lấy id để sửa nếu có
+		// Lấy id để sửa nếu có
 		short id = Utilities.getShortParam(request, "idForPost");
 		
-		//Lấy thông tin trên giao diện
+		// Lấy thông tin trên giao diện
 		String name = request.getParameter("txtName");
 		String notes = request.getParameter("txtNotes");
 		String nameEng = request.getParameter("txtNameEng");
@@ -239,42 +239,42 @@ public class SectionAE extends HttpServlet {
 			nameEng = nameEng.trim();
 			if(name.equalsIgnoreCase("") && notes.equalsIgnoreCase("") && nameEng.equalsIgnoreCase("")) {
 				
-				//Tạo đối tượng lưu thông tin
+				// Tạo đối tượng lưu thông tin
 				SectionObject nSec = new SectionObject();
 				nSec.setSection_name(Utilities_Support.encode(name));
 				nSec.setSection_notes(Utilities_Support.encode(notes));
 				nSec.setSection_name_en(Utilities_Support.encode(nameEng));
 				//nSec.setSection_name(name);
 				
-				//Ngày tạo/sửa chuyên mục
+				// Ngày tạo/sửa chuyên mục
 				String date = DateTime.getFullDate("dd/MM/yyyy");
 				
-				//Tìm thông tin đăng nhập
+				// Tìm thông tin đăng nhập
 				UserObject user = (UserObject) request.getSession().getAttribute("userLogined") ;
 				nSec.setSection_created_author_id(user.getUser_id());
 				
-				//Tim bộ quản lý kêt nối
+				// Tim bộ quản lý kêt nối
 				ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
 				
-				//Tạo đói tượng thực thi
+				// Tạo đói tượng thực thi
 				SectionControl sc = new SectionControl(cp);
 				
 				boolean result;
 				if(id>0) {
-					//act cập nhật
+					// action cập nhật
 					nSec.setSection_id(id);
 					nSec.setSection_last_modified(date);
 					result = sc.editSection(nSec);
 				} else {
-					//act Thêm
+					// action Thêm
 					nSec.setSection_last_modified(date);
 					result = sc.addSection(nSec);
 				}
 				
-				//Trả về kết nối
+				// Trả về kết nối
 				sc.releaseConnection();
 				
-				//Kiểm tra kết quả
+				// Kiểm tra kết quả
 				if(result) {
 					response.sendRedirect("/adv/section/view");
 				} else {

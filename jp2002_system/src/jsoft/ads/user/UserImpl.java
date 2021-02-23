@@ -209,12 +209,13 @@ public class UserImpl extends BasicImpl implements User {
 			return false;
 		}
 
-		String sql = "DELETE FROM tbluser WHERE user_id=?";
+		String sql = "DELETE FROM tbluser WHERE (user_id=?) AND (user_parant_id=?)";
 
 		try {
 			PreparedStatement pre = this.con.prepareStatement(sql);
 
 			pre.setInt(1, item.getUser_id());
+			pre.setInt(2, item.getUser_parent_id());
 
 			return this.del(pre);
 
@@ -288,6 +289,18 @@ public class UserImpl extends BasicImpl implements User {
 
 			conds = "(user_permission<=" + permis + ")";
 			conds += " AND ((user_parent_id = " + id + ") OR (user_id=" + id + "))";
+			
+			//Lấy từ khóa tìm kiếm
+			String key = similar.getUser_name();
+			if(key!=null && !key.equalsIgnoreCase("")) {
+				conds += " AND (";
+				conds += "(user_name LIKE '%"+key+"%' ) OR ";
+				conds += "(user_fullname LIKE '%"+key+"%' ) OR ";
+				conds += "(user_email LIKE '%"+key+"%' ) OR ";
+				conds += "(user_address LIKE '%"+key+"%' ) OR ";
+				conds += "(user_notes LIKE '%"+key+"%' )";
+				conds += ")";
+			}
 		}
 
 		String sql = "SELECT * FROM tbluser ";
