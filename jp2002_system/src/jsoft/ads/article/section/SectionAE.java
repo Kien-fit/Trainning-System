@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import jsoft.objects.*;
 import jsoft.*;
-import jsoft.library.DateTime;
-import jsoft.library.Utilities;
 import jsoft.library.*;
 
 /**
@@ -49,13 +47,13 @@ public class SectionAE extends HttpServlet {
 
 		// Kiểm tra
 		if (user != null) {
-			view(request, response);
+			view(request, response, user);
 		} else {
 			response.sendRedirect("/adv/user/login");
 		}
 	}
 
-	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void view(HttpServletRequest request, HttpServletResponse response, UserObject user) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
 		// xác định kiểu nội dung xuất về trình khách
@@ -63,43 +61,61 @@ public class SectionAE extends HttpServlet {
 
 		// Tạo đối tượng xuất nội dung về trình khách
 		PrintWriter out = response.getWriter();
-		
+
 		// Tìm id để sửa nếu có
 		short id = Utilities.getShortParam(request, "id");
-		String name="", notes="", nameEng="";
-		
+		String name = "", notes = "", nameEng = "";
+
 		String title = "<i class=\"fas fa-plus-circle\"></i>";
 		String lblCre = "Create";
-		
+
 		boolean isEdit = false;
+
+
+		// Tìm từ khóa nếu có
+		String key = request.getParameter("txtKeyword");
+		String saveKey = (key!=null) ? Utilities_Support.encode(key.trim()) : "";
 		
-		if(id>0) {
+		//Tạo đối tượng bộ lọc
+		SectionObject similar = new SectionObject();
+		//Truyền từ khóa tìm kiếm vào tên đăng nhập
+		similar.setSection_name(saveKey);
+		
+		//Lấy cấu trúc tùy chọn người sử dụng
+		String userOptions = null;
+		
+		if (id > 0) {
 			// Tìm bộ quản lý kết nối
 			ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
-			
+
 			// Tạo đối tượng thực thi chức năng
 			SectionControl sc = new SectionControl(cp);
+			if(cp==null) {
+				getServletContext().setAttribute("CPool", sc.getCP());
+			}
+
+			//Lấy cấu trúc tùy chọn người sử dụng
+			userOptions = sc.viewUserOptions(user);
 			
 			// Xác định đối tượng sửa
 			SectionObject eSec = new SectionObject();
-			
+
 			// Trả lại kết nốil
 			sc.releaseConnection();
-			
-			//kiểm tra
-			if(eSec!=null) {
+
+			// kiểm tra
+			if (eSec != null) {
 				// Lấy thông tin để sửa
 				name = eSec.getSection_name();
 				notes = eSec.getSection_notes();
 				nameEng = eSec.getSection_name_en();
-				
+
 				title = "Cập nhật chuyên mục";
 				lblCre = "Update";
-				
+
 				isEdit = true;
 			}
 		}
-		
 
 		// Tìm header và include
 		RequestDispatcher h = request.getRequestDispatcher("/header");
@@ -115,7 +131,7 @@ public class SectionAE extends HttpServlet {
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/article/view\">Bài viết</a></li>&nbsp;");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/section/view\">Chuyên mục</a></li>&nbsp;");
-		out.print("<li class=\"breadcrumb-item\">"+title+"</li>");
+		out.print("<li class=\"breadcrumb-item\">" + title + "</li>");
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
@@ -124,7 +140,8 @@ public class SectionAE extends HttpServlet {
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
+		out.print(
+				"<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
 		out.print("</div>");
 		out.print("</form>");
 		out.print("</div>");
@@ -138,22 +155,35 @@ public class SectionAE extends HttpServlet {
 		out.print("<form name=\"frmSection\" class=\"frmSection\" action=\"\" method=\"\">");
 		out.print("<div class=\"form-group row\">");
 		out.print("<div class=\"col-md-12 text-center\">");
-		out.print("<div class=\"mytitle\"><i class=\"fas fa-people-carry\"></i> Section information</div>");
+		out.print("<div class=\"mytitle\"><i class=\"fas fa-people-carry\"></i> Section management</div>");
 		out.print("</div>");
 		out.print("</div>");
-		
+
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputName\" class=\"col-md-2 col-form-label text-right\">Section name</label>");
 		out.print("<div class=\"col-md-4\">");
-		out.print("<input type=\"name\" class=\"form-control\" id=\"inputName\" name=\"txtName\" onkeyup=\"checkName(this.form)\" value=\""+name+"\" >");
+		out.print("<input type=\"name\" class=\"form-control\" id=\"inputName\" name=\"txtName\" onkeyup=\"checkName(this.form)\" "
+				+ "value=\"" + name + "\" >");
 		out.print("<div id=\"viewValidName\"></div>");
+		out.print("</div>");
+		out.print("</div>");
+
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputName\" class=\"col-md-2 col-form-label text-right\">Section manager</label>");
+		out.print("<div class=\"col-md-4\">");
+		out.print("<select name=\"slManager\" class=\"form-control\">");
+		out.print("<option value=0>...</option>");
+		out.print("<option value=0>...</option>");
+		out.print(userOptions);
+		out.print("</select>");
 		out.print("</div>");
 		out.print("</div>");
 
 		out.print("<div class=\"form-group row align-items-center\">");
 		out.print("<label for=\"inputNote\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Note</label>");
 		out.print("<div class=\"col-md-10\">");
-		out.print("<textarea class=\"form-control-file\" id=\"inputNote\" name=\"txtNotes\" rows=8>"+notes+"</textarea>");
+		out.print("<textarea class=\"form-control-file\" id=\"inputNote\" name=\"txtNotes\" rows=8>" + notes
+				+ "</textarea>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("<script language=\"javascript\" type=\"text/javascript\">");
@@ -163,21 +193,22 @@ public class SectionAE extends HttpServlet {
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputNameEng\" class=\"col-md-2 col-form-label text-right\">Name(English)</label>");
 		out.print("<div class=\"col-md-4\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputNameEng\" name=\"inputNameEng\" value=\""+nameEng+"\" >");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputNameEng\" name=\"inputNameEng\" value=\""
+				+ nameEng + "\" >");
 		out.print("</div>");
 		out.print("</div>");
-/*		
-		out.print("<div class=\"form-group row\">");
-		out.print("<label for=\"input\" class=\"col-md-2 col-form-label text-right\"></label>");
-		out.print("<div class=\"col-md-4\">");
-		out.print("<input type=\"name\" class=\"form-control\" id=\"input\" name=\"txt\">");
-		out.print("</div>");
-		out.print("</div>");
-*/		
+		/*
+		 * out.print("<div class=\"form-group row\">"); out.
+		 * print("<label for=\"input\" class=\"col-md-2 col-form-label text-right\"></label>"
+		 * ); out.print("<div class=\"col-md-4\">"); out.
+		 * print("<input type=\"name\" class=\"form-control\" id=\"input\" name=\"txt\">"
+		 * ); out.print("</div>"); out.print("</div>");
+		 */
 		out.print("<div class=\"form-group row\">");
 		out.print("<div class=\"col-sm-12 text-center\">");
 		out.print(
-				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveSection(this.form)\"><i class=\"fas fa-sign-in-alt\"></i>"+lblCre+"</button>&nbsp;");
+				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveSection(this.form)\"><i class=\"fas fa-sign-in-alt\"></i>"
+						+ lblCre + "</button>&nbsp;");
 		out.print(
 				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i>Exit</button>");
 		out.print("</div>");
@@ -188,12 +219,12 @@ public class SectionAE extends HttpServlet {
 		out.print("<a href=\"#\">Tiếng Việt?</a>");
 		out.print("</div>");
 		out.print("</div>");
-		
-		if(isEdit) {
+
+		if (isEdit) {
 			// Truyền giá trị của id cho doPost theo cơ chế form ẩn
-			out.print("<input type=\"hidden\" id=\"idForPost\" value=\""+id+"\" />");		
+			out.print("<input type=\"hidden\" id=\"idForPost\" value=\"" + id + "\" />");
 		}
-		
+
 		out.print("</form>");
 		out.print("</div>");
 
@@ -220,47 +251,47 @@ public class SectionAE extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		// Xác định tập ký tự cần lấy
 		request.setCharacterEncoding("UTF-8");
-		
+
 		// Lấy id để sửa nếu có
 		short id = Utilities.getShortParam(request, "idForPost");
-		
+
 		// Lấy thông tin trên giao diện
 		String name = request.getParameter("txtName");
 		String notes = request.getParameter("txtNotes");
 		String nameEng = request.getParameter("txtNameEng");
-		
+
 		// Kiểm tra
-		if(name!=null && notes!=null && nameEng!=null) {
+		if (name != null && notes != null && nameEng != null) {
 			name = name.trim();
 			notes = notes.trim();
 			nameEng = nameEng.trim();
-			if(name.equalsIgnoreCase("") && notes.equalsIgnoreCase("") && nameEng.equalsIgnoreCase("")) {
-				
+			if (name.equalsIgnoreCase("") && notes.equalsIgnoreCase("") && nameEng.equalsIgnoreCase("")) {
+
 				// Tạo đối tượng lưu thông tin
 				SectionObject nSec = new SectionObject();
 				nSec.setSection_name(Utilities_Support.encode(name));
 				nSec.setSection_notes(Utilities_Support.encode(notes));
 				nSec.setSection_name_en(Utilities_Support.encode(nameEng));
-				//nSec.setSection_name(name);
-				
+				// nSec.setSection_name(name);
+
 				// Ngày tạo/sửa chuyên mục
 				String date = DateTime.getFullDate("dd/MM/yyyy");
-				
+
 				// Tìm thông tin đăng nhập
-				UserObject user = (UserObject) request.getSession().getAttribute("userLogined") ;
+				UserObject user = (UserObject) request.getSession().getAttribute("userLogined");
 				nSec.setSection_created_author_id(user.getUser_id());
-				
+
 				// Tim bộ quản lý kêt nối
 				ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
-				
+
 				// Tạo đói tượng thực thi
 				SectionControl sc = new SectionControl(cp);
-				
+
 				boolean result;
-				if(id>0) {
+				if (id > 0) {
 					// action cập nhật
 					nSec.setSection_id(id);
 					nSec.setSection_last_modified(date);
@@ -270,23 +301,23 @@ public class SectionAE extends HttpServlet {
 					nSec.setSection_last_modified(date);
 					result = sc.addSection(nSec);
 				}
-				
+
 				// Trả về kết nối
 				sc.releaseConnection();
-				
+
 				// Kiểm tra kết quả
-				if(result) {
+				if (result) {
 					response.sendRedirect("/adv/section/view");
 				} else {
 					response.sendRedirect("/adv/section/ae?err=notok");
-				}	
+				}
 			} else {
 				response.sendRedirect("/adv/section/ae?err=value");
 			}
 		} else {
 			response.sendRedirect("/adv/section/ae?err=param");
 		}
-		
+
 	}
 
 }

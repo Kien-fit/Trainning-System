@@ -40,5 +40,17 @@ public class SectionLibrary {
 		
 		return tmp;
 	}
+	
+	public static String viewUserOptions(ArrayList<UserObject> users) {
+		String tmp = "";
+		
+		for(UserObject user:users) {
+			tmp+= "<option value=\""+user.getUser_id()+"\">";
+			tmp+= user.getUser_name() +" ("+user.getUser_fullname()+")";
+			tmp+= "</option>";
+		}
+		
+		return tmp;
+	}
 
 }

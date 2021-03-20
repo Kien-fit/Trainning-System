@@ -98,6 +98,30 @@ public class SectionModel {
 		return items;
 	}
 
+	public ArrayList<UserObject> getUsers(UserObject similar){
+		ArrayList<UserObject> users= new ArrayList<>();
+		
+		ResultSet rs = this.sec.getUsers(similar);
+		UserObject user = null;
+		if(rs!=null) {
+			try {
+				while(rs.next()) {
+					user = new UserObject();
+					user.setUser_id(rs.getInt("user_id"));
+					user.setUser_name(rs.getString("user_name"));
+					user.setUser_fullname(rs.getString("user_fullname"));
+
+					users.add(user);
+				}
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return users;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

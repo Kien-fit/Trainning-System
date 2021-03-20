@@ -48,13 +48,13 @@ public class SectionView extends HttpServlet {
 
 		// Kiểm tra
 		if (user != null) {
-			view(request, response);
+			view(request, response, user);
 		} else {
 			response.sendRedirect("/adv/user/login");
 		}
 	}
 
-	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void view(HttpServletRequest request, HttpServletResponse response, UserObject user) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
 		// xác định kiểu nội dung xuất về trình khách
@@ -74,11 +74,6 @@ public class SectionView extends HttpServlet {
 		
 		//Tạo đối tượng bộ lọc
 		SectionObject similar = new SectionObject();
-		//Truyền thông tin tài khoản đăng nhập
-//		//id
-//		similar.setUser_id(user.getUser_id());
-//		//truyền quyền thực thi của tài khoản đăng nhập
-//		similar.setUser_permission(user.getUser_permission());
 		//Truyền từ khóa tìm kiếm vào tên đăng nhập
 		similar.setSection_name(saveKey);
 		

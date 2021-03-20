@@ -114,7 +114,6 @@ public class ArticleAE extends HttpServlet {
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/article/view\">Bài viết</a></li>&nbsp;");
-		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/article/view\">Chuyên mục</a></li>&nbsp;");
 		out.print("<li class=\"breadcrumb-item\">"+title+"</li>");
 		out.print("</ol>");
 		out.print("</nav>");

@@ -50,6 +50,11 @@ public class SectionControl {
 		// Trả về cấu trúc HTML
 		return SectionLibrary.viewSections(items);
 	}
+	
+	public String viewUserOptions(UserObject user) {
+		ArrayList<UserObject> users = this.sm.getUsers(user);
+		return SectionLibrary.viewUserOptions(users);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

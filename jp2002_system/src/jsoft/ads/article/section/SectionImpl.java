@@ -249,4 +249,14 @@ public class SectionImpl extends BasicImpl implements Section {
 		}
 	}
 
+	@Override
+	public ResultSet getUsers(UserObject similar) {
+		// TODO Auto-generated method stub
+		
+		String sql = "SELECT user_id, user_name, user_fullname FROM tbluser WHERE ((user_parent_id=?) OR (user_id="+similar.getUser_id()+"))";
+		
+		
+		return this.get(sql, similar.getUser_id());
+	}
+
 }
