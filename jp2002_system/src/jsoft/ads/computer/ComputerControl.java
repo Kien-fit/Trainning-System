@@ -2,7 +2,6 @@ package jsoft.ads.computer;
 
 import jsoft.*;
 import jsoft.objects.*;
-import java.sql.*;
 import java.util.*;
 
 public class ComputerControl {
