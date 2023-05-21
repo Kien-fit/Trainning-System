@@ -12,12 +12,12 @@ public class CalendarLibrary {
 		// Dòng tiêu đề
 		tmp += "<tr>";
 		tmp += "<th>STT</th>";
-		tmp += "<th>Tài khoản khách hàng</th>";
-		tmp += "<th>Tiền trong tài khoản</th>";
-		tmp += "<th>Ngày kích hoạt</th>";
-		tmp += "<th>Ghi chú</th>";
-		tmp += "<th>Số tiền hiện tại</th>";
-		tmp += "<th>Kiểu</th>";
+		tmp += "<th></th>";
+		tmp += "<th></th>";
+		tmp += "<th></th>";
+		tmp += "<th></th>";
+		tmp += "<th></th>";
+		tmp += "<th></th>";
 //		tmp += "<th></th>";
 //		tmp += "<th></th>";
 		tmp += "<th colspan=2>Thực hiện</th>";
@@ -30,12 +30,12 @@ public class CalendarLibrary {
 			NO++;
 			tmp += "<tr>";
 			tmp += "<td>" + NO + "</td>";
-//			tmp += "<td>" + item.getCalendar_customer_id() + "</td>";
-//			tmp += "<td>" + item.getCalendar_money() + "</td>";
-//			tmp += "<td>" + item.getCalendar_actived_date() + "</td>";
-//			tmp += "<td>" + item.getCalendar_notes() + "</td>";
-//			tmp += "<td>" + item.getCalendar_current_money() + "</td>";
-//			tmp += "<td>" + item.getCalendar_type() + "</td>";
+			tmp += "<td>" + item.getCalendar_title() + "</td>";
+			tmp += "<td>" + item.getCalendar_user_name() + "</td>";
+			tmp += "<td>" + item.getCalendar_visited() + "</td>";
+			tmp += "<td>" + item.getCalendar_notes() + "</td>";
+//			tmp += "<td>" + item.getCalendar_() + "</td>";
+//			tmp += "<td>" + item.getCalendar_() + "</td>";
 			tmp += "<td>Sửa</td>";
 			tmp += "<td>Xóa</td>";
 			tmp += "<td>" + item.getCalendar_id() + "</td>";

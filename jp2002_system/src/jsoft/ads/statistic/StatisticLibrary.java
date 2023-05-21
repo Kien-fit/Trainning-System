@@ -6,18 +6,12 @@ import jsoft.objects.*;
 
 public class StatisticLibrary {
 
-	public static String viewAccounts(ArrayList<AccountObject> items) {
+	public static String viewStatistics(ArrayList<StatisticObject> items) {
 		String tmp = "<table cellspacing=0>";
 
 		// Dòng tiêu đề
 		tmp += "<tr>";
 		tmp += "<th>STT</th>";
-		tmp += "<th>Tài khoản khách hàng</th>";
-		tmp += "<th>Tiền trong tài khoản</th>";
-		tmp += "<th>Ngày kích hoạt</th>";
-		tmp += "<th>Ghi chú</th>";
-		tmp += "<th>Số tiền hiện tại</th>";
-		tmp += "<th>Kiểu</th>";
 //		tmp += "<th></th>";
 //		tmp += "<th></th>";
 		tmp += "<th colspan=2>Thực hiện</th>";
@@ -26,19 +20,14 @@ public class StatisticLibrary {
 
 		// Dòng nội dung
 		int NO = 0;
-		for (AccountObject item : items) {
+		for (StatisticObject item : items) {
 			NO++;
 			tmp += "<tr>";
 			tmp += "<td>" + NO + "</td>";
-			tmp += "<td>" + item.getAccount_customer_id() + "</td>";
-			tmp += "<td>" + item.getAccount_money() + "</td>";
-			tmp += "<td>" + item.getAccount_actived_date() + "</td>";
-			tmp += "<td>" + item.getAccount_notes() + "</td>";
-			tmp += "<td>" + item.getAccount_current_money() + "</td>";
-			tmp += "<td>" + item.getAccount_type() + "</td>";
+			tmp += "<td>" + item.getStatistic_visited() + "</td>";
 			tmp += "<td>Sửa</td>";
 			tmp += "<td>Xóa</td>";
-			tmp += "<td>" + item.getAccount_id() + "</td>";
+			tmp += "<td>" + item.getStatistic_id() + "</td>";
 			tmp += "</tr>";
 		}
 

@@ -9,8 +9,8 @@ public class LabelModel {
 
 	private Label lb;
 
-	public LabelModel(ConnectionPool cp, String objectname) {
-		this.lb = new LabelImpl(cp, objectname);
+	public LabelModel(ConnectionPool cp) {
+		this.lb = new LabelImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

@@ -2,96 +2,52 @@ package jsoft.ads.statistic;
 
 import jsoft.*;
 import jsoft.objects.*;
-import java.sql.*;
 import java.util.*;
 
 public class StatisticControl {
 
-	private Statistic st;
+	private StatisticModel sm;
 
-	public StatisticControl(ConnectionPool cp, String objectname) {
-		this.st = new StatisticImpl(cp, objectname);
+	public StatisticControl(ConnectionPool cp) {
+		this.sm = new StatisticModel(cp);
 	}
 
 	protected void finalize() throws Throwable {
-		this.st = null;
+		this.sm = null;
 		super.finalize();
 	}
 	
 	public void relaeseConnection() {
-		this.st.releaseConnection();
+		this.sm.releaseConnection();
 	}
 	
 	public ConnectionPool getCP() {
-		return this.st.getCP();
+		return this.sm.getCP();
 	}
 	
 	// ------------------------------------------------
 		public boolean addStatistic(StatisticObject item) {
-			return this.st.addStatistic(item);
+			return this.sm.addStatistic(item);
 		}
 
 		public boolean editStatistic(StatisticObject item) {
-			return this.st.editStatistic(item);
+			return this.sm.editStatistic(item);
 		}
 
 		public boolean delStatistic(StatisticObject item) {
-			return this.st.delStatistic(item);
+			return this.sm.delStatistic(item);
 		}
 
 		// ------------------------------------------------
 		public StatisticObject getStatisticObject(int id) {
-			StatisticObject item = null;
-
-			// Lấy dữ liệu
-			ResultSet rs = this.st.getStatistic(id);
-			if (rs != null) {
-				try {
-					if (rs.next()) {
-						item = new StatisticObject();
-						item.setStatistic_id(rs.getShort("statistic_id"));
-						item.setStatistic_current_date(rs.getString("statistic_current_date"));
-						item.setStatistic_visited(rs.getInt("statistic_visited"));
-					}
-
-					rs.close();
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return item;
+			return this.sm.getStatisticObject(id);
 		}
 
-		public ArrayList<StatisticObject> getStatisticObject(StatisticObject similar, short page, byte total) {
+		public String getStatisticObject(StatisticObject similar, short page, byte total) {
 
 			ArrayList<StatisticObject> items = new ArrayList<StatisticObject>();
 
-			StatisticObject item = null;
-
-			// Lấy dữ liệu
-			int at = (page - 1) * total;
-			ResultSet rs = this.st.getStatistics(similar, at, total);
-			if (rs != null) {
-				try {
-					while (rs.next()) {
-						item = new StatisticObject();
-						item.setStatistic_id(rs.getShort("statistic_id"));
-						item.setStatistic_current_date(rs.getString("statistic_current_date"));
-						item.setStatistic_visited(rs.getInt("statistic_visited"));
-						
-						items.add(item);
-					}
-
-					rs.close();
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return items;
+			return StatisticLibrary.viewStatistics(items);
 		}
 
 	public static void main(String[] args) {

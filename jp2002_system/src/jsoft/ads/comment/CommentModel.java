@@ -9,8 +9,8 @@ public class CommentModel {
 
 	private Comment cmt;
 
-	public CommentModel(ConnectionPool cp, String objectname) {
-		this.cmt = new CommentImpl(cp, objectname);
+	public CommentModel(ConnectionPool cp) {
+		this.cmt = new CommentImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {
@@ -50,10 +50,9 @@ public class CommentModel {
 					if (rs.next()) {
 						item = new CommentObject();
 						item.setComment_id(rs.getShort("comment_id"));
-//						item.setComment_name(rs.getString("comment_name"));
-//						item.setComment_notes(rs.getString("comment_notes"));
-//						item.setComment_created_date(rs.getString("comment_created_date"));
-//						item.setComment_last_modified(rs.getString("comment_last_modified"));
+						item.setComment_content(rs.getString("comment_content"));
+						item.setComment_notes(rs.getString("comment_notes"));
+						item.setComment_created_date(rs.getString("comment_created_date"));
 					}
 
 					rs.close();
@@ -80,10 +79,9 @@ public class CommentModel {
 					while (rs.next()) {
 						item = new CommentObject();
 						item.setComment_id(rs.getShort("comment_id"));
-//						item.setComment_name(rs.getString("comment_name"));
-//						item.setComment_notes(rs.getString("comment_notes"));
-//						item.setComment_created_date(rs.getString("comment_created_date"));
-//						item.setComment_last_modified(rs.getString("comment_last_modified"));
+						item.setComment_content(rs.getString("comment_content"));
+						item.setComment_notes(rs.getString("comment_notes"));
+						item.setComment_created_date(rs.getString("comment_created_date"));
 						
 						items.add(item);
 					}

@@ -2,7 +2,7 @@ package jsoft.ads.user;
 
 import jsoft.objects.*;
 import java.sql.*;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import jsoft.*;
 

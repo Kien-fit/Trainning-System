@@ -9,8 +9,8 @@ public class LogModel {
 
 	private Log log;
 
-	public LogModel(ConnectionPool cp, String objectname) {
-		this.log = new LogImpl(cp, objectname);
+	public LogModel(ConnectionPool cp) {
+		this.log = new LogImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

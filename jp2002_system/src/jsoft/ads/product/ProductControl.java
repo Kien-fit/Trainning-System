@@ -55,7 +55,7 @@ public class ProductControl {
 		// TODO Auto-generated method stub
 
 		// Tạo bộ quản lý kết nối
-		ConnectionPool cp = new ConnectionPoolImpl();
+		//ConnectionPool cp = new ConnectionPoolImpl();
 
 
 	}

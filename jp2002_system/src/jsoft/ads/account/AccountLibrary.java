@@ -18,8 +18,6 @@ public class AccountLibrary {
 		tmp += "<th>Ghi chú</th>";
 		tmp += "<th>Số tiền hiện tại</th>";
 		tmp += "<th>Kiểu</th>";
-//		tmp += "<th></th>";
-//		tmp += "<th></th>";
 		tmp += "<th colspan=2>Thực hiện</th>";
 		tmp += "<th>ID</th>";
 		tmp += "</tr>";

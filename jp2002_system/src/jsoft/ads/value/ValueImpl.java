@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class ValueImpl extends BasicImpl implements Value {
 	
-	public ValueImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public ValueImpl(ConnectionPool cp) {
+		super(cp, "Value");
 	}
 
 	@Override

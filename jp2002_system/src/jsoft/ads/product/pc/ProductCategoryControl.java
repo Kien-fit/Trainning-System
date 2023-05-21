@@ -2,7 +2,7 @@ package jsoft.ads.product.pc;
 
 import jsoft.*;
 import jsoft.objects.*;
-import java.sql.*;
+//import java.sql.*;
 import java.util.*;
 
 public class ProductCategoryControl {

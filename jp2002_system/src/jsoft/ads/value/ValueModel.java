@@ -9,8 +9,8 @@ public class ValueModel {
 
 	private Value vl;
 
-	public ValueModel(ConnectionPool cp, String objectname) {
-		this.vl = new ValueImpl(cp, objectname);
+	public ValueModel(ConnectionPool cp) {
+		this.vl = new ValueImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

@@ -100,7 +100,7 @@ public class ProductView extends HttpServlet {
 		ProductControl pc = new ProductControl(cp);
 
 		// Lấy cấu trúc trình bày
-		String view = pc.viewProducts(null, (short)1, (byte)10);
+		String view = pc.viewProducts(null, (short)1, (byte)30);
 		
 		//Trả lại kết nối
 		pc.releaseConnection();

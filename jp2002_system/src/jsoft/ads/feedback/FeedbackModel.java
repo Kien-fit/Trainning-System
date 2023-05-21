@@ -9,8 +9,8 @@ public class FeedbackModel {
 
 	private Feedback fb;
 
-	public FeedbackModel(ConnectionPool cp, String objectname) {
-		this.fb = new FeedbackImpl(cp, objectname);
+	public FeedbackModel(ConnectionPool cp) {
+		this.fb = new FeedbackImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

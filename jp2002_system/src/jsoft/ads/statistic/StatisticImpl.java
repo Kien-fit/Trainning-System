@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class StatisticImpl extends BasicImpl implements Statistic {
 	
-	public StatisticImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public StatisticImpl(ConnectionPool cp) {
+		super(cp, "Statistic");
 	}
 
 	@Override

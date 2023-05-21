@@ -9,8 +9,8 @@ public class StatisticModel {
 
 	private Statistic st;
 
-	public StatisticModel(ConnectionPool cp, String objectname) {
-		this.st = new StatisticImpl(cp, objectname);
+	public StatisticModel(ConnectionPool cp) {
+		this.st = new StatisticImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

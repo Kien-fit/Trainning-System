@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class LabelImpl extends BasicImpl implements Label {
 	
-	public LabelImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public LabelImpl(ConnectionPool cp) {
+		super(cp, "Label");
 	}
 
 	@Override

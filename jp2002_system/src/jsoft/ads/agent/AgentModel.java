@@ -9,8 +9,8 @@ public class AgentModel {
 
 	private Agent agent;
 
-	public AgentModel(ConnectionPool cp, String objectname) {
-		this.agent = new AgentImpl(cp, objectname);
+	public AgentModel(ConnectionPool cp) {
+		this.agent = new AgentImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

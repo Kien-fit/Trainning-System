@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class PatternImpl extends BasicImpl implements Pattern {
 	
-	public PatternImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public PatternImpl(ConnectionPool cp) {
+		super(cp, "Pattern");
 	}
 
 	@Override
@@ -234,7 +234,8 @@ public class PatternImpl extends BasicImpl implements Pattern {
 		
 		String sql = "SELECT * FROM tblpattern WHERE pattern_id=?";
 
-		return this.get(sql, id);	}
+		return this.get(sql, id);
+	}
 
 	@Override
 	public ResultSet getPatterns(PatternObject similar, int at, byte total) {
@@ -245,6 +246,7 @@ public class PatternImpl extends BasicImpl implements Pattern {
 		sql += "ORDER BY pattern_id ASC ";
 		sql += "LIMIT " + at + ", " + total;
 
-		return this.gets(sql);	}
+		return this.gets(sql);
+	}
 
 }

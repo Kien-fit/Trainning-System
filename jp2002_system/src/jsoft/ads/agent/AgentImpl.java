@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class AgentImpl extends BasicImpl implements Agent {
 	
-	public AgentImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public AgentImpl(ConnectionPool cp) {
+		super(cp, "Agent");
 	}
 
 	@Override

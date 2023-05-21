@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class CommentImpl extends BasicImpl implements Comment {
 	
-	public CommentImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public CommentImpl(ConnectionPool cp) {
+		super(cp, "Comment");
 	}
 
 	@Override

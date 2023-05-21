@@ -9,8 +9,8 @@ public class AdvertiseModel {
 
 	private Advertise adv;
 
-	public AdvertiseModel(ConnectionPool cp, String objectname) {
-		this.adv = new AdvertiseImpl(cp, objectname);
+	public AdvertiseModel(ConnectionPool cp) {
+		this.adv = new AdvertiseImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

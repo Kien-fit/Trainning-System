@@ -2,15 +2,15 @@ package jsoft.ads.advertise;
 
 import jsoft.*;
 import jsoft.objects.*;
-import java.sql.*;
+//import java.sql.*;
 import java.util.*;
 
 public class AdvertiseControl {
 
 	private AdvertiseModel adv;
 
-	public AdvertiseControl(ConnectionPool cp, String objectname) {
-		this.adv = new AdvertiseModel(cp, objectname);
+	public AdvertiseControl(ConnectionPool cp) {
+		this.adv = new AdvertiseModel(cp);
 	}
 
 	protected void finalize() throws Throwable {

@@ -9,8 +9,8 @@ public class ComputerModel {
 
 	private Computer cpt;
 
-	public ComputerModel(ConnectionPool cp, String objectname) {
-		this.cpt = new ComputerImpl(cp, objectname);
+	public ComputerModel(ConnectionPool cp) {
+		this.cpt = new ComputerImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {
@@ -50,10 +50,10 @@ public class ComputerModel {
 					if (rs.next()) {
 						item = new ComputerObject();
 						item.setComputer_id(rs.getShort("computer_id"));
-//						item.setComputer_name(rs.getString("computer_name"));
+						item.setComputer_product_code(rs.getString("computer_product_code"));
+//						item.setComputer_model(rs.getString("computer_name"));
 //						item.setComputer_notes(rs.getString("computer_notes"));
 //						item.setComputer_created_date(rs.getString("computer_created_date"));
-//						item.setComputer_last_modified(rs.getString("computer_last_modified"));
 					}
 
 					rs.close();
@@ -80,7 +80,7 @@ public class ComputerModel {
 					while (rs.next()) {
 						item = new ComputerObject();
 						item.setComputer_id(rs.getShort("computer_id"));
-//						item.setComputer_name(rs.getString("computer_name"));
+						item.setComputer_product_code(rs.getString("computer_product_code"));
 //						item.setComputer_notes(rs.getString("computer_notes"));
 //						item.setComputer_created_date(rs.getString("computer_created_date"));
 //						item.setComputer_last_modified(rs.getString("computer_last_modified"));

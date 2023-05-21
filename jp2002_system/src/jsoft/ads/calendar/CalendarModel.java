@@ -9,8 +9,8 @@ public class CalendarModel {
 
 	private Calendar cal;
 
-	public CalendarModel(ConnectionPool cp, String objectname) {
-		this.cal = new CalendarImpl(cp, objectname);
+	public CalendarModel(ConnectionPool cp) {
+		this.cal = new CalendarImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

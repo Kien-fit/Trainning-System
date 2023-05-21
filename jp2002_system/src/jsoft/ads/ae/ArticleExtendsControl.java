@@ -2,51 +2,51 @@ package jsoft.ads.ae;
 
 import jsoft.*;
 import jsoft.objects.*;
-import java.sql.*;
+//import java.sql.*;
 import java.util.*;
 
 public class ArticleExtendsControl {
 
-	private ArticleExtendsModel ae;
+	private ArticleExtendsModel aem;
 
-	public ArticleExtendsControl(ConnectionPool cp, String objectname) {
-		this.ae = new ArticleExtendsModel(cp, objectname);
+	public ArticleExtendsControl(ConnectionPool cp) {
+		this.aem = new ArticleExtendsModel(cp);
 	}
 
 	protected void finalize() throws Throwable {
-		this.ae = null;
+		this.aem = null;
 		super.finalize();
 	}
 
 	public void releaseConnection() {
-		this.ae.releaseConnection();
+		this.aem.releaseConnection();
 	}
 	
 	public ConnectionPool getCP() {
-		return this.ae.getCP();
+		return this.aem.getCP();
 	}
 
 	// ------------------------------------------------
 		public boolean addArticleExtends(ArticleExtendsObject item) {
-			return this.ae.addArticleExtends(item);
+			return this.aem.addArticleExtends(item);
 		}
 
 		public boolean editArticleExtends(ArticleExtendsObject item) {
-			return this.ae.editArticleExtends(item);
+			return this.aem.editArticleExtends(item);
 		}
 
 		public boolean delArticleExtends(ArticleExtendsObject item) {
-			return this.ae.delArticleExtends(item);
+			return this.aem.delArticleExtends(item);
 		}
 
 		// ------------------------------------------------
 		public ArticleExtendsObject getArticleExtendsObject(int id) {
-			return this.ae.getArticleExtendsObject(id);
+			return this.aem.getArticleExtendsObject(id);
 		}
 
 		public String viewArticleExtends(ArticleExtendsObject similar, short page, byte total) {
 
-			ArrayList<ArticleExtendsObject> items = this.ae.getArticleExtendsObjects(similar, page, total);
+			ArrayList<ArticleExtendsObject> items = this.aem.getArticleExtendsObjects(similar, page, total);
 			
 			return ArticleExtendsLibrary.viewArticleExtends(items);
 		}

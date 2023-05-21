@@ -8,8 +8,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class CustomerImpl extends BasicImpl implements Customer {
 
-	public CustomerImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public CustomerImpl(ConnectionPool cp) {
+		super(cp, "Customer");
 	}
 
 	@Override
@@ -191,8 +191,8 @@ public class CustomerImpl extends BasicImpl implements Customer {
 	private boolean isEmpty(CustomerObject item) {
 		boolean flag = true;
 
-		String sql = "SELECT account_id FROM tblaccount ";
-		sql += "WHERE (account_customer_id=" + item.getCustomer_id() + ")";
+		String sql = "SELECT product_id FROM tblproduct ";
+		sql += "WHERE (customer_product_id=" + item.getCustomer_id() + ")";
 
 		ResultSet rs = this.gets(sql);
 		if (rs != null) {

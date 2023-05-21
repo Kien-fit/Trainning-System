@@ -7,95 +7,48 @@ import java.util.*;
 
 public class ComputerControl {
 
-	private Computer cpt;
+	private ComputerModel cm;
 
-	public ComputerControl(ConnectionPool cp, String objectname) {
-		this.cpt = new ComputerImpl(cp, objectname);
+	public ComputerControl(ConnectionPool cp) {
+		this.cm = new ComputerModel(cp);
 	}
 
 	protected void finalize() throws Throwable {
-		this.cpt = null;
+		this.cm = null;
 		super.finalize();
 	}
 
 	public void releaseConnection() {
-		this.cpt.releaseConnection();
+		this.cm.releaseConnection();
 	}
 	
 	public ConnectionPool getCP() {
-		return this.cpt.getCP();
+		return this.cm.getCP();
 	}
 
 	// ------------------------------------------------
 		public boolean addComputer(ComputerObject item) {
-			return this.cpt.addComputer(item);
+			return this.cm.addComputer(item);
 		}
 
 		public boolean editComputer(ComputerObject item) {
-			return this.cpt.editComputer(item);
+			return this.cm.editComputer(item);
 		}
 
 		public boolean delComputer(ComputerObject item) {
-			return this.cpt.delComputer(item);
+			return this.cm.delComputer(item);
 		}
 
 		// ------------------------------------------------
 		public ComputerObject getComputerObject(short id) {
-			ComputerObject item = null;
-
-			// Lấy dữ liệu
-			ResultSet rs = this.cpt.getComputer(id);
-			if (rs != null) {
-				try {
-					if (rs.next()) {
-						item = new ComputerObject();
-						item.setComputer_id(rs.getShort("computer_id"));
-//						item.setComputer_name(rs.getString("computer_name"));
-//						item.setComputer_notes(rs.getString("computer_notes"));
-//						item.setComputer_created_date(rs.getString("computer_created_date"));
-//						item.setComputer_last_modified(rs.getString("computer_last_modified"));
-					}
-
-					rs.close();
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return item;
+			return this.cm.getComputerObject(id);
 		}
 
-		public ArrayList<ComputerObject> getComputerObject(ComputerObject similar, short page, byte total) {
+		public String getComputerObject(ComputerObject similar, short page, byte total) {
 
 			ArrayList<ComputerObject> items = new ArrayList<ComputerObject>();
 
-			ComputerObject item = null;
-
-			// Lấy dữ liệu
-			int at = (page - 1) * total;
-			ResultSet rs = this.cpt.getComputers(similar, at, total);
-			if (rs != null) {
-				try {
-					while (rs.next()) {
-						item = new ComputerObject();
-						item.setComputer_id(rs.getShort("computer_id"));
-//						item.setComputer_name(rs.getString("computer_name"));
-//						item.setComputer_notes(rs.getString("computer_notes"));
-//						item.setComputer_created_date(rs.getString("computer_created_date"));
-//						item.setComputer_last_modified(rs.getString("computer_last_modified"));
-						
-						items.add(item);
-					}
-
-					rs.close();
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return items;
+			return ComputerLibrary.viewComputers(items);
 		}
 
 	public static void main(String[] args) {

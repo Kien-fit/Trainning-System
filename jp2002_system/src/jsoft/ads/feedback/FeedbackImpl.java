@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class FeedbackImpl extends BasicImpl implements Feedback {
 	
-	public FeedbackImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public FeedbackImpl(ConnectionPool cp) {
+		super(cp, "Feedback");
 	}
 
 	@Override

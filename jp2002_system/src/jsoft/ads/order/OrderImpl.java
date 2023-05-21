@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class OrderImpl extends BasicImpl implements Order {
 	
-	public OrderImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public OrderImpl(ConnectionPool cp) {
+		super(cp, "Order");
 	}
 
 	@Override

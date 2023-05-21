@@ -8,8 +8,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class InteriorImpl extends BasicImpl implements Interior {
 
-	public InteriorImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public InteriorImpl(ConnectionPool cp) {
+		super(cp, "Interior");
 	}
 
 	@Override

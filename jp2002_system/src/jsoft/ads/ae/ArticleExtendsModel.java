@@ -9,8 +9,8 @@ public class ArticleExtendsModel {
 
 	private ArticleExtends ae;
 
-	public ArticleExtendsModel(ConnectionPool cp, String objectname) {
-		this.ae = new ArticleExtendsImpl(cp, objectname);
+	public ArticleExtendsModel(ConnectionPool cp) {
+		this.ae = new ArticleExtendsImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

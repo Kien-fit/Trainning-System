@@ -2,7 +2,7 @@ package jsoft.ads.product.pg;
 
 import jsoft.*;
 import jsoft.objects.*;
-import java.sql.*;
+//import java.sql.*;
 import java.util.*;
 
 public class ProductGroupControl {

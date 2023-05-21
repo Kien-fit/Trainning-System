@@ -9,8 +9,8 @@ public class InteriorModel {
 
 	private Interior it;
 
-	public InteriorModel(ConnectionPool cp, String objectname) {
-		this.it = new InteriorImpl(cp, objectname);
+	public InteriorModel(ConnectionPool cp) {
+		this.it = new InteriorImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

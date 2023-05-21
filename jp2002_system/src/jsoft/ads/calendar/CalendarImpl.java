@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class CalendarImpl extends BasicImpl implements Calendar {
 	
-	public CalendarImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public CalendarImpl(ConnectionPool cp) {
+		super(cp, "Calendar");
 	}
 
 	@Override

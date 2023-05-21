@@ -431,7 +431,6 @@ public class UserAE extends HttpServlet {
 					response.sendRedirect("/adv/user/view");
 				} else {
 					response.sendRedirect("/adv/user/ae?err=notok");
-
 				}
 
 			} else {

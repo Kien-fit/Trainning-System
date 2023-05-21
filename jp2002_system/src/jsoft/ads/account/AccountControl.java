@@ -2,51 +2,51 @@ package jsoft.ads.account;
 
 import jsoft.*;
 import jsoft.objects.*;
-import java.sql.*;
+//import java.sql.*;
 import java.util.*;
 
 public class AccountControl {
 
-	private AccountModel acc;
+	private AccountModel am;
 
 	public AccountControl(ConnectionPool cp) {
-		this.acc = new AccountModel(cp);
+		this.am = new AccountModel(cp);
 	}
 
 	protected void finalize() throws Throwable {
-		this.acc = null;
+		this.am = null;
 		super.finalize();
 	}
 	
 	public void releaseConnection() {
-		this.acc.releaseConnection();
+		this.am.releaseConnection();
 	}
 	
 	public ConnectionPool getCP() {
-		return this.acc.getCP();
+		return this.am.getCP();
 	}
 
 	// **************************************************
 	public boolean addAccount(AccountObject item) {
-		return this.acc.addAccount(item);
+		return this.am.addAccount(item);
 	}
 
 	public boolean editAccount(AccountObject item) {
-		return this.acc.editAccount(item);
+		return this.am.editAccount(item);
 	}
 
 	public boolean delAccount(AccountObject item) {
-		return this.acc.delAccount(item);
+		return this.am.delAccount(item);
 	}
 
 	// **************************************************
 	public AccountObject getAccountObject(short id) {
-		return this.acc.getAccountObject(id);
+		return this.am.getAccountObject(id);
 	}
 
 	public String viewAccounts(AccountObject similar, short page, byte total) {
 
-		ArrayList<AccountObject> items = this.acc.getAccountObjects(similar, page, total);
+		ArrayList<AccountObject> items = this.am.getAccountObjects(similar, page, total);
 
 		return AccountLibrary.viewAccounts(items);
 	}
@@ -55,7 +55,7 @@ public class AccountControl {
 		// TODO Auto-generated method stub
 
 		// Tạo bộ quản lý kết nối
-		ConnectionPool cp = new ConnectionPoolImpl();
+		//ConnectionPool cp = new ConnectionPoolImpl();
 
 	}
 

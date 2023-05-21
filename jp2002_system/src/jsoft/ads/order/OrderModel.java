@@ -9,8 +9,8 @@ public class OrderModel {
 
 	private Order od;
 
-	public OrderModel(ConnectionPool cp, String objectname) {
-		this.od = new OrderImpl(cp, objectname);
+	public OrderModel(ConnectionPool cp) {
+		this.od = new OrderImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {

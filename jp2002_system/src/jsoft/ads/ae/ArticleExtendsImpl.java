@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
 	
-	public ArticleExtendsImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public ArticleExtendsImpl(ConnectionPool cp) {
+		super(cp, "ArticleExtends");
 	}
 
 	@Override
@@ -149,9 +149,9 @@ public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
 	public boolean delArticleExtends(ArticleExtendsObject item) {
 		// TODO Auto-generated method stub
 
-		if(!this.isEmpty(item)) {
-			return false;
-		}
+//		if(!this.isEmpty(item)) {
+//			return false;
+//		}
 		
 		String sql = "DELETE FROM tblarticle_extends WHERE ae_id=?";
 		
@@ -177,29 +177,29 @@ public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
 		return false;
 	}
 	
-	private boolean isEmpty(ArticleExtendsObject item) {
-		boolean flag = true;
-		
-		String sql = "SELECT _id FROM tbl ";
-		sql += "WHERE (_id="+item.getAe_id()+")";
-		
-		ResultSet rs = this.gets(sql);
-		if(rs!=null) {
-			try {
-				if(rs.next()) {
-					flag = false;
-				}
-				
-				rs.close();
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		return flag;
-	}
+//	private boolean isEmpty(ArticleExtendsObject item) {
+//		boolean flag = true;
+//		
+//		String sql = "SELECT _id FROM tbl ";
+//		sql += "WHERE (_id="+item.getAe_id()+")";
+//		
+//		ResultSet rs = this.gets(sql);
+//		if(rs!=null) {
+//			try {
+//				if(rs.next()) {
+//					flag = false;
+//				}
+//				
+//				rs.close();
+//				
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		return flag;
+//	}
 
 
 	@Override

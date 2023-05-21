@@ -9,8 +9,8 @@ public class PatternModel {
 
 	private Pattern pt;
 
-	public PatternModel(ConnectionPool cp, String objectname) {
-		this.pt = new PatternImpl(cp, objectname);
+	public PatternModel(ConnectionPool cp) {
+		this.pt = new PatternImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {
@@ -84,7 +84,11 @@ public class PatternModel {
 						item.setPattern_title(rs.getString("pattern_title"));
 						item.setPattern_summary(rs.getString("pattern_summary"));
 						item.setPattern_detail(rs.getString("pattern_detail"));
-						item.setPattern_image(rs.getString("pattern_image"));
+						item.setPattern_image(rs.getString("pattern_image"));		
+						item.setPattern_code(rs.getString("pattern_code"));
+						item.setPattern_ps_id(rs.getShort("pattern_ps_id"));
+						item.setPattern_pg_id(rs.getShort("pattern_pg_id"));
+						item.setPattern_pc_id(rs.getShort("pattern_pc_id"));
 
 //						pattern_image1
 //						pattern_image2
@@ -98,8 +102,7 @@ public class PatternModel {
 //						pattern_size
 //						pattern_ps_id
 //						pattern_pg_id
-//						pattern_pc_id
-//						pattern_code
+//						pattern_pc_id						
 //						pattern_user_view
 //						pattern_visited
 //						pattern_approved

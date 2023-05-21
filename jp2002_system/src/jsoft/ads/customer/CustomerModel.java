@@ -9,8 +9,8 @@ public class CustomerModel {
 
 	private Customer ctm;
 
-	public CustomerModel(ConnectionPool cp, String objectname) {
-		this.ctm = new CustomerImpl(cp, objectname);
+	public CustomerModel(ConnectionPool cp) {
+		this.ctm = new CustomerImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {
@@ -58,6 +58,7 @@ public class CustomerModel {
 						item.setCustomer_jobarea(rs.getString("customer_jobarea"));
 						item.setCustomer_notes(rs.getString("customer_notes"));
 						item.setCustomer_email(rs.getString("customer_email"));
+						item.setCustomer_code(rs.getString("customer_code"));
 						item.setCustomer_created_date(rs.getString("customer_created_date"));
 						item.setCustomer_modified_date(rs.getString("customer_modified_date"));
 						

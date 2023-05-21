@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class ComputerImpl extends BasicImpl implements Computer {
 	
-	public ComputerImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public ComputerImpl(ConnectionPool cp) {
+		super(cp, "Computer");
 	}
 
 	@Override

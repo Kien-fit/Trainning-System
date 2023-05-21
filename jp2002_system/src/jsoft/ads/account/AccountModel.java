@@ -7,36 +7,36 @@ import java.util.*;
 
 public class AccountModel {
 
-	private Account acc;
+	private Account a;
 
 	public AccountModel(ConnectionPool cp) {
-		this.acc = new AccountImpl(cp);
+		this.a = new AccountImpl(cp);
 	}
 
 	protected void finalize() throws Throwable {
-		this.acc = null;
+		this.a = null;
 		super.finalize();
 	}
 	
 	public void releaseConnection() {
-		this.acc.releaseConnection();
+		this.a.releaseConnection();
 	}
 	
 	public ConnectionPool getCP() {
-		return this.acc.getCP();
+		return this.a.getCP();
 	}
 
 	// **************************************************
 	public boolean addAccount(AccountObject item) {
-		return this.acc.addAccount(item);
+		return this.a.addAccount(item);
 	}
 
 	public boolean editAccount(AccountObject item) {
-		return this.acc.editAccount(item);
+		return this.a.editAccount(item);
 	}
 
 	public boolean delAccount(AccountObject item) {
-		return this.acc.delAccount(item);
+		return this.a.delAccount(item);
 	}
 
 	// **************************************************
@@ -44,7 +44,7 @@ public class AccountModel {
 		AccountObject item = null;
 
 		// Lấy dữ liệu
-		ResultSet rs = this.acc.getAccount(id);
+		ResultSet rs = this.a.getAccount(id);
 		if (rs != null) {
 			try {
 				if (rs.next()) {
@@ -78,10 +78,11 @@ public class AccountModel {
 
 		// Lấy dữ liệu
 		int at = (page - 1) * total;
-		ResultSet rs = this.acc.getAccounts(similar, at, total);
+		ResultSet rs = this.a.getAccounts(similar, at, total);
 		if (rs != null) {
 			try {
 				while (rs.next()) {
+					item = new AccountObject();
 					item.setAccount_id(rs.getInt("account_id"));
 					item.setAccount_customer_id(rs.getInt("account_customer_id"));
 					item.setAccount_money(rs.getInt("account_money"));
@@ -113,9 +114,9 @@ public class AccountModel {
 		ConnectionPool cp = new ConnectionPoolImpl();
 
 		// Tạo đối tượng thực thii chức năng mới Model
-		AccountModel um = new AccountModel(cp);
+		AccountModel am = new AccountModel(cp);
 
-		ArrayList<AccountObject> Accounts = um.getAccountObjects(null, (short) 1, (byte) 10);
+		ArrayList<AccountObject> Accounts = am.getAccountObjects(null, (short) 1, (byte) 10);
 
 		for (AccountObject Account : Accounts) {
 			System.out.print("ID: " + Account.getAccount_id());

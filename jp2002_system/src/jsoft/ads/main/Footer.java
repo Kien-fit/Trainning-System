@@ -40,15 +40,9 @@ public class Footer extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		out.print("<div class=\"row\">");
-		out.print("<div class=\"col-md-6\">");
-		out.print("<div class=\"footer-left\">");
-
-		out.print("</div>");
-		out.print("</div>");
-
-		out.print("<div class=\"col-md-6\">");
-		out.print("<div class=\"footer-right\">");
-
+		out.print("<div class=\"col-md-12\">");
+		out.print("<div class=\"footer\">");
+		out.print("<p>Copyright JP2002</p>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");

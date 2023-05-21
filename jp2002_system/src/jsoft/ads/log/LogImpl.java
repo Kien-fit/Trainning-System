@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class LogImpl extends BasicImpl implements Log {
 	
-	public LogImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public LogImpl(ConnectionPool cp) {
+		super(cp, "Log");
 	}
 
 	@Override

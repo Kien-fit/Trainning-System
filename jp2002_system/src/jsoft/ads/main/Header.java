@@ -57,11 +57,11 @@ public class Header extends HttpServlet {
 		out.print("<meta charset=\"utf-8\">");
 		out.print("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">");
 		out.print("<title>Quản trị hệ thống</title>");
-		out.print("<link href=\"/adv/adcss/all.css\" rel=\"stylesheet\" type=\"text/css\" />");
-		out.print("<link href=\"/adv/adcss/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\" />");
-		out.print("<link href=\"/adv/adcss/bootstrap-grid.css\" rel=\"stylesheet\" type=\"text/css\" />");
-		out.print("<link href=\"/adv/adcss/layout.css\" rel=\"stylesheet\" type=\"text/css\" />");
-		out.print("<link href=\"/adv/adcss/user.css\" rel=\"stylesheet\" type=\"text/css\" />");
+		out.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"/adv/adcss/all.css\" />");
+		out.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"/adv/adcss/bootstrap.css\" />");
+		out.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"/adv/adcss/bootstrap-grid.css\" />");
+		out.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"/adv/adcss/layout.css\" />");
+		out.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"/adv/adcss/user.css\" />");
 
 		out.print("<script language=\"javascript\" src=\"/adv/ckeditor/ckeditor.js\"></script>");	
 		out.print("<script language=\"javascript\" src=\"/adv/adjs/user.js\"></script>");
@@ -80,6 +80,7 @@ public class Header extends HttpServlet {
 		out.print("<div class=\"row\">");
 		out.print("<div class=\"col-md-6\">");
 		out.print("<div class=\"logo\">");
+		out.print("<img src=\"/adv/uploads/image/Generate/mikadologo2.png\" style=\"height: 10vh;\" alt=\"Logo\">");	
 		out.print("</div>");
 		out.print("</div>");
 
@@ -91,7 +92,7 @@ public class Header extends HttpServlet {
 		out.print("</div>");
 		out.print("<div class=\"col-md-8 text-left\">");
 		out.print("<h6>Quyền quản trị</h6>");
-		out.print("Tên dăng nhập: <a href=\"#\">"+user.getUser_name()+"("+user.getUser_fullname()+")</a><br />");
+		out.print("Tên dăng nhập: <a href=\"#\">"+user.getUser_name()+" ("+user.getUser_fullname()+")</a><br />");
 		out.print("<a href=\"#\">Đổi mật khẩu</a>");
 		out.print("&nbsp;|&nbsp;");
 		out.print("<a href=\"/adv/user/logout\">Thoát</a>");

@@ -18,8 +18,6 @@ public class AdvertiseLibrary {
 		tmp += "<th>Kiểu</th>";
 		tmp += "<th>Hiển thị</th>";
 		tmp += "<th>Hình ảnh</th>";
-//		tmp += "<th></th>";
-//		tmp += "<th></th>";
 		tmp += "<th colspan=2>Thực hiện</th>";
 		tmp += "<th>ID</th>";
 		tmp += "</tr>";

@@ -9,8 +9,8 @@ import jsoft.ads.basic.BasicImpl;
 
 public class AdvertiseImpl extends BasicImpl implements Advertise {
 	
-	public AdvertiseImpl(ConnectionPool cp, String objectname) {
-		super(cp, objectname);
+	public AdvertiseImpl(ConnectionPool cp) {
+		super(cp, "Advertise");
 	}
 
 	@Override
@@ -85,10 +85,6 @@ public class AdvertiseImpl extends BasicImpl implements Advertise {
 	@Override
 	public boolean delAdvertise(AdvertiseObject item) {
 		// TODO Auto-generated method stub
-
-		if(!this.isEmpty(item)) {
-			return false;
-		}
 		
 		String sql = "DELETE FROM tbladvertise WHERE advertise_id=?";
 		
@@ -112,30 +108,6 @@ public class AdvertiseImpl extends BasicImpl implements Advertise {
 		}
 		
 		return false;
-	}
-	
-	private boolean isEmpty(AdvertiseObject item) {
-		boolean flag = true;
-		
-		String sql = "SELECT _id FROM tbl ";
-		sql += "WHERE (_id="+item.getAdvertise_id()+")";
-		
-		ResultSet rs = this.gets(sql);
-		if(rs!=null) {
-			try {
-				if(rs.next()) {
-					flag = false;
-				}
-				
-				rs.close();
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		return flag;
 	}
 
 	@Override
