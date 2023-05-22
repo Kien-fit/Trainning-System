@@ -29,7 +29,7 @@ public class StatisticImpl extends BasicImpl implements Statistic {
 			PreparedStatement pre = this.con.prepareStatement(sql);
 			
 			pre.setString(1, item.getStatistic_current_date());
-			pre.setInt(1, item.getStatistic_visited());
+			pre.setInt(2, item.getStatistic_visited());
 			
 			return this.add(pre);
 			

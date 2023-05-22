@@ -82,6 +82,7 @@ public class Menu extends HttpServlet {
 		out.print("<div id=\"collapseOne\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
 		out.print("<a href=\"/adv/view\"><i class=\"fas fa-clipboard-list\"></i> Tổng hợp</a><br />");
+		out.print("<a href=\"/adv/statistic/view\"><i class=\"fas fa-clipboard-list\"></i> Thống kê</a><br />");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
@@ -117,6 +118,7 @@ public class Menu extends HttpServlet {
 		out.print("<a href=\"/adv/article/view\"><i class=\"fas fa-clipboard-list\"></i> Danh sách</a><br />");
 		out.print("<a href=\"/adv/section/view\"><i class=\"fas fa-clipboard-list\"></i> Chuyên mục</a><br />");
 		out.print("<a href=\"/adv/category/view\"><i class=\"fas fa-clipboard-list\"></i> Thể loại</a><br />");
+		out.print("<a href=\"/adv/article-extends/view\"><i class=\"fas fa-clipboard-list\"></i> Bài viết mở rộng</a><br />");
 		out.print("<a href=\"/adv/article/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
 		out.print("</div>");
 		out.print("</div>");
@@ -146,7 +148,7 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingFive\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseFive\" aria-expanded=\"false\" aria-controls=\"collapseFive\">");
-		out.print("<i class=\"far fa-user-circle\"></i> Account");
+		out.print("<i class=\"far fa-user-circle\"></i> Tài khoản");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
@@ -162,7 +164,7 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingSix\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSix\" aria-expanded=\"false\" aria-controls=\"collapseSix\">");
-		out.print("<i class=\"fas fa-user\"></i> Feedback");
+		out.print("<i class=\"fas fa-user\"></i> Phản hồi");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
@@ -178,14 +180,14 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingSeven\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSeven\" aria-expanded=\"false\" aria-controls=\"collapseSeven\">");
-		out.print("<i class=\"fas fa-desktop\"></i> Log");
+		out.print("<i class=\"fas fa-desktop\"></i> Khách hàng");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
 		out.print("<div id=\"collapseSeven\" class=\"collapse\" aria-labelledby=\"headingSeven\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/log/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
-		out.print("<a href=\"/adv/log/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
+		out.print("<a href=\"/adv/customer/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
+		out.print("<a href=\"/adv/customer/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
@@ -194,7 +196,7 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingEight\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseEight\" aria-expanded=\"false\" aria-controls=\"collapseEight\">");
-		out.print("<i class=\"fas fa-user\"></i> Order");
+		out.print("<i class=\"fas fa-user\"></i> Đặt hàng");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
@@ -210,14 +212,14 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingNine\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseNine\" aria-expanded=\"false\" aria-controls=\"collapseNine\">");
-		out.print("<i class=\"fas fa-user\"></i> Article extends");
+		out.print("<i class=\"fas fa-user\"></i> Bình luận");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
 		out.print("<div id=\"collapseNine\" class=\"collapse\" aria-labelledby=\"headingNine\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/interior/view\">Danh Sách</a><br />");
-		out.print("<a href=\"/adv/interior/ae\">Thêm mới</a>");
+		out.print("<a href=\"/adv/comment/view\">Danh Sách</a><br />");
+		out.print("<a href=\"/adv/comment/ae\">Thêm mới</a>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
@@ -226,7 +228,7 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingTen\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTen\" aria-expanded=\"false\" aria-controls=\"collapseTen\">");
-		out.print("<i class=\"fas fa-user\"></i> Pattern");
+		out.print("<i class=\"fas fa-user\"></i> Mẫu");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
@@ -237,7 +239,39 @@ public class Menu extends HttpServlet {
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
+		
+		out.print("<div class=\"card\">");
+		out.print("<div class=\"card-header\" id=\"headingTen\">");
+		out.print("<h2 class=\"mb-0\">");
+		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTen\" aria-expanded=\"false\" aria-controls=\"collapseTen\">");
+		out.print("<i class=\"fas fa-user\"></i> Đại lý");
+		out.print("</button>");
+		out.print("</h2>");
+		out.print("</div>");
+		out.print("<div id=\"collapseTen\" class=\"collapse\" aria-labelledby=\"headingTen\" data-parent=\"#accordionExample\">");
+		out.print("<div class=\"card-body\">");
+		out.print("<a href=\"/adv/agent/view\">Danh Sách</a><br />");
+		out.print("<a href=\"/adv/agent/ae\">Thêm mới</a>");
+		out.print("</div>");
+		out.print("</div>");
+		out.print("</div>");
 
+		out.print("<div class=\"card\">");
+		out.print("<div class=\"card-header\" id=\"headingEleven\">");
+		out.print("<h2 class=\"mb-0\">");
+		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTen\" aria-expanded=\"false\" aria-controls=\"collapseTen\">");
+		out.print("<i class=\"fas fa-user\"></i> Quảng cáo");
+		out.print("</button>");
+		out.print("</h2>");
+		out.print("</div>");
+		out.print("<div id=\"collapseTen\" class=\"collapse\" aria-labelledby=\"headingEleven\" data-parent=\"#accordionExample\">");
+		out.print("<div class=\"card-body\">");
+		out.print("<a href=\"/adv/advertise/view\">Danh Sách</a><br />");
+		out.print("<a href=\"/adv/advertise/ae\">Thêm mới</a>");
+		out.print("</div>");
+		out.print("</div>");
+		out.print("</div>");
+		
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");

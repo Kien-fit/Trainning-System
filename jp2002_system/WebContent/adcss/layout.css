@@ -48,7 +48,6 @@
 }
 
 .view-content {
-	min-height:60vh;
 	height: auto;
 	background-color: rgba(225,255,255,0.2);
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
@@ -87,7 +86,7 @@
 /*========== FOOTER ==========*/
 .footer {
 	margin: 3vh 0 2vh 0;
-	height: 10vh;
+	height: 15vh;
 	text-align: center;
 	background-color: rgba(0,0,0,0.05);
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);

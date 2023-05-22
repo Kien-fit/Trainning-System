@@ -12,9 +12,10 @@ public class AgentLibrary {
 		//Dòng tiêu đề
 		tmp += "<tr>";
 		tmp += "<th>STT</th>";
-		tmp += "<th>Tên</th>";
+		tmp += "<th>Ảnh</th>";
+		tmp += "<th>Tên đại lý</th>";
 		tmp += "<th>Địa chỉ</th>";
-		tmp += "<th>Diện thoại</th>";
+		tmp += "<th>Điện thoại</th>";
 		tmp += "<th>Email</th>";
 		tmp += "<th>Website</th>";
 		tmp += "<th>Ghi chú</th>";
@@ -30,6 +31,7 @@ public class AgentLibrary {
 			NO++;
 			tmp += "<tr>";
 			tmp += "<td>"+NO+"</td>";
+			tmp += "<td>"+item.getAgent_image()+"</td>";
 			tmp += "<td>"+item.getAgent_name()+"</td>";
 			tmp += "<td>"+item.getAgent_address()+"</td>";
 			tmp += "<td>"+item.getAgent_phone()+"</td>";
