@@ -17,38 +17,38 @@ public class OrderControl {
 		super.finalize();
 	}
 	
-	public void relaeseConnection() {
-		this.om.releaseConnection();
-	}
-	
 	public ConnectionPool getCP() {
 		return this.om.getCP();
 	}
-	
+
+	public void releaseConnection() {
+		this.om.releaseConnection();
+	}
+
 	// ------------------------------------------------
-		public boolean addOrder(OrderObject item) {
-			return this.om.addOrder(item);
-		}
+	public boolean addOrder(OrderObject item) {
+		return this.om.addOrder(item);
+	}
 
-		public boolean editOrder(OrderObject item) {
-			return this.om.editOrder(item);
-		}
+	public boolean editOrder(OrderObject item) {
+		return this.om.editOrder(item);
+	}
 
-		public boolean delOrder(OrderObject item) {
-			return this.om.delOrder(item);
-		}
+	public boolean delOrder(OrderObject item) {
+		return this.om.delOrder(item);
+	}
 
-		// ------------------------------------------------
-		public OrderObject getOrderObject(int id) {
-			return this.om.getOrderObject(id);
-		}
+	// ------------------------------------------------
+	public OrderObject getOrderObject(int id) {
+		return this.om.getOrderObject(id);
+	}
 
-		public String getOrderObject(OrderObject similar, short page, byte total) {
+	public String viewOrders(OrderObject similar, short page, byte total) {
 
-			ArrayList<OrderObject> items = new ArrayList<OrderObject>();
+		ArrayList<OrderObject> items = new ArrayList<OrderObject>();
 
-			return OrderLibrary.viewOrders(items);
-		}
+		return OrderLibrary.viewOrders(items);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

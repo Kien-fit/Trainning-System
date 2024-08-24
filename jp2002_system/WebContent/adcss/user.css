@@ -1,27 +1,4 @@
-﻿/*
-.mybg {
-	background: #f8f9fa !important;
-	margin: 10px 0;
-}
-
-.myrow {
-	height: 100px;
-	border: 1px solid #55f;
-	
-}
-
-.myborder {
-	border: 1px solid #dee2e6 !important;
-	padding: 10px;
-}
-
-.mt-23 {margin-top: 23px;}
-.mt-flex {margin-top: 100px;}
-
-.size200 {
-	width: 100px;
-}
-*/
+﻿
 .mytitle {
 	width: 100%;
 	padding: 10px;
@@ -29,6 +6,24 @@
 	color: #fff;
 	text-transform: uppercase;
 	margin-bottom: 20px;
+}
+
+.view-content table .NAME {
+	width: 10vw;
+	font-weight: bold;
+}
+
+.view-content table .ADDRESS {
+	width: 20vw;
+}
+
+.view-content table .PHONE,
+.view-content table .LOGINED {
+	text-align: center;
+}
+
+.view-content table .IMAGE {
+	width: 10vw;
 }
 
 

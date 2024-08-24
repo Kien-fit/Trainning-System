@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import jsoft.objects.*;
 import jsoft.*;
+import jsoft.library.DateTime;
+import jsoft.library.Utilities;
+import jsoft.library.Utilities_Support;
 
 
 /**
@@ -61,6 +64,58 @@ public class ProductCategoryAE extends HttpServlet {
 
 		// Tạo đối tượng xuất nội dung về trình khách
 		PrintWriter out = response.getWriter();
+		
+		// Tim id dể sửa nếu có
+		int id = Utilities.getIntParam(request, "id");
+		String name = "", image = "", notes = "", nameEn = "";
+		int pgId = 0;
+		
+		String title = "<i class=\"fas fa-plus-circle\"></i>";
+		String lblCre = "Create";
+		String readonly = "";
+		
+		String productGroupOptions = null;
+
+		boolean isEdit = false;
+		
+		// Tìm bộ quản lý kết nối
+		ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
+		
+		// Tạo đối tượng thực thi
+		ProductCategoryControl pcc = new ProductCategoryControl(cp);
+		
+		if(cp==null) {
+			getServletContext().setAttribute("CPool", pcc.getCP());
+		}
+		
+		productGroupOptions = pcc.viewProductGroupOptions(null, pgId);
+		
+		if (id > 0) {
+			
+			// Xác định đối tượng để sửa
+			ProductCategoryObject ePc = pcc.getProductCategoryObject(id);	
+
+			// Kiểm tra
+			if (ePc != null) {
+				// Tách thông tin để sửa
+				name = ePc.getPc_name();
+				image = ePc.getPc_image();
+				notes = ePc.getPc_notes();
+				nameEn = ePc.getPc_name_en();
+				pgId = ePc.getPc_pg_id();
+				
+				title = "Update Product Category";
+				lblCre = "Update";
+				readonly = "readonly";
+
+				isEdit = true;
+			}
+			
+			productGroupOptions = pcc.viewProductGroupOptions(null, pgId);
+		}
+		
+		// Trả về kết nối
+		pcc.releaseConnection();
 
 		// Tìm header và include
 		RequestDispatcher h = request.getRequestDispatcher("/header");
@@ -69,49 +124,96 @@ public class ProductCategoryAE extends HttpServlet {
 		}
 
 		out.print("<div class=\"col-md-10\">");
-		out.print("<div class=\"row mt-flex\">");
-		out.print("<div class=\"col-md-9\">");
+		out.print("<div class=\"row mt-flex view-header\">");
+		out.print("<div class=\"col-md-12\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
-		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/product/view\">Sản phẩm</a></li>&nbsp;");
-		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/pc/view\">Loại sản phẩm</a></li>&nbsp;");
-		out.print("<li class=\"breadcrumb-item\">Danh sách</li>");
+		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/article/view\">Product Category</a></li>&nbsp;");
+		out.print("<li class=\"breadcrumb-item\">"+title+"</li>");
 		out.print("</ol>");
 		out.print("</nav>");
-		out.print("</div>");
-		out.print("<div class=\"col-md-3\">");
-		out.print("<div class=\"mysearch\">");
-		out.print("<form class=\"form-inline\">");
-		out.print("<div class=\"form-group\">");
-		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
-		out.print("</div>");
-		out.print("</form>");
-		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
 
 		out.print("<div class=\"row\">");
 		out.print("<div class=\"col-md-12\">");
-		
-		//Tìm bộ quản lý kết nối
-		ConnectionPool cp = (ConnectionPool)getServletContext().getAttribute("CPool");
-		//Tạo đối tượng thực thi chức năng
-		ProductCategoryControl sc = new ProductCategoryControl(cp, "ProductCategory");
 
-		// Lấy cấu trúc trình bày
-		String view = sc.viewProductCategory(null, (short)1, (byte)10);
-		
-		//Trả lại kết nối
-		sc.releaseConnection();
-		
-		
-		out.print("<div class=\"view\">"+view+"</div>");
-		
+		out.print("<div class=\"view-content\">");
+		out.print("<form name=\"frmPc\" class=\"frmPc\" action=\"\" method=\"\">");
+		out.print("<div class=\"form-group row\">");
+		out.print("<div class=\"col-md-12 text-center\">");
+		out.print("<div class=\"mytitle\"><i class=\"fas fa-people-carry\"></i> Product category information</div>");
 		out.print("</div>");
 		out.print("</div>");
 		
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputName\" class=\"col-md-2 col-form-label text-right\">Product name</label>");
+		out.print("<div class=\"col-md-4\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputName\" name=\"txtName\" "
+				+ "onkeyup=\"checkName(this.form)\" "+ readonly +" value=\""+name+"\" >");
+		out.print("<div id=\"viewValidName\"></div>");
+		out.print("</div>");
+		out.print("</div>");
+		
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputNameEn\" class=\"col-md-2 col-form-label text-right\">Product name(English)</label>");
+		out.print("<div class=\"col-md-4\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputNameEn\" name=\"txtNameEn\" value=\""+nameEn+"\" >");
+		out.print("</div>");
+		out.print("</div>");
+
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputPg\" class=\"col-md-2 col-form-label text-right\">Product group</label>");
+		out.print("<div class=\"col-md-8\">");
+		out.print("<select name=\"slcPg\" class=\"form-control\" required>");
+		out.print("<option value=0>...</option>");
+		out.print(productGroupOptions);
+		out.print("</select>");
+		out.print("</div>");
+		out.print("</div>");
+
+		out.print("<div class=\"form-group row align-items-center\">");
+		out.print("<label for=\"inputNotes\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Notes</label>");
+		out.print("<div class=\"col-md-10\">");
+		out.print("<textarea class=\"form-control-file\" id=\"inputNotes\" name=\"txtNotes\" rows=8>"+notes+"</textarea>");
+		out.print("</div>");
+		out.print("</div>");
+		out.print("<script language=\"javascript\" type=\"text/javascript\">");
+		out.print("var editor = CKEDITOR.replace('inputNotes');");
+		out.print("</script>");
+	
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputImage\" class=\"col-md-2 col-form-label text-right\">Image</label>");
+		out.print("<div class=\"col-md-4\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputImage\" name=\"txtImage\" value=\""+ image +"\">");
+		out.print("</div>");
+		out.print("</div>");
+		
+		out.print("<div class=\"form-group row\">");
+		out.print("<div class=\"col-sm-12 text-center\">");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"savePc(this.form)\"><i class=\"fas fa-sign-in-alt\"></i>"+lblCre+"</button>&nbsp;");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i>Exit</button>");
+		out.print("</div>");
+		out.print("</div>");
+
+		out.print("<div class=\"form-group row\">");
+		out.print("<div class=\"col-sm-12 text-right\">");
+		out.print("<a href=\"#\">Tiếng Việt?</a>");
+		out.print("</div>");
+		out.print("</div>");
+		
+		if(isEdit) {
+			//truyền giá trị của id cho doPost theo cơ chế form ẩn
+			out.print("<input type=\"hidden\" id=\"idForPost\" value=\""+id+"\" />");		
+		}
+		
+		out.print("</form>");
+		out.print("</div>");
+
+		out.print("</div>");
+		out.print("</div>");
+
 		out.print("</div>");
 		out.print("</div>");
 
@@ -132,7 +234,79 @@ public class ProductCategoryAE extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		//Xác định tập ký tự cần lấy
+		request.setCharacterEncoding("UTF-8");
+		
+		//Lấy id để sửa nếu có
+		int id = Utilities.getIntParam(request, "idForPost");
+		
+		//Lấy thông tin trên giao diện
+		String name = request.getParameter("txtName");
+		
+		String productGroup = request.getParameter("slcPg");
+		
+		// Kiểm tra
+		if(name!=null) {
+			name = name.trim();
+			
+			if(name.equalsIgnoreCase("")) {
+				// Lấy thêm thông tin trên giao diện
+				String image = request.getParameter("txtImage");
+				String notes = request.getParameter("txtNotes");
+				String nameEn = request.getParameter("txtNameEn");
+				
+				//Tạo đối tượng lưu thông tin
+				ProductCategoryObject newPc = new ProductCategoryObject();
+				newPc.setPc_name(Utilities_Support.encode(name));
+				newPc.setPc_name_en(Utilities_Support.encode(nameEn));
+				newPc.setPc_notes(Utilities_Support.encode(notes));
+				newPc.setPc_image(image);
+				
+				//Ngày tạo/sửa sản phẩm
+				String date = DateTime.getFullDate("dd/MM/yyyy");
+				
+				//Tìm thông tin đăng nhập
+				UserObject user = (UserObject) request.getSession().getAttribute("userLogined") ;
+				newPc.setPc_created_author_id(user.getUser_id());
+				newPc.setPc_manager_id(user.getUser_parent_id());
+				
+				//Tim bộ quản lý kêt nối
+				ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
+				
+				//Tạo đói tượng thực thi
+				ProductCategoryControl pcc = new ProductCategoryControl(cp);
+				if(cp==null) {
+					getServletContext().setAttribute("CPool", pcc.getCP());
+				}
+				
+				boolean result;
+				if(id>0) {
+					// cập nhật
+					newPc.setPc_id(id);
+					newPc.setPc_modified_date(date);
+					result = pcc.editProductCategory(newPc);
+				} else {
+					// Thêm mới
+					newPc.setPc_created_date(date);
+					result = pcc.addProductCategory(newPc);
+				}
+				
+				//Trả về kết nối
+				pcc.releaseConnection();
+				
+				//Kiểm tra kết quả
+				if(result) {
+					response.sendRedirect("/adv/pc/view");
+				} else {
+					response.sendRedirect("/adv/pc/ae?err=notok");
+				}	
+			} else {
+				response.sendRedirect("/adv/pc/ae?err=value");
+			}
+		} else {
+			response.sendRedirect("/adv/pc/ae?err=param");
+		}
 	}
 
 }

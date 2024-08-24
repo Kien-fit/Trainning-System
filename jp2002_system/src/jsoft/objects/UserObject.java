@@ -132,7 +132,7 @@ public class UserObject {
 		return user_logined;
 	}
 	public void setUser_logined(short user_logined) {
-		this.user_logined = user_logined;
+		this.user_logined = ++user_logined;
 	}
 	public String getUser_created_date() {
 		return user_created_date;

@@ -8,8 +8,8 @@ public class CategoryControl {
 
 	private CategoryModel cm;
 
-	public CategoryControl(ConnectionPool cp, String objectName) {
-		this.cm = new CategoryModel(cp, objectName);
+	public CategoryControl(ConnectionPool cp) {
+		this.cm = new CategoryModel(cp);
 	}
 
 	protected void finalize() throws Throwable {
@@ -49,10 +49,12 @@ public class CategoryControl {
 
 		return CategoryLibrary.viewCategories(items);
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
+	public String viewSectionOptions(SectionObject item) {
+		
+		ArrayList<SectionObject> items = this.cm.getSectionObjects(item);
+		
+		return CategoryLibrary.viewSectionOptions(items);
 	}
 
 }

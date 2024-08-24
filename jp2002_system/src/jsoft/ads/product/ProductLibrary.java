@@ -52,4 +52,14 @@ public class ProductLibrary {
 		return tmp;
 	}
 
+	public static String viewProductCategoryOptions(ArrayList<ProductCategoryObject> items) {
+		String tmp = "";
+		
+		for(ProductCategoryObject item : items) {
+			tmp +="<option value=\""+item.getPg_id()+"\">";
+			tmp += item.getPg_name();
+			tmp += "</option>";		
+		}
+		return tmp;
+	}
 }

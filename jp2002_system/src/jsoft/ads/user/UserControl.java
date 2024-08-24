@@ -55,18 +55,9 @@ public class UserControl {
 		// Trả về cấu trúc HTML
 		return UserLibrary.viewUsers(items,user);
 	}
-/*
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ConnectionPool cp = new ConnectionPoolImpl();
-
-		UserControl um = new UserControl(cp);
-
-		// Lấy cấu trúc trình bày
-		String view = um.viewUsers(null, (short) 1, (byte) 10);
-		um.releaseConnection();
-
-		System.out.print(view);
 	}
-*/
+
 }

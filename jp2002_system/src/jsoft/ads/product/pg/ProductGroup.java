@@ -14,5 +14,6 @@ public interface ProductGroup extends ProductSystem {
 	// Cac chuc nang lay du lieu
 	public ResultSet getProductGroup(int id);
 	public ResultSet getProductGroups(ProductGroupObject similar, int at, byte total);
-
+	
+	public ResultSet getProductSystems(ProductSystemObject similar);
 }

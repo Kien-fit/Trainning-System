@@ -4,13 +4,12 @@ import java.sql.*;
 
 import jsoft.objects.*;
 import jsoft.*;
-import jsoft.ads.article.section.*;;
+import jsoft.ads.article.category.*;
 
-public class ArticleImpl extends SectionImpl implements Article {
+public class ArticleImpl extends CategoryImpl implements Article {
 
 	public ArticleImpl(ConnectionPool cp, String objectName) {
 		super(cp, objectName);
-		//super(cp, "Article");
 	}
 
 	@Override
@@ -18,7 +17,7 @@ public class ArticleImpl extends SectionImpl implements Article {
 		// TODO Auto-generated method stub
 		
 		String sql = "INSERT INTO tblarticle(";
-		//sql += "article_id, ";
+		
 		sql += "article_title, ";
 		sql += "article_summary, ";
 		sql += "article_content, ";
@@ -50,7 +49,6 @@ public class ArticleImpl extends SectionImpl implements Article {
 		sql += "article_forhome ";
 		sql += ") ";
 		sql += "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		sql += "";
 		
 		//Thực hiện biên dịch
 		try {
@@ -85,7 +83,6 @@ public class ArticleImpl extends SectionImpl implements Article {
 			pre.setBoolean(27, item.isArticle_focus());
 			pre.setByte(28, item.getArticle_type());
 			pre.setBoolean(29, item.isArticle_forhome());
-			
 			
 			return this.add(pre);
 			
@@ -115,7 +112,7 @@ public class ArticleImpl extends SectionImpl implements Article {
 		sql += "article_title=?, ";
 		sql += "article_summary=?, ";
 		sql += "article_content=?, ";
-//		sql += "article_created_date=?, ";
+
 		sql += "article_last_modified=?, ";
 		sql += "article_image=?, ";
 		sql += "article_category_id=?, ";
@@ -131,8 +128,7 @@ public class ArticleImpl extends SectionImpl implements Article {
 		sql += "article_tag_en=?, ";
 		sql += "article_fee=?, ";
 		sql += "article_isfee=?, ";
-		sql += "article_delete=?, ";
-		sql += "article_deleted_date=?, ";
+
 		sql += "article_restored_date=?, ";
 		sql += "article_modified_author_name=?, ";
 		sql += "article_author_permission=?, ";
@@ -143,7 +139,6 @@ public class ArticleImpl extends SectionImpl implements Article {
 		sql += "article_forhome=? ";
 		
 		sql += "WHERE article_id=?";
-		sql += "";
 		
 		//Thực hiện biên dịch
 		try {
@@ -152,34 +147,33 @@ public class ArticleImpl extends SectionImpl implements Article {
 			pre.setString(1, item.getArticle_title());
 			pre.setString(2, item.getArticle_summary());
 			pre.setString(3, item.getArticle_content());
-			pre.setString(4, item.getArticle_created_date());
-			pre.setString(5, item.getArticle_last_modified());
-			pre.setString(6, item.getArticle_image());
-			pre.setShort(7, item.getArticle_category_id());
-			pre.setShort(8, item.getArticle_section_id());
-			pre.setShort(9, item.getArticle_visited());
-			pre.setString(10, item.getArticle_author_name());
-			pre.setBoolean(11, item.isArticle_enable());
-			pre.setString(12, item.getArticle_url_link());
-			pre.setString(13, item.getArticle_tag());
-			pre.setString(14, item.getArticle_title_en());
-			pre.setString(15, item.getArticle_summary_en());
-			pre.setString(16, item.getArticle_content_en());
-			pre.setString(17, item.getArticle_tag_en());
-			pre.setInt(18, item.getArticle_fee());
-			pre.setBoolean(19, item.isArticle_isfee());
-			pre.setBoolean(20, item.isArticle_delete());
-			pre.setString(21, item.getArticle_deleted_date());
-			pre.setString(22, item.getArticle_restored_date());
-			pre.setString(23, item.getArticle_modified_author_name());
-			pre.setByte(24, item.getArticle_author_permission());
-			pre.setString(25, item.getArticle_source());
-			pre.setByte(26, item.getArticle_language());
-			pre.setBoolean(27, item.isArticle_focus());
-			pre.setByte(28, item.getArticle_type());
-			pre.setBoolean(29, item.isArticle_forhome());
+
+			pre.setString(4, item.getArticle_last_modified());
+			pre.setString(5, item.getArticle_image());
+			pre.setShort(6, item.getArticle_category_id());
+			pre.setShort(7, item.getArticle_section_id());
+			pre.setShort(8, item.getArticle_visited());
+			pre.setString(9, item.getArticle_author_name());
+			pre.setBoolean(10, item.isArticle_enable());
+			pre.setString(11, item.getArticle_url_link());
+			pre.setString(12, item.getArticle_tag());
+			pre.setString(13, item.getArticle_title_en());
+			pre.setString(14, item.getArticle_summary_en());
+			pre.setString(15, item.getArticle_content_en());
+			pre.setString(16, item.getArticle_tag_en());
+			pre.setInt(17, item.getArticle_fee());
+			pre.setBoolean(18, item.isArticle_isfee());
 			
-			pre.setInt(30, item.getArticle_id());
+			pre.setString(19, item.getArticle_restored_date());
+			pre.setString(20, item.getArticle_modified_author_name());
+			pre.setByte(21, item.getArticle_author_permission());
+			pre.setString(22, item.getArticle_source());
+			pre.setByte(23, item.getArticle_language());
+			pre.setBoolean(24, item.isArticle_focus());
+			pre.setByte(25, item.getArticle_type());
+			pre.setBoolean(26, item.isArticle_forhome());
+			
+			pre.setInt(27, item.getArticle_id());
 			
 			
 			return this.edit(pre);
@@ -208,11 +202,17 @@ public class ArticleImpl extends SectionImpl implements Article {
 			return false;
 		}
 		
-		String sql = "DELETE FROM tblarticle WHERE article_id=?";
+		String sql = "UPDATE tblarticle SET ";
+		sql += "article_delete=1 ";
+		sql += "article_deleted_date=?, ";
+		sql += "article_last_modified=?, ";
+		sql += "WHERE article_id=?";
 		
 		try {
 			PreparedStatement pre = this.con.prepareStatement(sql);
-			pre.setInt(1, item.getArticle_id());
+			pre.setString(1, item.getArticle_deleted_date());
+			pre.setString(2, item.getArticle_last_modified());
+			pre.setInt(3, item.getArticle_id());
 			
 			return this.del(pre);
 
@@ -235,10 +235,14 @@ public class ArticleImpl extends SectionImpl implements Article {
 	private boolean isEmpty(ArticleObject item) {
 		boolean flag = true;
 		
-		String sql = "SELECT section_id FROM tblsection ";
-		sql += "WHERE (article_section_id="+item.getArticle_id()+")";
+		String sql = "SELECT ae_id FROM tblarticle_extends ";
+		sql += "WHERE (ae_article_id="+item.getArticle_id()+")";
+		
+		String sql2 = "SELECT order_id FROM tblorder ";
+		sql2 += "WHERE (order_article_id="+item.getArticle_id()+")";
 		
 		ResultSet rs = this.gets(sql);
+		ResultSet rs2 = this.gets(sql2);
 		if(rs!=null) {
 			try {
 				if(rs.next()) {
@@ -246,6 +250,18 @@ public class ArticleImpl extends SectionImpl implements Article {
 				}
 				
 				rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(rs2!=null) {
+			try {
+				if(rs2.next()) {
+					flag = false;
+				}
+				
+				rs2.close();
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -263,7 +279,7 @@ public class ArticleImpl extends SectionImpl implements Article {
 		String sql = "SELECT * FROM tblarticle ";
 		sql += "LEFT JOIN tblcategory ON article_category_id=category_id ";
 		sql += "LEFT JOIN tblsection ON category_section_id=section_id ";
-		sql += "WHERE article_id=?";
+		sql += "WHERE ((article_id=?) AND (article_enable=1) AND (article_delete=0))";
 		
 		return this.get(sql, id);
 	}
@@ -275,10 +291,21 @@ public class ArticleImpl extends SectionImpl implements Article {
 		String sql = "SELECT * FROM tblarticle ";
 		sql += "LEFT JOIN tblcategory ON article_category_id=category_id ";
 		sql += "LEFT JOIN tblsection ON category_section_id=section_id ";
-		sql += "";
+		sql += "WHERE ((article_enable=1) AND (article_delete=0))";
 		sql += "ORDER BY article_id DESC ";
 		sql += "LIMIT " + at + ", " + total;
 
+		return this.gets(sql);
+	}
+
+	@Override
+	public ResultSet getCategories(CategoryObject similar) {
+		// TODO Auto-generated method stub
+
+		String sql = "SELECT category_id, category_name FROM tblcategory ";
+		sql += "WHERE ((category_enable=1) AND (category_delete=0))";
+		sql += "ORDER BY category_name ASC ";
+		
 		return this.gets(sql);
 	}
 
@@ -305,6 +332,7 @@ public class ArticleImpl extends SectionImpl implements Article {
 
 					System.out.println(row);
 				}
+				rs.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

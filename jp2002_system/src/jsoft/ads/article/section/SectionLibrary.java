@@ -11,9 +11,10 @@ public class SectionLibrary {
 		
 		tmp += "<tr>";
 		tmp += "<th>STT</th>";
-		tmp += "<th>Ngày tạo</th>";
 		tmp += "<th>Tên chuyên mục</th>";
 		tmp += "<th>Ghi chú</th>";
+		tmp += "<th>Ngày tạo</th>";
+		tmp += "<th>Ngày cập nhật</th>";
 		tmp += "<th colspan=2>Thực hiện</th>";
 		tmp += "<th>Id</th>";
 		tmp += "</tr>";
@@ -25,18 +26,16 @@ public class SectionLibrary {
 			
 			tmp += (NO%2==0)?"<tr class=\"even\">":"<tr>";
 			tmp += "<td class=\"NO\">"+NO+"</td>";
-			tmp += "<td class=\"CREATED_DATE\">"+item.getSection_created_date()+"</td>";
 			tmp += "<td class=\"NAME\">"+item.getSection_name()+"</td>";
 			tmp += "<td class=\"NOTES\">"+item.getSection_notes()+"</td>";
+			tmp += "<td class=\"CREATED_DATE\">"+item.getSection_created_date()+"</td>";
+			tmp += "<td class=\"LAST_MODIFIED\">"+item.getSection_last_modified()+"</td>";
 			tmp += "<td class=\"ED\"><a href=\"/adv/section/ae?id="+item.getSection_id()+"\">Sửa</a></td>";
 			tmp += "<td class=\"ED\"><a href=\"/adv/section/del?id="+item.getSection_id()+"\">Xóa</a></td>";
 			tmp += "<td class=\"ID\">"+item.getSection_id()+"</td>";
-			tmp += "";
-			tmp += "</tr>";
-			
+			tmp += "</tr>";		
 		}
-		tmp += "</table>";
-		
+		tmp += "</table>";		
 		
 		return tmp;
 	}

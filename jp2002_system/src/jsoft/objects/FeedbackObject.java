@@ -1,6 +1,6 @@
 package jsoft.objects;
 
-public class FeedbackObject {
+public class FeedbackObject extends ProductObject {
 	
 	private int feedback_id;
 	private String feedback_title;

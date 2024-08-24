@@ -238,8 +238,7 @@ public class UserImpl extends BasicImpl implements User {
 		boolean flag = true;
 
 		String sql = "SELECT section_id FROM tblsection ";
-		sql += "WHERE (section_manager_id=" + item.getUser_id() + ") OR (section_created_author_id=" + item.getUser_id()
-				+ ")";
+		sql += "WHERE (section_manager_id=" + item.getUser_id() + ") OR (section_created_author_id=" + item.getUser_id() + ")";
 
 		ResultSet rs = this.gets(sql);
 		if (rs != null) {
@@ -324,7 +323,7 @@ public class UserImpl extends BasicImpl implements User {
 		// Tạo đối tượng lưu trữ thông tin
 		UserObject nUser = new UserObject();
 		nUser.setUser_id(60);
-		nUser.setUser_name("anhkien");
+		nUser.setUser_name("kienlv");
 		nUser.setUser_fullname("Lưu Văn Kiên");
 		nUser.setUser_pass("123456789");
 		nUser.setUser_email("vankkientl99@gmail.com");

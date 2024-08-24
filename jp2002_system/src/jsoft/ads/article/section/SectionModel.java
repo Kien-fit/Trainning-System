@@ -5,6 +5,7 @@ import jsoft.objects.*;
 import java.sql.*;
 import java.util.*;
 
+
 public class SectionModel {
 
 	private Section sec;
@@ -50,10 +51,10 @@ public class SectionModel {
 				if (rs.next()) {
 					item = new SectionObject();
 					item.setSection_id(rs.getShort("section_id"));
+					item.setSection_manager_id(rs.getShort("section_manager_id"));
 					item.setSection_name(rs.getString("section_name"));
+					item.setSection_name_en(rs.getString("section_name_en"));
 					item.setSection_notes(rs.getString("section_notes"));
-					item.setSection_created_date(rs.getString("section_created_date"));
-//					item.setSection_last_modified(rs.getString("section_last_modified"));
 				}
 
 				rs.close();
@@ -65,13 +66,13 @@ public class SectionModel {
 		}
 		return item;
 	}
-
+	
 	public ArrayList<SectionObject> getSectionObjects(SectionObject similar, short page, byte total) {
-
+		
 		ArrayList<SectionObject> items = new ArrayList<SectionObject>();
-
+		
 		SectionObject item = null;
-
+		
 		// Lấy dữ liệu
 		int at = (page - 1) * total;
 		ResultSet rs = this.sec.getSections(similar, at, total);
@@ -84,12 +85,12 @@ public class SectionModel {
 					item.setSection_notes(rs.getString("section_notes"));
 					item.setSection_created_date(rs.getString("section_created_date"));
 					item.setSection_last_modified(rs.getString("section_last_modified"));
-
+					
 					items.add(item);
 				}
-
+				
 				rs.close();
-
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -98,7 +99,7 @@ public class SectionModel {
 		return items;
 	}
 
-	public ArrayList<UserObject> getUsers(UserObject similar){
+	public ArrayList<UserObject> getUserObjects(UserObject similar){
 		ArrayList<UserObject> users= new ArrayList<>();
 		
 		ResultSet rs = this.sec.getUsers(similar);
@@ -124,7 +125,6 @@ public class SectionModel {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

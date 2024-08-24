@@ -16,13 +16,13 @@ public class InteriorControl {
 		this.im = null;
 		super.finalize();
 	}
-
-	public void releaseConnection() {
-		this.im.releaseConnection();
-	}
 	
 	public ConnectionPool getCP() {
 		return this.im.getCP();
+	}
+
+	public void releaseConnection() {
+		this.im.releaseConnection();
 	}
 
 	// ------------------------------------------------
@@ -43,7 +43,7 @@ public class InteriorControl {
 		return this.im.getInteriorObject(id);
 	}
 
-	public String getInteriorObject(InteriorObject similar, short page, byte total) {
+	public String ViewInteriors(InteriorObject similar, short page, byte total) {
 
 			ArrayList<InteriorObject> items = new ArrayList<InteriorObject>();
 

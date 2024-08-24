@@ -16,7 +16,7 @@ public class UserLibrary {
 		tmp += "<th>Địa chỉ</th>";
 		tmp += "<th>Hộp thư</th>";
 		tmp += "<th>Điện thoại</th>";
-		tmp += "<th>Lần dăng nhập</th>";
+		tmp += "<th>Số lần đăng nhập</th>";
 		tmp += "<th colspan=2>Thực hiện</th>";
 		tmp += "<th>ID</th>";
 		tmp += "<th></th>";
@@ -38,15 +38,17 @@ public class UserLibrary {
 			tmp += "<td class=\"ADDRESS\">" + item.getUser_address() + "</td>";
 			tmp += "<td class=\"EMAIL\">" + item.getUser_email() + "</td>";
 			tmp += "<td class=\"PHONE\">" + item.getUser_homephone() + "</td>";
-//			tmp += "<td class=\"LOGINED\">" + item.getUser_last_logined() + "</td>";
+			//tmp += "<td class=\"LOGINED\">" + item.getUser_last_logined() + "</td>";
 			tmp += "<td class=\"LOGINED\">" + item.getUser_logined() + "</td>";
 			
 			tmp += "<td class=\"ED\"><a href=\"/adv/user/ae?id="+item.getUser_id()+"\">Sửa</a></td>";
+			
 			if(item.getUser_id()==user.getUser_id()) {
 				tmp += "<td class=\"ED\">...</td>";								
 			}else {
 				tmp += "<td class=\"ED\"><a href=\"javascript:confirmDel('/adv/user/del?id="+item.getUser_id()+"'); void(0);\">Xóa</a></td>";				
 			}
+			
 			tmp += "<td class=\"ID\">" + item.getUser_id() + "</td>";
 			tmp += "</tr>";
 		}

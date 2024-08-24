@@ -10,8 +10,8 @@ public class ArticleModel {
 	//
 	private Article art;
 
-	public ArticleModel(ConnectionPool cp, String objectName) {
-		this.art = new ArticleImpl(cp, objectName);
+	public ArticleModel(ConnectionPool cp) {
+		this.art = new ArticleImpl(cp, "Article");
 	}
 
 	protected void finalize() throws Throwable {
@@ -117,6 +117,29 @@ public class ArticleModel {
 		return items;
 	}
 
+	public ArrayList<CategoryObject> getCategoryObjects(CategoryObject similar){
+		ArrayList<CategoryObject> categories= new ArrayList<>();
+		
+		ResultSet rs = this.art.getCategories(similar);
+		CategoryObject category = null;
+		if(rs!=null) {
+			try {
+				while(rs.next()) {
+					category = new CategoryObject();
+					category.setCategory_id(rs.getShort("category_id"));
+					category.setCategory_name(rs.getString("category_name"));
+
+					categories.add(category);
+				}
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return categories;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

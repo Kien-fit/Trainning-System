@@ -13,6 +13,7 @@ public interface ProductCategory extends ProductGroup {
 
 	// Cac chuc nang lay du lieu
 	public ResultSet getProductCategory(int id);
-	public ResultSet getProductCategorys(ProductCategoryObject similar, int at, byte total);
-
+	public ResultSet getProductCategories(ProductCategoryObject similar, int at, byte total);
+	
+	public ResultSet getProductGroups(ProductGroupObject similar);
 }

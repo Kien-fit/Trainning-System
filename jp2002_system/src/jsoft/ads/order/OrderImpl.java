@@ -20,7 +20,7 @@ public class OrderImpl extends BasicImpl implements Order {
 		String sql = "INSERT INTO tblorder (";
 		sql += "order_article_id, ";
 		sql += "order_customer_id, ";
-		sql += "order_create_date ";
+		sql += "order_created_date ";
 		sql += ") ";
 		sql += "VALUES (?,?,?)";
 		
@@ -55,7 +55,6 @@ public class OrderImpl extends BasicImpl implements Order {
 		String sql = "UPDATE tblorder SET ";
 		sql += "order_article_id=?, ";
 		sql += "order_customer_id=?, ";
-		sql += "order_create_date=? ";
 		
 		sql += "WHERE order_id=?";
 		
@@ -64,9 +63,8 @@ public class OrderImpl extends BasicImpl implements Order {
 			
 			pre.setString(1, item.getOrder_article_id());
 			pre.setString(2, item.getOrder_customer_id());
-			pre.setString(3, item.getOrder_created_date());
 			
-			pre.setInt(4, item.getOrder_id());
+			pre.setInt(3, item.getOrder_id());
 			
 			return this.edit(pre);
 			

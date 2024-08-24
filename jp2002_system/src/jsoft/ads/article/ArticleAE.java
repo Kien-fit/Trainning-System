@@ -67,31 +67,39 @@ public class ArticleAE extends HttpServlet {
 		//Tìm id để sủa nếu có
 		short id = Utilities.getShortParam(request, "id");
 		String name="", content="", nameEng="";
+		int categoryId=0;
+		
+		String categoryOptions = null;
 		
 		String title = "<i class=\"fas fa-plus-circle\"></i>";
-		String lblCre = "Create";
+		String lblCre = "Create";	
 		
 		boolean isEdit = false;
 		
+		// Tìm bộ quản lý kết nối
+		ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
+		
+		// Tạo đối tượng thực thi chức năng
+		ArticleControl ac = new ArticleControl(cp);
+		if(cp==null) {
+			getServletContext().setAttribute("CPool", ac.getCP());
+		}
+		
+		// Lay danh sach the loai
+		categoryOptions = ac.viewCategoryOptions(null);
+		
 		if(id>0) {
-			// Tìm bộ quản lý kết nối
-			ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
-			
-			// Tạo đối tượng thực thi chức năng
-			ArticleControl sc = new ArticleControl(cp, "Article");
 			
 			// Xác định đối tượng sửa
-			ArticleObject eSec = new ArticleObject();
-			
-			// Trả lại kết nối
-			sc.releaseConnection();
+			ArticleObject editArticle = ac.getArticleObject(id);
 			
 			//kiểm tra
-			if(eSec!=null) {
+			if(editArticle!=null) {
 				// Lấy thông tin để sửa
-				name = eSec.getArticle_title();
-				content = eSec.getArticle_content();
-				nameEng = eSec.getArticle_title_en();
+				name = editArticle.getArticle_title();
+				content = editArticle.getArticle_content();
+				nameEng = editArticle.getArticle_title_en();
+				categoryId = editArticle.getArticle_category_id();
 				
 				title = "Cập nhật chuyên mục";
 				lblCre = "Update";
@@ -99,6 +107,9 @@ public class ArticleAE extends HttpServlet {
 				isEdit = true;
 			}
 		}
+		
+		// Trả lại kết nối
+		ac.releaseConnection();
 		
 
 		// Tìm header và include
@@ -109,7 +120,7 @@ public class ArticleAE extends HttpServlet {
 
 		out.print("<div class=\"col-md-10\">");
 		out.print("<div class=\"row mt-flex view-header\">");
-		out.print("<div class=\"col-md-9\">");
+		out.print("<div class=\"col-md-12\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
@@ -117,16 +128,6 @@ public class ArticleAE extends HttpServlet {
 		out.print("<li class=\"breadcrumb-item\">"+title+"</li>");
 		out.print("</ol>");
 		out.print("</nav>");
-		out.print("</div>");
-		out.print("<div class=\"col-md-3\">");
-		out.print("<div class=\"view-search\">");
-		out.print("<form class=\"form-inline\">");
-		out.print("<div class=\"form-group\">");
-		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
-		out.print("</div>");
-		out.print("</form>");
-		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -148,6 +149,23 @@ public class ArticleAE extends HttpServlet {
 		out.print("<div id=\"viewValidName\"></div>");
 		out.print("</div>");
 		out.print("</div>");
+		
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputTitleEng\" class=\"col-md-2 col-form-label text-right\">Titel(English)</label>");
+		out.print("<div class=\"col-md-4\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputTitleEng\" name=\"inputTitleEng\" value=\""+nameEng+"\" >");
+		out.print("</div>");
+		out.print("</div>");
+
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputName\" class=\"col-md-2 col-form-label text-right\">Category</label>");
+		out.print("<div class=\"col-md-8\">");
+		out.print("<select name=\"slcCategory\" class=\"form-control\">");
+		out.print("<option value=0>...</option>");
+		out.print(categoryOptions);
+		out.print("</select>");
+		out.print("</div>");
+		out.print("</div>");
 
 		out.print("<div class=\"form-group row align-items-center\">");
 		out.print("<label for=\"inputContent\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Content</label>");
@@ -156,15 +174,9 @@ public class ArticleAE extends HttpServlet {
 		out.print("</div>");
 		out.print("</div>");
 		out.print("<script language=\"javascript\" type=\"text/javascript\">");
-		out.print("var editor = CKEDITOR.replace('inputNote');");
+		out.print("var editor = CKEDITOR.replace('inputContent');");
 		out.print("</script>");
 
-		out.print("<div class=\"form-group row\">");
-		out.print("<label for=\"inputTitleEng\" class=\"col-md-2 col-form-label text-right\">Titel(English)</label>");
-		out.print("<div class=\"col-md-4\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputTitleEng\" name=\"inputTitleEng\" value=\""+nameEng+"\" >");
-		out.print("</div>");
-		out.print("</div>");
 /*		
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"input\" class=\"col-md-2 col-form-label text-right\"></label>");
@@ -175,10 +187,8 @@ public class ArticleAE extends HttpServlet {
 */		
 		out.print("<div class=\"form-group row\">");
 		out.print("<div class=\"col-sm-12 text-center\">");
-		out.print(
-				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveArticle(this.form)\"><i class=\"fas fa-sign-in-alt\"></i>"+lblCre+"</button>&nbsp;");
-		out.print(
-				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i>Exit</button>");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveArticle(this.form)\"><i class=\"fas fa-sign-in-alt\"></i>"+lblCre+"</button>&nbsp;");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i>Exit</button>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("				");
@@ -230,6 +240,7 @@ public class ArticleAE extends HttpServlet {
 		String name = request.getParameter("txtTitle");
 		String content = request.getParameter("txtContent");
 		String nameEng = request.getParameter("txtTitleEng");
+		String categoryId = request.getParameter("slcCategory");
 		
 		// Kiểm tra
 		if(name!=null && content!=null && nameEng!=null) {
@@ -239,39 +250,42 @@ public class ArticleAE extends HttpServlet {
 			if(name.equalsIgnoreCase("") && content.equalsIgnoreCase("") && nameEng.equalsIgnoreCase("")) {
 				
 				//Tạo đối tượng lưu thông tin
-				ArticleObject nArt = new ArticleObject();
-				nArt.setArticle_title(Utilities_Support.encode(name));
-				nArt.setArticle_content(Utilities_Support.encode(content));
-				nArt.setArticle_title_en(Utilities_Support.encode(nameEng));
-				//nArt.setArticle_name(name);
+				ArticleObject newArticle = new ArticleObject();
+				newArticle.setArticle_title(Utilities_Support.encode(name));
+				newArticle.setArticle_content(Utilities_Support.encode(content));
+				newArticle.setArticle_title_en(Utilities_Support.encode(nameEng));
+				//newArticle.setArticle_category_id(categoryId);
 				
 				//Ngày tạo/sửa chuyên mục
 				String date = DateTime.getFullDate("dd/MM/yyyy");
 				
 				//Tìm thông tin đăng nhập
 				UserObject user = (UserObject) request.getSession().getAttribute("userLogined") ;
-				nArt.setArticle_author_name(user.getUser_name());
+				newArticle.setArticle_author_name(user.getUser_name());
 				
 				//Tim bộ quản lý kêt nối
 				ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
 				
 				//Tạo đói tượng thực thi
-				ArticleControl sc = new ArticleControl(cp, "Article");
+				ArticleControl ac = new ArticleControl(cp);
+				if(cp==null) {
+					getServletContext().setAttribute("CPool", ac.getCP());
+				}
 				
 				boolean result;
 				if(id>0) {
 					//act cập nhật
-					nArt.setArticle_id(id);
-					nArt.setArticle_last_modified(date);
-					result = sc.editArticle(nArt);
+					newArticle.setArticle_id(id);
+					newArticle.setArticle_last_modified(date);
+					result = ac.editArticle(newArticle);
 				} else {
 					//act Thêm
-					nArt.setArticle_last_modified(date);
-					result = sc.addArticle(nArt);
+					newArticle.setArticle_last_modified(date);
+					result = ac.addArticle(newArticle);
 				}
 				
 				//Trả về kết nối
-				sc.releaseConnection();
+				ac.releaseConnection();
 				
 				//Kiểm tra kết quả
 				if(result) {

@@ -110,21 +110,20 @@ public class ProductImpl extends ProductCategoryImpl implements Product {
 		sql += "product_price=?, ";
 		sql += "product_discount_price=?, ";
 		sql += "product_enable=?, ";
-		sql += "product_delete=?, ";
-		sql += "product_visited=?, ";
+
+		
 		sql += "product_total=?, ";
 		sql += "product_manager_id=?, ";
 		sql += "product_intro=?, ";
 		sql += "product_notes=?, ";
 		sql += "product_code=?, ";
-//		sql += "product_created_date=?, ";
+
 		sql += "product_modified_date=?, ";
 		sql += "product_pc_id=?, ";
 		sql += "product_pg_id=?, ";
 		sql += "product_ps_id=?, ";
 		sql += "product_is_detail=?, ";
-		sql += "product_deleted_date=?, ";
-		sql += "product_deleted_author=?, ";
+
 		sql += "product_promotion_price=?, ";
 		sql += "product_sold=?, ";
 		sql += "product_best_seller=?, ";
@@ -134,7 +133,7 @@ public class ProductImpl extends ProductCategoryImpl implements Product {
 		sql += "product_name_en=?, ";
 		sql += "product_customer_id=?, ";
 		sql += "product_perspective_id=?, ";
-		sql += ") ";
+		
 		sql += "WHERE product_id=?";
 
 		try {
@@ -145,32 +144,31 @@ public class ProductImpl extends ProductCategoryImpl implements Product {
 			pre.setInt(3, item.getProduct_price());
 			pre.setInt(4, item.getProduct_discount_price());
 			pre.setBoolean(5, item.isProduct_enable());
-			pre.setBoolean(6, item.isProduct_delete());
-			pre.setShort(7, item.getProduct_visited());
-			pre.setShort(8, item.getProduct_total());
-			pre.setInt(9, item.getProduct_manager_id());
-			pre.setString(10, item.getProduct_intro());
-			pre.setString(11, item.getProduct_notes());
-			pre.setString(12, item.getProduct_code());
-//			pre.setString(13, item.getProduct_created_date());
-			pre.setString(13, item.getProduct_modified_date());
-			pre.setShort(14, item.getProduct_pc_id());
-			pre.setShort(15, item.getProduct_pg_id());
-			pre.setShort(16, item.getProduct_ps_id());
-			pre.setBoolean(17, item.isProduct_is_detail());
-			pre.setString(18, item.getProduct_deleted_date());
-			pre.setString(19, item.getProduct_deleted_author());
-			pre.setInt(20, item.getProduct_promotion_price());
-			pre.setShort(21, item.getProduct_sold());
-			pre.setBoolean(22, item.isProduct_best_seller());
-			pre.setBoolean(23, item.isProduct_promotion());
-			pre.setByte(24, item.getProduct_price_calc_description());
-			pre.setString(25, item.getProduct_size());
-			pre.setString(26, item.getProduct_name_en());
-			pre.setInt(27, item.getProduct_customer_id());
-			pre.setBoolean(28, item.isProduct_perspective_id());
 
-			pre.setInt(29, item.getProduct_id());
+			
+			pre.setShort(6, item.getProduct_total());
+			pre.setInt(7, item.getProduct_manager_id());
+			pre.setString(8, item.getProduct_intro());
+			pre.setString(9, item.getProduct_notes());
+			pre.setString(10, item.getProduct_code());
+
+			pre.setString(11, item.getProduct_modified_date());
+			pre.setShort(12, item.getProduct_pc_id());
+			pre.setShort(13, item.getProduct_pg_id());
+			pre.setShort(14, item.getProduct_ps_id());
+			pre.setBoolean(15, item.isProduct_is_detail());
+
+			pre.setInt(16, item.getProduct_promotion_price());
+			pre.setShort(17, item.getProduct_sold());
+			pre.setBoolean(18, item.isProduct_best_seller());
+			pre.setBoolean(19, item.isProduct_promotion());
+			pre.setByte(20, item.getProduct_price_calc_description());
+			pre.setString(21, item.getProduct_size());
+			pre.setString(22, item.getProduct_name_en());
+			pre.setInt(23, item.getProduct_customer_id());
+			pre.setBoolean(24, item.isProduct_perspective_id());
+
+			pre.setInt(25, item.getProduct_id());
 
 			return this.edit(pre);
 
@@ -197,12 +195,18 @@ public class ProductImpl extends ProductCategoryImpl implements Product {
 			return false;
 		}
 
-		String sql = "DELETE FROM tblproduct WHERE product_id=?";
+		String sql = "UPDATE tblproduct SET ";
+		sql += "product_delete=1, ";
+		sql += "product_deleted_date=?, ";
+		sql += "product_deleted_author=? ";
+		sql += "WHERE product_id=?";
 
 		try {
 			PreparedStatement pre = this.con.prepareStatement(sql);
 
-			pre.setInt(1, item.getProduct_id());
+			pre.setString(1, item.getProduct_deleted_date());
+			pre.setString(2, item.getProduct_deleted_author());
+			pre.setInt(3, item.getProduct_id());
 
 			return this.del(pre);
 
@@ -224,8 +228,8 @@ public class ProductImpl extends ProductCategoryImpl implements Product {
 	public boolean isEmpty(ProductObject item) {
 		boolean flag = true;
 
-		String sql = "SELECT _id FROM tbl ";
-		sql += "WHERE (_id = " + item.getProduct_id() + ") ";
+		String sql = "SELECT feedback_id FROM tblfeedback ";
+		sql += "WHERE (feedback_product_id = " + item.getProduct_id() + ") AND (feedback_view=1)";
 		ResultSet rs = this.gets(sql);
 		if (rs != null) {
 			try {
@@ -242,15 +246,14 @@ public class ProductImpl extends ProductCategoryImpl implements Product {
 	}
 
 	@Override
-	public ResultSet getProduct(short id) {
+	public ResultSet getProduct(int id) {
 		// TODO Auto-generated method stub
 
 		String sql = "SELECT * FROM tblproduct ";
 		sql += "LEFT JOIN tblpc ON product_pc_id=pc_id ";
 		sql += "LEFT JOIN tblpg ON pc_pg_id=pg_id ";
 		sql += "LEFT JOIN tblps ON pg_ps_id=ps_id ";
-		sql += "";
-		sql += "WHERE product_id=?";
+		sql += "WHERE (product_id=?) AND (product_enable=1) AND (product_delete=0)";
 
 		return this.get(sql, id);
 	}
@@ -263,12 +266,25 @@ public class ProductImpl extends ProductCategoryImpl implements Product {
 		sql += "LEFT JOIN tblpc ON product_pc_id=pc_id ";
 		sql += "LEFT JOIN tblpg ON pc_pg_id=pg_id ";
 		sql += "LEFT JOIN tblps ON pg_ps_id=ps_id ";
-		sql += "";
+		sql += "WHERE (product_enable=1) AND (product_delete=0)";
 		sql += "ORDER BY product_id DESC ";
 		sql += "LIMIT " + at + ", " + total;
 
 		return this.gets(sql);
 
+	}
+	
+	@Override
+	public ResultSet getProductCategories(ProductCategoryObject similar) {
+		// TODO Auto-generated method stub
+		
+		String sql = "SELECT pc_id, pc_name FROM tblpc ";
+		sql += "WHERE (pc_delete=0) ";
+//		sql += "AND (pc_enable=1) ";
+		sql += "ORDER BY pc_name DESC ";
+		
+		return this.gets(sql);
+		
 	}
 	
 	public static void main(String[] args) {

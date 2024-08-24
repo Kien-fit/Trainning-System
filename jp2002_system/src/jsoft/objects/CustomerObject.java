@@ -1,6 +1,6 @@
 package jsoft.objects;
 
-public class CustomerObject {
+public class CustomerObject extends ProductObject {
 	
 	private int customer_id;
 	private String customer_fullname;

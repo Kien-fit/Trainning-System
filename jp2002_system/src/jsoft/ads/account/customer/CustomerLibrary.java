@@ -1,4 +1,4 @@
-package jsoft.ads.customer;
+package jsoft.ads.account.customer;
 
 import java.util.*;
 

@@ -3,14 +3,14 @@ package jsoft.ads.article.category;
 import jsoft.*;
 import jsoft.objects.*;
 import java.sql.*;
-import  java.util.*;
+import java.util.*;
 
 public class CategoryModel {
 	
 	private Category cat;
 	
-	public CategoryModel(ConnectionPool cp, String objectName) {
-		this.cat = new CategoryImpl(cp, objectName);
+	public CategoryModel(ConnectionPool cp) {
+		this.cat = new CategoryImpl(cp, "Category");
 	}
 	
 	protected void finalize() throws Throwable{
@@ -27,87 +27,105 @@ public class CategoryModel {
 	}
 	
 	// ------------------------------------------------
-		public boolean addCategory(CategoryObject item) {
-			return this.cat.addCategory(item);
-		}
+	public boolean addCategory(CategoryObject item) {
+		return this.cat.addCategory(item);
+	}
 
-		public boolean editCategory(CategoryObject item) {
-			return this.cat.editCategory(item);
-		}
+	public boolean editCategory(CategoryObject item) {
+		return this.cat.editCategory(item);
+	}
 
-		public boolean delCategory(CategoryObject item) {
-			return this.cat.delCategory(item);
-		}
+	public boolean delCategory(CategoryObject item) {
+		return this.cat.delCategory(item);
+	}
 
-		// ------------------------------------------------
-		public CategoryObject getCategoryObject(short id) {
-			CategoryObject item = null;
+	// ------------------------------------------------
+	public CategoryObject getCategoryObject(short id) {
+		CategoryObject item = null;
 
-			// Lấy dữ liệu
-			ResultSet rs = this.cat.getCategory(id);
-			if (rs != null) {
-				try {
-					if (rs.next()) {
-						item = new CategoryObject();
-						item.setCategory_id(rs.getShort("category_id"));
-						item.setSection_id(rs.getShort("section_id"));
-						item.setCategory_name(rs.getString("category_name"));
-						item.setCategory_notes(rs.getString("category_notes"));
-						item.setCategory_created_date(rs.getString("category_created_date"));
-//						item.setCategory_last_modified(rs.getString("category_last_modified"));
-						item.setCategory_image(rs.getString("category_image"));
+		// Lấy dữ liệu
+		ResultSet rs = this.cat.getCategory(id);
+		if (rs != null) {
+			try {
+				if (rs.next()) {
+					item = new CategoryObject();
+					item.setCategory_id(rs.getShort("category_id"));
+					item.setSection_id(rs.getShort("section_id"));
+					item.setCategory_name(rs.getString("category_name"));
+					item.setCategory_notes(rs.getString("category_notes"));
 
-						item.setCategory_section_id(rs.getInt("category_section_id"));
-					}
-
-					rs.close();
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					item.setCategory_section_id(rs.getInt("category_section_id"));
 				}
+
+				rs.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			return item;
 		}
+		return item;
+	}
 
-		public ArrayList<CategoryObject> getCategoryObjects(CategoryObject similar, short page, byte total) {
+	public ArrayList<CategoryObject> getCategoryObjects(CategoryObject similar, short page, byte total) {
 
-			ArrayList<CategoryObject> items = new ArrayList<CategoryObject>();
+		ArrayList<CategoryObject> items = new ArrayList<CategoryObject>();
 
-			CategoryObject item = null;
+		CategoryObject item = null;
 
-			// Lấy dữ liệu
-			int at = (page - 1) * total;
-			ResultSet rs = this.cat.getCategories(similar, at, total);
-			if (rs != null) {
-				try {
-					while (rs.next()) {
-						item = new CategoryObject();
-						item.setCategory_id(rs.getShort("category_id"));
-						item.setSection_name(rs.getString("section_name"));
-						item.setCategory_name(rs.getString("category_name"));
-						item.setCategory_notes(rs.getString("category_notes"));
-						item.setCategory_created_date(rs.getString("category_created_date"));
-//						item.setCategory_last_modified(rs.getString("category_last_modified"));
-						item.setCategory_image(rs.getString("category_image"));
+		// Lấy dữ liệu
+		int at = (page - 1) * total;
+		ResultSet rs = this.cat.getCategories(similar, at, total);
+		if (rs != null) {
+			try {
+				while (rs.next()) {
+					item = new CategoryObject();
+					item.setCategory_id(rs.getShort("category_id"));
+					item.setSection_name(rs.getString("section_name"));
+					item.setCategory_name(rs.getString("category_name"));
+					item.setCategory_notes(rs.getString("category_notes"));
+					item.setCategory_created_date(rs.getString("category_created_date"));
+					item.setCategory_last_modified(rs.getString("category_last_modified"));
 
-						items.add(item);
-					}
-
-					rs.close();
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					items.add(item);
 				}
+
+				rs.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			return items;
 		}
-	
+		return items;
+	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public ArrayList<SectionObject> getSectionObjects(SectionObject similar) {
 
+		ArrayList<SectionObject> items = new ArrayList<SectionObject>();
+
+		SectionObject item = null;
+
+		// Lấy dữ liệu
+		ResultSet rs = this.cat.getSections(similar);
+		if (rs != null) {
+			try {
+				while (rs.next()) {
+					item = new SectionObject();
+					item.setSection_id(rs.getShort("section_id"));
+					item.setSection_name(rs.getString("section_name"));
+
+					items.add(item);
+				}
+
+				rs.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return items;
 	}
 
 }

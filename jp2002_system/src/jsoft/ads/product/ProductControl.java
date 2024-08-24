@@ -40,7 +40,7 @@ public class ProductControl {
 	}
 
 	// **************************************************
-	public ProductObject getProductObject(short id) {
+	public ProductObject getProductObject(int id) {
 		return this.pm.getProductObject(id);
 	}
 
@@ -49,6 +49,13 @@ public class ProductControl {
 		ArrayList<ProductObject> items = this.pm.getProductObjects(similar, page, total);
 
 		return ProductLibrary.viewProducts(items);
+	}
+	
+	public String viewProductCategoryOptions(ProductCategoryObject similar) {
+		
+		ArrayList<ProductCategoryObject> items = this.pm.getProductCategoryObjects(similar);
+		
+		return ProductLibrary.viewProductCategoryOptions(items);
 	}
 
 	public static void main(String[] args) {

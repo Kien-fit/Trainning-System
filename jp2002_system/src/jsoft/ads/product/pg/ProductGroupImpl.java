@@ -32,7 +32,7 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 		sql += "pg_created_author_id, ";
 		sql += "pg_language ";
 		sql += ") ";
-		sql += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		sql += "VALUES (?,?,?,?,0,?,?,?,?,1,?,?,?)";
 		
 		try {
 			PreparedStatement pre = this.con.prepareStatement(sql);
@@ -41,15 +41,15 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 			pre.setInt(2, item.getPg_ps_id());
 			pre.setInt(3, item.getPg_manager_id());
 			pre.setString(4, item.getPg_notes());
-			pre.setBoolean(5, item.isPg_delete());
-			pre.setString(6, item.getPg_deleted_date());
-			pre.setString(7, item.getPg_deleted_author());
-			pre.setString(8, item.getPg_modified_date());
-			pre.setString(9, item.getPg_created_date());
-			pre.setBoolean(10, item.isPg_enable());
-			pre.setString(11, item.getPg_name_en());
-			pre.setInt(12, item.getPg_created_author_id());
-			pre.setByte(13, item.getPg_language());
+
+			pre.setString(5, item.getPg_deleted_date());
+			pre.setString(6, item.getPg_deleted_author());
+			pre.setString(7, item.getPg_modified_date());
+			pre.setString(8, item.getPg_created_date());
+			
+			pre.setString(9, item.getPg_name_en());
+			pre.setInt(10, item.getPg_created_author_id());
+			pre.setByte(11, item.getPg_language());
 			
 			return this.add(pre);
 			
@@ -77,11 +77,9 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 		sql += "pg_ps_id=?, ";
 		sql += "pg_manager_id=?, ";
 		sql += "pg_notes=?, ";
-		sql += "pg_delete=?, ";
-		sql += "pg_deleted_date=?, ";
-		sql += "pg_deleted_author=?, ";
+
 		sql += "pg_modified_date=?, ";
-		sql += "pg_created_date=?, ";
+
 		sql += "pg_enable=?, ";
 		sql += "pg_name_en=?, ";
 		sql += "pg_created_author_id=?, ";
@@ -96,17 +94,15 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 			pre.setInt(2, item.getPg_ps_id());
 			pre.setInt(3, item.getPg_manager_id());
 			pre.setString(4, item.getPg_notes());
-			pre.setBoolean(5, item.isPg_delete());
-			pre.setString(6, item.getPg_deleted_date());
-			pre.setString(7, item.getPg_deleted_author());
-			pre.setString(8, item.getPg_modified_date());
-			pre.setString(9, item.getPg_created_date());
-			pre.setBoolean(10, item.isPg_enable());
-			pre.setString(11, item.getPg_name_en());
-			pre.setInt(12, item.getPg_created_author_id());
-			pre.setByte(13, item.getPg_language());
 
-			pre.setInt(14, item.getPg_id());
+			pre.setString(5, item.getPg_modified_date());
+
+			pre.setBoolean(6, item.isPg_enable());
+			pre.setString(7, item.getPg_name_en());
+			pre.setInt(8, item.getPg_created_author_id());
+			pre.setByte(9, item.getPg_language());
+
+			pre.setInt(10, item.getPg_id());
 			
 			return this.edit(pre);
 			
@@ -133,10 +129,18 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 			return false;
 		}
 		
-		String sql = "DELETE FROM tblpg WHERE pg_id=?";
+		String sql = "UPDATE tblpg SET ";
+		sql += "pg_delete=1, ";
+		sql += "pg_deleted_date=?, ";
+		sql += "pg_deleted_author=? ";	
+		sql += "WHERE pg_id=?";
+		
+
 		
 		try {
 			PreparedStatement pre = this.con.prepareStatement(sql);
+			pre.setString(1, item.getPg_deleted_date());
+			pre.setString(1, item.getPg_deleted_author());
 			pre.setInt(1, item.getPg_id());
 			
 			return this.del(pre);
@@ -160,8 +164,8 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 	private boolean isEmpty(ProductGroupObject item) {
 		boolean flag = true;
 		
-		String sql = "SELECT _id FROM tbl ";
-		sql += "WHERE (_id="+item.getPg_id()+")";
+		String sql = "SELECT pc_id FROM tblpc ";
+		sql += "WHERE (pc_pg_id="+item.getPg_id()+") AND (pc_enable=1) AND (pc_delete=0)";
 		
 		ResultSet rs = this.gets(sql);
 		if(rs!=null) {
@@ -188,7 +192,7 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 		
 		String sql = "SELECT * FROM tblpg ";
 		sql += "LEFT JOIN tblps ON pg_ps_id=ps_id ";
-		sql += "WHERE pg_id=?";
+		sql += "WHERE (pg_id=?) AND (pg_enable=1) AND (pg_delete=0)";
 
 		return this.get(sql, id);	}
 
@@ -198,19 +202,32 @@ public class ProductGroupImpl extends ProductSystemImpl implements ProductGroup 
 		
 		String sql = "SELECT *FROM tblpg ";
 		sql += "LEFT JOIN tblps ON pg_ps_id=ps_id ";
-		sql += " ";
+		sql += "WHERE (pg_delete=0) ";
+//		sql += "AND (pg_enable=1) ";
 		sql += "ORDER BY pg_id ASC ";
 		sql += "LIMIT " + at + ", " + total;
 
 		return this.gets(sql);	
 	}
 	
+	@Override
+	public ResultSet getProductSystems(ProductSystemObject similar) {
+		// TODO Auto-generated method stub
+		
+		String sql = "SELECT ps_id, ps_name FROM tblps ";
+		sql += "WHERE (ps_delete=0) ";
+//		sql += "AND (ps_enable=1) ";
+		sql += "ORDER BY ps_name ASC ";
+
+		return this.gets(sql);	}
+
+	
 	public static void main(String[] args) {
 		// Tạo đối tượng quản lý kết nối
 		ConnectionPool cp = new ConnectionPoolImpl();
 
 		// Tạo đối tượng thực thi chức năng vào CSDL mức giao tiếp (interface)
-		ProductGroup pg = new ProductGroupImpl(cp, "ProductCategory");
+		ProductGroup pg = new ProductGroupImpl(cp, "ProductGroup");
 
 		// Lấy tập kết quả
 		ResultSet rs = pg.getProductGroups(null, 0, (byte) 10);

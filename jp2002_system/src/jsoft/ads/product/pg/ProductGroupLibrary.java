@@ -38,4 +38,14 @@ public class ProductGroupLibrary {
 		return tmp;
 	}
 
+	public static String viewProductSystemOptions(ArrayList<ProductSystemObject> items) {
+		String tmp = "";
+		
+		for(ProductSystemObject item : items) {
+			tmp +="<option value=\""+item.getPs_id()+"\">";
+			tmp += item.getPs_name();
+			tmp += "</option>";		
+		}
+		return tmp;
+	}
 }

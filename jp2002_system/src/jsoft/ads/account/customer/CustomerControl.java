@@ -1,4 +1,4 @@
-package jsoft.ads.customer;
+package jsoft.ads.account.customer;
 
 import jsoft.*;
 import jsoft.objects.*;
@@ -43,9 +43,9 @@ public class CustomerControl {
 			return this.ctm.getCustomerObject(id);
 		}
 
-		public String getCustomerObject(CustomerObject similar, short page, byte total) {
+		public String viewCustomers(CustomerObject similar, short page, byte total) {
 
-			ArrayList<CustomerObject> items = new ArrayList<CustomerObject>();
+			ArrayList<CustomerObject> items = this.ctm.getCustomerObjects(similar, page, total);
 
 			return CustomerLibrary.viewCustomers(items);
 		}

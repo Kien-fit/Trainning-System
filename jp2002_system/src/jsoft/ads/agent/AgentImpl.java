@@ -95,7 +95,7 @@ public class AgentImpl extends BasicImpl implements Agent {
 		sql += "agent_website=? ";
 		sql += "agent_map=? ";
 		sql += "agent_notes=? ";
-		sql += "agent_created_date=? ";
+
 		sql += "agent_last_modified=? ";
 		sql += "agent_manager_id=? ";
 		sql += "agent_manager_name=? ";
@@ -121,21 +121,21 @@ public class AgentImpl extends BasicImpl implements Agent {
 			pre.setString(5, item.getAgent_website());
 			pre.setString(6, item.getAgent_map());
 			pre.setString(7, item.getAgent_notes());
-			pre.setString(8, item.getAgent_created_date());
-			pre.setString(9, item.getAgent_last_modified());
-			pre.setInt(10, item.getAgent_manager_id());
-			pre.setString(11, item.getAgent_manager_name());
-			pre.setBoolean(12, item.isAgent_enable());
-			pre.setBoolean(13, item.isAgent_delete());
-			pre.setString(14, item.getAgent_boss());
-			pre.setString(15, item.getAgent_boss_mobile());
-			pre.setString(16, item.getAgent_pass());
-			pre.setString(17, item.getAgent_image());
-			pre.setShort(18, item.getAgent_area_id());
-			pre.setString(19, item.getAgent_tax_code());
-			pre.setShort(20, item.getAgent_city_id());
+
+			pre.setString(8, item.getAgent_last_modified());
+			pre.setInt(9, item.getAgent_manager_id());
+			pre.setString(10, item.getAgent_manager_name());
+			pre.setBoolean(11, item.isAgent_enable());
+			pre.setBoolean(12, item.isAgent_delete());
+			pre.setString(13, item.getAgent_boss());
+			pre.setString(14, item.getAgent_boss_mobile());
+			pre.setString(15, item.getAgent_pass());
+			pre.setString(16, item.getAgent_image());
+			pre.setShort(17, item.getAgent_area_id());
+			pre.setString(18, item.getAgent_tax_code());
+			pre.setShort(19, item.getAgent_city_id());
 			
-			pre.setInt(21, item.getAgent_id());
+			pre.setInt(20, item.getAgent_id());
 			
 			return this.edit(pre);
 			
@@ -158,9 +158,9 @@ public class AgentImpl extends BasicImpl implements Agent {
 	public boolean delAgent(AgentObject item) {
 		// TODO Auto-generated method stub
 
-		if(!this.isEmpty(item)) {
-			return false;
-		}
+//		if(!this.isEmpty(item)) {
+//			return false;
+//		}
 		
 		String sql = "DELETE FROM tblagent WHERE agent_id=?";
 		
@@ -185,7 +185,7 @@ public class AgentImpl extends BasicImpl implements Agent {
 		
 		return false;
 	}
-	
+/*
 	private boolean isEmpty(AgentObject item) {
 		boolean flag = true;
 		
@@ -209,7 +209,7 @@ public class AgentImpl extends BasicImpl implements Agent {
 		
 		return flag;
 	}
-
+*/
 
 	@Override
 	public ResultSet getAgent(int id) {

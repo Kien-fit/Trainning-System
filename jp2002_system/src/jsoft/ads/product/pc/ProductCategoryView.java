@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import jsoft.objects.*;
 import jsoft.*;
+import jsoft.library.Utilities_Support;
 
 
 /**
@@ -59,6 +60,26 @@ public class ProductCategoryView extends HttpServlet {
 		// xác định kiểu nội dung xuất về trình khách
 		response.setContentType(CONTENT_TYPE);
 
+		//Tìm bộ quản lý kết nối
+		ConnectionPool cp = (ConnectionPool)getServletContext().getAttribute("CPool");
+		//Tạo đối tượng thực thi chức năng
+		ProductCategoryControl pcc = new ProductCategoryControl(cp);
+
+		// Tìm từ khóa nếu có
+		String key = request.getParameter("txtKeyword");
+		String saveKey = (key!=null) ? Utilities_Support.encode(key.trim()) : "";
+		
+		//Tạo đối tượng bộ lọc
+		ProductCategoryObject similar = new ProductCategoryObject();
+		//Truyền từ khóa tìm kiếm vào tên đăng nhập
+		similar.setPc_name(saveKey);
+		
+		// Lấy cấu trúc trình bày
+		String view = pcc.viewProductCategory(null, (short)1, (byte)10);
+		
+		//Trả lại kết nối
+		pcc.releaseConnection();
+		
 		// Tạo đối tượng xuất nội dung về trình khách
 		PrintWriter out = response.getWriter();
 
@@ -70,7 +91,7 @@ public class ProductCategoryView extends HttpServlet {
 
 		out.print("<div class=\"col-md-10\">");
 		out.print("<div class=\"row mt-flex view-header\">");
-		out.print("<div class=\"col-md-9\">");
+		out.print("<div class=\"col-md-8\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
@@ -80,12 +101,12 @@ public class ProductCategoryView extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3\">");
+		out.print("<div class=\"col-md-4\">");
 		out.print("<div class=\"view-search\">");
-		out.print("<form class=\"form-inline\">");
+		out.print("<form class=\"form-inline\" name=\"frmSearch\" action=\"/adv/pc/view\" method=\"POST\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
+		out.print("<input type=\"text\" id=\"inputKeyword\" name=\"txtKeyword\" value=\""+ saveKey +"\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
 		out.print("</div>");
 		out.print("</form>");
 		out.print("</div>");
@@ -94,18 +115,6 @@ public class ProductCategoryView extends HttpServlet {
 
 		out.print("<div class=\"row\">");
 		out.print("<div class=\"col-md-12\">");
-		
-		//Tìm bộ quản lý kết nối
-		ConnectionPool cp = (ConnectionPool)getServletContext().getAttribute("CPool");
-		//Tạo đối tượng thực thi chức năng
-		ProductCategoryControl sc = new ProductCategoryControl(cp, "ProductCategory");
-
-		// Lấy cấu trúc trình bày
-		String view = sc.viewProductCategory(null, (short)1, (byte)10);
-		
-		//Trả lại kết nối
-		sc.releaseConnection();
-		
 		
 		out.print("<div class=\"view-content\">"+view+"</div>");
 

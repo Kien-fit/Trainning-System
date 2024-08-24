@@ -3,35 +3,35 @@ package jsoft.objects;
 public class ProductObject extends ProductCategoryObject {
 	
 	private int product_id;
-	private String product_name;//Ten san pham
-	private String product_image;//Anh san pham
-	private int product_price;//Gia san pham
-	private int product_discount_price;//Gia chiet khau
-	private boolean product_enable;//Hien thi san pham
-	private boolean product_delete;//Danh dau xoa san pham
-	private short product_visited;//Luot xem san pham
-	private short product_total;//So luong trong kho
-	private int product_manager_id;//Nguoi cap nhat
-	private String product_intro;//Gioi thieu chung
-	private String product_notes;//Ghi chu
-	private String product_code;//Ma quan ly cua san pham
-	private String product_created_date;//Ngay cap nhat
-	private String product_modified_date;//Ngay sua
-	private short product_pc_id;//Loai san pham
-	private short product_pg_id;//Nhom san pham
-	private short product_ps_id;//He san pham
-	private boolean product_is_detail;//Da duoc cap nhat chi tiet chua?
-	private String product_deleted_date;//Ngay xoa
-	private String product_deleted_author;//Nguoi xoa
-	private int product_promotion_price;//Gia khuyen mai
-	private short product_sold;//So luong da ban
-	private boolean product_best_seller;//Ban chay?
-	private boolean product_promotion;//Khuyen mai
-	private byte product_price_calc_description;//Cach tinh gia
-	private String product_size;//Kich thuoc
-	private String product_name_en;//Ten san pham tieng Anh
-	private int product_customer_id;//Ma khach hang
-	private boolean product_perspective_id;//Phoi canh: noi that, ngoai that
+	private String product_name;// Tên sản phẩm
+	private String product_image;// Ảnh sản phẩm
+	private int product_price;// Giá sản phẩm
+	private int product_discount_price;// Giá chiết khấu
+	private boolean product_enable;// Hiển thị sản phẩm
+	private boolean product_delete;// Đánh dấu xóa sản phẩm
+	private short product_visited;// Lượt xem sản phẩm
+	private short product_total;// Số lượng trong kho
+	private int product_manager_id;// Người cập nhật
+	private String product_intro;// Giới thiệu chung
+	private String product_notes;// Ghi chú
+	private String product_code;// Mã quản lý của sản phẩm
+	private String product_created_date;// Ngày cập nhật
+	private String product_modified_date;// Ngày sửa
+	private short product_pc_id;// Loại sản phẩm
+	private short product_pg_id;// Nhóm sản phẩm
+	private short product_ps_id;// Hệ sản phẩm
+	private boolean product_is_detail;// Đã được cập nhật chi tiết chưa?
+	private String product_deleted_date;// Ngày xóa
+	private String product_deleted_author;// Người xóa
+	private int product_promotion_price;// Giá khuyến mại
+	private short product_sold;// Số lượng đã bán
+	private boolean product_best_seller;// Bán chạy?
+	private boolean product_promotion;// Khuyến mãi
+	private byte product_price_calc_description;// Cách tính giá
+	private String product_size;// Kích thước
+	private String product_name_en;// Tên sản phẩm tiếng Anh
+	private int product_customer_id;// Mã khách hàng
+	private boolean product_perspective_id;// Phối cảnh: nội thấ, ngoại thất
 	
 	public int getProduct_id() {
 		return product_id;

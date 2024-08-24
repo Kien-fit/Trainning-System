@@ -15,5 +15,6 @@ public interface ProductSystem extends ShareControl {
 	// Cac chuc nang lay du lieu
 	public ResultSet getProductSystem(int id);
 	public ResultSet getProductSystems(ProductSystemObject similar, int at, byte total);
+	ResultSet getUsers(UserObject similar);
 
 }

@@ -63,9 +63,9 @@ public class UserView extends HttpServlet {
 		
 		// Tìm bộ quản lý kết nối
 		ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
-		// Tạo đối tượng thực thi chức năng
+		// Tạo đối tượng thực thi chức năng mức control
 		UserControl uc = new UserControl(cp);
-		
+		// Nếu cp lúc đầu chưa tồn tại thì hỏi xin ngược trở lại ngữ cảnh
 		if(cp==null) {
 			getServletContext().setAttribute("CPool", uc.getCP());
 		}

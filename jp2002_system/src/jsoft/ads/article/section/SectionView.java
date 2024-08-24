@@ -48,13 +48,13 @@ public class SectionView extends HttpServlet {
 
 		// Kiểm tra
 		if (user != null) {
-			view(request, response, user);
+			view(request, response);
 		} else {
 			response.sendRedirect("/adv/user/login");
 		}
 	}
 
-	protected void view(HttpServletRequest request, HttpServletResponse response, UserObject user) throws ServletException, IOException {
+	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
 		// xác định kiểu nội dung xuất về trình khách
@@ -81,8 +81,7 @@ public class SectionView extends HttpServlet {
 		String view = sc.viewSections(similar, (short)1, (byte)15);
 		
 		// Trả lại kết nối
-		sc.releaseConnection();
-		
+		sc.releaseConnection();	
 		
 		// Tạo đối tượng xuất nội dung về trình khách
 		PrintWriter out = response.getWriter();
@@ -95,7 +94,7 @@ public class SectionView extends HttpServlet {
 
 		out.print("<div class=\"col-md-10\">");
 		out.print("<div class=\"row mt-flex view-header\">");
-		out.print("<div class=\"col-md-9\">");
+		out.print("<div class=\"col-md-8\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
@@ -105,9 +104,9 @@ public class SectionView extends HttpServlet {
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3\">");
+		out.print("<div class=\"col-md-4\">");
 		out.print("<div class=\"view-search\">");
-		out.print("<form class=\"form-inline\">");
+		out.print("<form class=\"form-inline\" name=\"frmSearch\" action=\"/adv/section/view\" method=\"POST\">");
 		out.print("<div class=\"form-group\">");
 		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
 		out.print("<input type=\"text\" id=\"inputKeyword\" name=\"txtKeyword\" value=\""+ saveKey +"\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");

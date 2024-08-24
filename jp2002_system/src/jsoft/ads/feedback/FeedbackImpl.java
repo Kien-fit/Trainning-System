@@ -76,7 +76,7 @@ public class FeedbackImpl extends BasicImpl implements Feedback {
 		sql +="feedback_email=?, ";
 		sql +="feedback_phone=?, ";
 		sql +="feedback_product_id=?, ";
-		sql +="feedback_created_date=?, ";
+
 		sql +="feedback_view=?, ";
 		sql +="feedback_company=?, ";
 		sql +="feedback_intro=? ";
@@ -93,12 +93,12 @@ public class FeedbackImpl extends BasicImpl implements Feedback {
 			pre.setString(5, item.getFeedback_email());
 			pre.setString(6, item.getFeedback_phone());
 			pre.setInt(7, item.getFeedback_product_id());
-			pre.setString(8, item.getFeedback_created_date());
-			pre.setBoolean(9, item.isFeedback_view());
-			pre.setString(10, item.getFeedback_company());
-			pre.setString(11, item.getFeedback_intro());
 
-			pre.setInt(12, item.getFeedback_id());
+			pre.setBoolean(8, item.isFeedback_view());
+			pre.setString(9, item.getFeedback_company());
+			pre.setString(10, item.getFeedback_intro());
+
+			pre.setInt(11, item.getFeedback_id());
 			
 			return this.edit(pre);
 			
@@ -120,10 +120,6 @@ public class FeedbackImpl extends BasicImpl implements Feedback {
 	@Override
 	public boolean delFeedback(FeedbackObject item) {
 		// TODO Auto-generated method stub
-
-		if(!this.isEmpty(item)) {
-			return false;
-		}
 		
 		String sql = "DELETE FROM tblfeedback WHERE feedback_id=?";
 		
@@ -148,31 +144,6 @@ public class FeedbackImpl extends BasicImpl implements Feedback {
 		
 		return false;
 	}
-	
-	private boolean isEmpty(FeedbackObject item) {
-		boolean flag = true;
-		
-		String sql = "SELECT _id FROM tbl ";
-		sql += "WHERE (_id="+item.getFeedback_id()+")";
-		
-		ResultSet rs = this.gets(sql);
-		if(rs!=null) {
-			try {
-				if(rs.next()) {
-					flag = false;
-				}
-				
-				rs.close();
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		return flag;
-	}
-
 
 	@Override
 	public ResultSet getFeedback(int id) {

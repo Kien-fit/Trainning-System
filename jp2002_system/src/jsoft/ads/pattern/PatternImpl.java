@@ -106,7 +106,7 @@ public class PatternImpl extends BasicImpl implements Pattern {
 		sql += "pattern_image1=?, ";
 		sql += "pattern_image2=?, ";
 		sql += "pattern_image3=?, ";
-		sql += "pattern_created_date=?, ";
+
 		sql += "pattern_last_modified=?, ";
 		sql += "pattern_author_name=?, ";
 		sql += "pattern_author_name_comment=?, ";
@@ -138,27 +138,27 @@ public class PatternImpl extends BasicImpl implements Pattern {
 			pre.setString(5, item.getPattern_image1());
 			pre.setString(6, item.getPattern_image2());
 			pre.setString(7, item.getPattern_image3());
-			pre.setString(8, item.getPattern_created_date());
-			pre.setString(9, item.getPattern_last_modified());
-			pre.setString(10, item.getPattern_author_name());
-			pre.setString(11, item.getPattern_author_name_comment());
-			pre.setString(12, item.getPattern_comment());
-			pre.setString(13, item.getPattern_star());
-			pre.setString(14, item.getPattern_size());
-			pre.setShort(15, item.getPattern_ps_id());
-			pre.setShort(16, item.getPattern_pg_id());
-			pre.setShort(17, item.getPattern_pc_id());
-			pre.setString(18, item.getPattern_code());
-			pre.setString(19, item.getPattern_user_view());
-			pre.setShort(20, item.getPattern_visited());
-			pre.setByte(21, item.getPattern_approved());
-			pre.setString(22, item.getPattern_approved_date());
-			pre.setString(23, item.getPattern_approved_name());
-			pre.setShort(24, item.getPattern_user_permis());
-			pre.setBoolean(25, item.isPattern_is_new_comment());
-			pre.setString(26, item.getPattern_new_comment_date());
+
+			pre.setString(8, item.getPattern_last_modified());
+			pre.setString(9, item.getPattern_author_name());
+			pre.setString(10, item.getPattern_author_name_comment());
+			pre.setString(11, item.getPattern_comment());
+			pre.setString(12, item.getPattern_star());
+			pre.setString(13, item.getPattern_size());
+			pre.setShort(14, item.getPattern_ps_id());
+			pre.setShort(15, item.getPattern_pg_id());
+			pre.setShort(16, item.getPattern_pc_id());
+			pre.setString(17, item.getPattern_code());
+			pre.setString(18, item.getPattern_user_view());
+			pre.setShort(19, item.getPattern_visited());
+			pre.setByte(20, item.getPattern_approved());
+			pre.setString(21, item.getPattern_approved_date());
+			pre.setString(22, item.getPattern_approved_name());
+			pre.setShort(23, item.getPattern_user_permis());
+			pre.setBoolean(24, item.isPattern_is_new_comment());
+			pre.setString(25, item.getPattern_new_comment_date());
 			
-			pre.setInt(27, item.getPattern_id());
+			pre.setInt(26, item.getPattern_id());
 			
 			return this.edit(pre);
 			

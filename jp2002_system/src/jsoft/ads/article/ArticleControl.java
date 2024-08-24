@@ -9,19 +9,19 @@ public class ArticleControl {
 	//
 	private ArticleModel am;
 
-	public ArticleControl(ConnectionPool cp, String objectName) {
-		this.am = new ArticleModel(cp, objectName);
+	public ArticleControl(ConnectionPool cp) {
+		this.am = new ArticleModel(cp);
 	}
 
 	protected void finalize() throws Throwable {
 		this.am = null;
 		super.finalize();
 	}
-	
+
 	public void releaseConnection() {
 		this.am.releaseConnection();
 	}
-	
+
 	public ConnectionPool getCP() {
 		return this.am.getCP();
 	}
@@ -48,6 +48,13 @@ public class ArticleControl {
 
 		ArrayList<ArticleObject> items = this.am.getArticleObjects(similar, page, total);
 		return ArticleLibrary.viewArticles(items);
+	}
+
+	public String viewCategoryOptions(CategoryObject item) {
+
+		ArrayList<CategoryObject> items = this.am.getCategoryObjects(item);
+
+		return ArticleLibrary.viewCategoryOptions(items);
 	}
 
 	public static void main(String[] args) {

@@ -16,39 +16,39 @@ public class StatisticControl {
 		this.sm = null;
 		super.finalize();
 	}
-	
-	public void relaeseConnection() {
-		this.sm.releaseConnection();
-	}
-	
+
 	public ConnectionPool getCP() {
 		return this.sm.getCP();
 	}
-	
+
+	public void relaeseConnection() {
+		this.sm.releaseConnection();
+	}
+
 	// ------------------------------------------------
-		public boolean addStatistic(StatisticObject item) {
-			return this.sm.addStatistic(item);
-		}
+	public boolean addStatistic(StatisticObject item) {
+		return this.sm.addStatistic(item);
+	}
 
-		public boolean editStatistic(StatisticObject item) {
-			return this.sm.editStatistic(item);
-		}
+	public boolean editStatistic(StatisticObject item) {
+		return this.sm.editStatistic(item);
+	}
 
-		public boolean delStatistic(StatisticObject item) {
-			return this.sm.delStatistic(item);
-		}
+	public boolean delStatistic(StatisticObject item) {
+		return this.sm.delStatistic(item);
+	}
 
-		// ------------------------------------------------
-		public StatisticObject getStatisticObject(int id) {
-			return this.sm.getStatisticObject(id);
-		}
+	// ------------------------------------------------
+	public StatisticObject getStatisticObject(int id) {
+		return this.sm.getStatisticObject(id);
+	}
 
-		public String getStatisticObject(StatisticObject similar, short page, byte total) {
+	public String viewStatistics(StatisticObject similar, short page, byte total) {
 
-			ArrayList<StatisticObject> items = new ArrayList<StatisticObject>();
+		ArrayList<StatisticObject> items = new ArrayList<StatisticObject>();
 
-			return StatisticLibrary.viewStatistics(items);
-		}
+		return StatisticLibrary.viewStatistics(items);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

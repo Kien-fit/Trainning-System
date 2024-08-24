@@ -1,6 +1,6 @@
 package jsoft.objects;
 
-public class ArticleExtendsObject {
+public class ArticleExtendsObject extends ArticleObject {
 	
 	private int ae_id;
 	private String ae_text200_1;

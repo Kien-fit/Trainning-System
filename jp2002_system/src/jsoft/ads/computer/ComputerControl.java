@@ -17,38 +17,38 @@ public class ComputerControl {
 		super.finalize();
 	}
 
-	public void releaseConnection() {
-		this.cm.releaseConnection();
-	}
-	
 	public ConnectionPool getCP() {
 		return this.cm.getCP();
 	}
 
+	public void releaseConnection() {
+		this.cm.releaseConnection();
+	}
+
 	// ------------------------------------------------
-		public boolean addComputer(ComputerObject item) {
-			return this.cm.addComputer(item);
-		}
+	public boolean addComputer(ComputerObject item) {
+		return this.cm.addComputer(item);
+	}
 
-		public boolean editComputer(ComputerObject item) {
-			return this.cm.editComputer(item);
-		}
+	public boolean editComputer(ComputerObject item) {
+		return this.cm.editComputer(item);
+	}
 
-		public boolean delComputer(ComputerObject item) {
-			return this.cm.delComputer(item);
-		}
+	public boolean delComputer(ComputerObject item) {
+		return this.cm.delComputer(item);
+	}
 
-		// ------------------------------------------------
-		public ComputerObject getComputerObject(short id) {
-			return this.cm.getComputerObject(id);
-		}
+	// ------------------------------------------------
+	public ComputerObject getComputerObject(short id) {
+		return this.cm.getComputerObject(id);
+	}
 
-		public String getComputerObject(ComputerObject similar, short page, byte total) {
+	public String viewComputers(ComputerObject similar, short page, byte total) {
 
-			ArrayList<ComputerObject> items = new ArrayList<ComputerObject>();
+		ArrayList<ComputerObject> items = new ArrayList<ComputerObject>();
 
-			return ComputerLibrary.viewComputers(items);
-		}
+		return ComputerLibrary.viewComputers(items);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

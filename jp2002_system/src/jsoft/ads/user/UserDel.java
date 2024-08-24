@@ -41,7 +41,7 @@ public class UserDel extends HttpServlet {
 
 		// Kiểm tra
 		if (user != null) {
-			// Tim id nguoi su dung
+			// Tìm id người sử dụng
 			int id = jsoft.library.Utilities.getIntParam(request, "id");
 			if (id > 0 && id != user.getUser_id()) {
 				ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");

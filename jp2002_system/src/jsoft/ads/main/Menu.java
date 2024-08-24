@@ -41,7 +41,7 @@ public class Menu extends HttpServlet {
 		// Tạo đối tượng xuất nội dung về trình khách
 		PrintWriter out = response.getWriter();
 
-		// Xac dinh vi tri cua menu
+/*		// Xac dinh vi tri cua menu
 		String uri = request.getRequestURI();
 		String pos = uri.substring(5);// loai bo '/adv/'
 		// Xac dinh vi tri '/'
@@ -64,7 +64,7 @@ public class Menu extends HttpServlet {
 		} else {
 			shows[0] = "show";
 		}
-
+*/
 		out.print("<div class=\"row\">");
 		out.print("<div class=\"col-md-2\">");
 		out.print("<div class=\"menu\">");
@@ -155,6 +155,7 @@ public class Menu extends HttpServlet {
 		out.print("<div id=\"collapseFive\" class=\"collapse\" aria-labelledby=\"headingFive\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
 		out.print("<a href=\"/adv/account/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
+		out.print("<a href=\"/adv/customer/view\"><i class=\"fas fa-clipboard-list\"></i> Khách hàng</a><br />");
 		out.print("<a href=\"/adv/account/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
 		out.print("</div>");
 		out.print("</div>");
@@ -164,14 +165,13 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingSix\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSix\" aria-expanded=\"false\" aria-controls=\"collapseSix\">");
-		out.print("<i class=\"fas fa-user\"></i> Phản hồi");
+		out.print("<i class=\"fas fa-user\"></i> Đặt hàng");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
 		out.print("<div id=\"collapseSix\" class=\"collapse\" aria-labelledby=\"headingSix\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/feedback/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
-		out.print("<a href=\"/adv/feedback/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
+		out.print("<a href=\"/adv/order/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
@@ -180,78 +180,60 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card-header\" id=\"headingSeven\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseSeven\" aria-expanded=\"false\" aria-controls=\"collapseSeven\">");
-		out.print("<i class=\"fas fa-desktop\"></i> Khách hàng");
+		out.print("<i class=\"fas fa-user\"></i> Bình luận");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
 		out.print("<div id=\"collapseSeven\" class=\"collapse\" aria-labelledby=\"headingSeven\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/customer/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
-		out.print("<a href=\"/adv/customer/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
+		out.print("<a href=\"/adv/comment/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
-
+		
 		out.print("<div class=\"card\">");
 		out.print("<div class=\"card-header\" id=\"headingEight\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseEight\" aria-expanded=\"false\" aria-controls=\"collapseEight\">");
-		out.print("<i class=\"fas fa-user\"></i> Đặt hàng");
+		out.print("<i class=\"fas fa-user\"></i> Mẫu");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
 		out.print("<div id=\"collapseEight\" class=\"collapse\" aria-labelledby=\"headingEight\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/order/view\">Danh Sách</a><br />");
-		out.print("<a href=\"/adv/order/ae\">Thêm mới</a>");
+		out.print("<a href=\"/adv/pattern/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
+		out.print("<a href=\"/adv/pattern/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
-
+		
 		out.print("<div class=\"card\">");
 		out.print("<div class=\"card-header\" id=\"headingNine\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseNine\" aria-expanded=\"false\" aria-controls=\"collapseNine\">");
-		out.print("<i class=\"fas fa-user\"></i> Bình luận");
+		out.print("<i class=\"fas fa-user\"></i> Đại lý");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
 		out.print("<div id=\"collapseNine\" class=\"collapse\" aria-labelledby=\"headingNine\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/comment/view\">Danh Sách</a><br />");
-		out.print("<a href=\"/adv/comment/ae\">Thêm mới</a>");
+		out.print("<a href=\"/adv/agent/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
+		out.print("<a href=\"/adv/agent/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
-		
+
 		out.print("<div class=\"card\">");
 		out.print("<div class=\"card-header\" id=\"headingTen\">");
 		out.print("<h2 class=\"mb-0\">");
 		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTen\" aria-expanded=\"false\" aria-controls=\"collapseTen\">");
-		out.print("<i class=\"fas fa-user\"></i> Mẫu");
+		out.print("<i class=\"fas fa-user\"></i> Phản hồi");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
 		out.print("<div id=\"collapseTen\" class=\"collapse\" aria-labelledby=\"headingTen\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/pattern/view\">Danh Sách</a><br />");
-		out.print("<a href=\"/adv/pattern/ae\">Thêm mới</a>");
-		out.print("</div>");
-		out.print("</div>");
-		out.print("</div>");
-		
-		out.print("<div class=\"card\">");
-		out.print("<div class=\"card-header\" id=\"headingTen\">");
-		out.print("<h2 class=\"mb-0\">");
-		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTen\" aria-expanded=\"false\" aria-controls=\"collapseTen\">");
-		out.print("<i class=\"fas fa-user\"></i> Đại lý");
-		out.print("</button>");
-		out.print("</h2>");
-		out.print("</div>");
-		out.print("<div id=\"collapseTen\" class=\"collapse\" aria-labelledby=\"headingTen\" data-parent=\"#accordionExample\">");
-		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/agent/view\">Danh Sách</a><br />");
-		out.print("<a href=\"/adv/agent/ae\">Thêm mới</a>");
+		out.print("<a href=\"/adv/feedback/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
@@ -259,19 +241,34 @@ public class Menu extends HttpServlet {
 		out.print("<div class=\"card\">");
 		out.print("<div class=\"card-header\" id=\"headingEleven\">");
 		out.print("<h2 class=\"mb-0\">");
-		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTen\" aria-expanded=\"false\" aria-controls=\"collapseTen\">");
+		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseEleven\" aria-expanded=\"false\" aria-controls=\"collapseEleven\">");
 		out.print("<i class=\"fas fa-user\"></i> Quảng cáo");
 		out.print("</button>");
 		out.print("</h2>");
 		out.print("</div>");
-		out.print("<div id=\"collapseTen\" class=\"collapse\" aria-labelledby=\"headingEleven\" data-parent=\"#accordionExample\">");
+		out.print("<div id=\"collapseEleven\" class=\"collapse\" aria-labelledby=\"headingEleven\" data-parent=\"#accordionExample\">");
 		out.print("<div class=\"card-body\">");
-		out.print("<a href=\"/adv/advertise/view\">Danh Sách</a><br />");
-		out.print("<a href=\"/adv/advertise/ae\">Thêm mới</a>");
+		out.print("<a href=\"/adv/advertise/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
+		out.print("<a href=\"/adv/advertise/ae\"><i class=\"fas fa-plus-circle\"></i> Thêm mới</a>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
-		
+
+		out.print("<div class=\"card\">");
+		out.print("<div class=\"card-header\" id=\"headingTwelve\">");
+		out.print("<h2 class=\"mb-0\">");
+		out.print("<button class=\"btn btn-link btn-block text-left collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTwelve\" aria-expanded=\"false\" aria-controls=\"collapseTwelve\">");
+		out.print("<i class=\"fas fa-user\"></i> Log");
+		out.print("</button>");
+		out.print("</h2>");
+		out.print("</div>");
+		out.print("<div id=\"collapseTwelve\" class=\"collapse\" aria-labelledby=\"headingTwelve\" data-parent=\"#accordionExample\">");
+		out.print("<div class=\"card-body\">");
+		out.print("<a href=\"/adv/order/view\"><i class=\"fas fa-clipboard-list\"></i> Danh Sách</a><br />");
+		out.print("</div>");
+		out.print("</div>");
+		out.print("</div>");
+
 		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");

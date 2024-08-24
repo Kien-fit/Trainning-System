@@ -9,8 +9,8 @@ public class ProductGroupModel {
 
 	private ProductGroup pg;
 
-	public ProductGroupModel(ConnectionPool cp, String objectname) {
-		this.pg = new ProductGroupImpl(cp, objectname);
+	public ProductGroupModel(ConnectionPool cp) {
+		this.pg = new ProductGroupImpl(cp, "ProductGroup");
 	}
 
 	protected void finalize() throws Throwable {
@@ -106,7 +106,33 @@ public class ProductGroupModel {
 			}
 			return items;
 		}
+		public ArrayList<ProductSystemObject> getProductSystemObjects(ProductSystemObject similar) {
 
+			ArrayList<ProductSystemObject> items = new ArrayList<>();
+
+			ProductSystemObject item = null;
+
+			// Lấy dữ liệu
+			ResultSet rs = this.pg.getProductSystems(similar);
+			if (rs != null) {
+				try {
+					while (rs.next()) {
+						item = new ProductSystemObject();
+						item.setPs_id(rs.getInt("ps_id"));
+						item.setPs_name(rs.getString("ps_name"));
+
+						items.add(item);
+					}
+
+					rs.close();
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return items;
+		}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

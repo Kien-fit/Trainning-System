@@ -17,13 +17,13 @@ public class ArticleExtendsControl {
 		this.aem = null;
 		super.finalize();
 	}
-
-	public void releaseConnection() {
-		this.aem.releaseConnection();
-	}
 	
 	public ConnectionPool getCP() {
 		return this.aem.getCP();
+	}
+
+	public void releaseConnection() {
+		this.aem.releaseConnection();
 	}
 
 	// ------------------------------------------------

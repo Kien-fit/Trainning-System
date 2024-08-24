@@ -14,6 +14,6 @@ public interface Section extends ShareControl {
 	// Cac chuc nang lay du lieu
 	public ResultSet getSection(short id);
 	public ResultSet getSections(SectionObject similar, int at, byte total);
-
+	
 	public ResultSet getUsers(UserObject similar);
 }

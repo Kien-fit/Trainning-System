@@ -58,8 +58,7 @@ public class SectionImpl extends BasicImpl implements Section {
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			
+			}			
 		}
 		
 		return false;
@@ -75,7 +74,7 @@ public class SectionImpl extends BasicImpl implements Section {
 		
 		sql += "section_manager_id=?, ";
 		sql += "section_enable=?, ";
-		sql += "section_delete=?, ";
+
 		sql += "section_last_modified=?, ";
 		
 		sql += "section_name_en=?, ";
@@ -93,13 +92,13 @@ public class SectionImpl extends BasicImpl implements Section {
 			
 			pre.setInt(3, item.getSection_manager_id());
 			pre.setBoolean(4, item.isSection_enable());
-			pre.setBoolean(5, item.isSection_delete());
-			pre.setString(6, item.getSection_last_modified());
+
+			pre.setString(5, item.getSection_last_modified());
 			
-			pre.setString(7, item.getSection_name_en());
-			pre.setByte(8, item.getSection_language());
+			pre.setString(6, item.getSection_name_en());
+			pre.setByte(7, item.getSection_language());
 			
-			pre.setShort(9, item.getSection_id());
+			pre.setShort(8, item.getSection_id());
 			
 			return this.edit(pre);
 			
@@ -127,11 +126,15 @@ public class SectionImpl extends BasicImpl implements Section {
 			return false;
 		}
 		
-		String sql = "DELETE FROM tblsection WHERE section_id=?";
+		String sql = "UPDATE tblsection SET ";
+		sql += "section_delete=1, ";
+		sql += "section_last_modified=? ";
+		sql += "WHERE section_id=?";
 		
 		try {
 			PreparedStatement pre = this.con.prepareStatement(sql);
-			pre.setShort(1, item.getSection_id());
+			pre.setString(1, item.getSection_last_modified());
+			pre.setShort(2, item.getSection_id());
 			
 			return this.del(pre);
 
@@ -155,7 +158,7 @@ public class SectionImpl extends BasicImpl implements Section {
 		boolean flag = true;
 		
 		String sql = "SELECT category_id FROM tblcategory ";
-		sql += "WHERE (category_manager_id="+item.getSection_id()+")";
+		sql += "WHERE ((category_section_id="+item.getSection_id()+") AND (category_enable=1) AND (category_delete=0))";
 		
 		ResultSet rs = this.gets(sql);
 		if(rs!=null) {
@@ -179,7 +182,8 @@ public class SectionImpl extends BasicImpl implements Section {
 	public ResultSet getSection(short id) {
 		// TODO Auto-generated method stub
 
-		String sql = "SELECT * FROM tblsection WHERE section_id=?";
+		String sql = "SELECT * FROM tblsection ";
+		sql += "WHERE ((section_id=?) AND (section_enable=1) AND (section_delete=0))";
 
 		return this.get(sql, id);
 	}
@@ -210,13 +214,22 @@ public class SectionImpl extends BasicImpl implements Section {
 			}
 		}
 */		
-		String sql = "SELECT *FROM tblsection ";
-		
-		sql += "";
+		String sql = "SELECT * FROM tblsection ";
+		sql += "WHERE ((section_enable=1) AND (section_delete=0))";
 		sql += "ORDER BY section_name ASC ";
 		sql += "LIMIT " + at + ", " + total;
 
 		return this.gets(sql);
+	}
+
+	@Override
+	public ResultSet getUsers(UserObject similar) {
+		// TODO Auto-generated method stub
+		
+		String sql = "SELECT user_id, user_name, user_fullname FROM tbluser ";
+		sql	+= "WHERE ((user_parent_id=?) OR (user_id="+similar.getUser_id()+"))";
+			
+		return this.get(sql, similar.getUser_id());
 	}
 
 	public static void main(String[] args) {
@@ -247,16 +260,6 @@ public class SectionImpl extends BasicImpl implements Section {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	@Override
-	public ResultSet getUsers(UserObject similar) {
-		// TODO Auto-generated method stub
-		
-		String sql = "SELECT user_id, user_name, user_fullname FROM tbluser WHERE ((user_parent_id=?) OR (user_id="+similar.getUser_id()+"))";
-		
-		
-		return this.get(sql, similar.getUser_id());
 	}
 
 }

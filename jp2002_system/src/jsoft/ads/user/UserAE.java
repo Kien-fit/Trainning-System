@@ -119,7 +119,7 @@ public class UserAE extends HttpServlet {
 
 		out.print("<div class=\"col-md-10\">");
 		out.print("<div class=\"row mt-flex view-header\">");
-		out.print("<div class=\"col-md-9\">");
+		out.print("<div class=\"col-md-12\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
@@ -127,16 +127,6 @@ public class UserAE extends HttpServlet {
 		out.print("<li class=\"breadcrumb-item\">" + title + "</li>");
 		out.print("</ol>");
 		out.print("</nav>");
-		out.print("</div>");
-		out.print("<div class=\"col-md-3\">");
-		out.print("<div class=\"view-search\">");
-		out.print("<form class=\"form-inline\">");
-		out.print("<div class=\"form-group\">");
-		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
-		out.print("</div>");
-		out.print("</form>");
-		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -155,27 +145,22 @@ public class UserAE extends HttpServlet {
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputName\" class=\"col-md-2 col-form-label text-right\">User name</label>");
 		out.print("<div class=\"col-md-3\">");
-		out.print(
-				"<input type=\"name\" class=\"form-control\" id=\"inputName\" name=\"txtUserName\" onkeyup=\"checkName(this.form)\" "
-						+ readonly + " value=\"" + name + "\">");
+		out.print("<input type=\"name\" class=\"form-control\" id=\"inputName\" name=\"txtUserName\" "
+				+ "onkeyup=\"checkName(this.form)\" " + readonly + " value=\"" + name + "\">");
 		out.print("<div id=\"viewValidName\"></div>");
 		out.print("</div>");
 		out.print("</div>");
 
 		out.print("<div class=\"form-group row\">");
-		out.print(
-				"<label for=\"inputPass\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Password</label>");
+		out.print("<label for=\"inputPass\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Password</label>");
 		out.print("<div class=\"col-md-3\">");
-		out.print(
-				"<input type=\"password\" class=\"form-control-file\" id=\"inputPass\" name=\"txtUserPass\" onkeyup=\"checkPass(this.form)\">");
+		out.print("<input type=\"password\" class=\"form-control-file\" id=\"inputPass\" name=\"txtUserPass\" onkeyup=\"checkPass(this.form)\">");
 		out.print("<div id=\"viewValidPass1\"></div>");
 		out.print("</div>");
 
-		out.print(
-				"<label for=\"inputPass2\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Confirm</label>");
+		out.print("<label for=\"inputPass2\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Confirm</label>");
 		out.print("<div class=\"col-md-3\">");
-		out.print(
-				"<input type=\"password\" class=\"form-control-file\" id=\"inputPass2\" name=\"txtUserPassConfirm\" onkeyup=\"checkPass(this.form)\">");
+		out.print("<input type=\"password\" class=\"form-control-file\" id=\"inputPass2\" name=\"txtUserPassConfirm\" onkeyup=\"checkPass(this.form)\">");
 		out.print("<div id=\"viewValidPass2\"></div>");
 		out.print("</div>");
 		out.print("</div>");
@@ -183,8 +168,7 @@ public class UserAE extends HttpServlet {
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputEmail\" class=\"col-md-2 col-form-label text-right\">Email address</label>");
 		out.print("<div class=\"col-md-3\">");
-		out.print("<input type=\"name\" class=\"form-control\" id=\"inputEmail\" name=\"txtEmail\" value=\"" + email
-				+ "\">");
+		out.print("<input type=\"name\" class=\"form-control\" id=\"inputEmail\" name=\"txtEmail\" value=\"" + email + "\">");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -217,8 +201,7 @@ public class UserAE extends HttpServlet {
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputFullName\" class=\"col-md-2 col-form-label text-right\">Full name</label>");
 		out.print("<div class=\"col-md-3\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputFullName\" name=\"txtFullName\" value=\""
-				+ fullname + "\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputFullName\" name=\"txtFullName\" value=\"" + fullname + "\">");
 		out.print("</div>");
 		out.print("</div>");
 		
@@ -232,15 +215,14 @@ public class UserAE extends HttpServlet {
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputAddress\" class=\"col-md-2 col-form-label text-right\">Address</label>");
 		out.print("<div class=\"col-md-3\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputAddress\" name=\"txtAddress\" value=\""
-				+ address + "\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputAddress\" name=\"txtAddress\" value=\"" + address + "\">");
 		out.print("</div>");
 		out.print("</div>");
 
 		out.print("<div class=\"form-group row\">");
-		out.print("<label for=\"inputbirthdate\" class=\"col-md-2 col-form-label text-right\">BirthDate</label>");
+		out.print("<label for=\"inputBirthdate\" class=\"col-md-2 col-form-label text-right\">BirthDate</label>");
 		out.print("<div class=\"col-md-3\">");
-		out.print("<input type=\"date\" class=\"form-control\" name=\"txtbirthdate\" id=\"inputbirthdate\">");
+		out.print("<input type=\"date\" class=\"form-control\" name=\"txtBirthdate\" id=\"inputBirthdate\">");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -262,29 +244,26 @@ public class UserAE extends HttpServlet {
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputHomePhone\" class=\"col-md-2 col-form-label text-right\">Home Phone</label>");
 		out.print("<div class=\"col-md-2\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputHomePhone\" name=\"txtHomePhone\" value=\""
-				+ phone + "\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputHomePhone\" name=\"txtHomePhone\" value=\"" + phone + "\">");
 		out.print("</div>");
 		out.print("<label for=\"inputOfficePhone\" class=\"col-md-2 col-form-label text-right\">Office Phone</label>");
 		out.print("<div class=\"col-md-2\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputOfficePhone\" name=\"txtOfficePhone\" value=\""
-				+ office + "\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputOfficePhone\" name=\"txtOfficePhone\" value=\"" + office + "\">");
 		out.print("</div>");
 		out.print("<label for=\"inputMobilePhone\" class=\"col-md-2 col-form-label text-right\">Mobile Phone</label>");
 		out.print("<div class=\"col-md-2\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputMobilePhone\" name=\"txtMobilePhone\" value=\""
-				+ mobile + "\">");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputMobilePhone\" name=\"txtMobilePhone\" value=\"" + mobile + "\">");
 		out.print("</div>");
 		out.print("</div>");
 
 		out.print("<div class=\"form-group row align-items-center\">");
-		out.print("<label for=\"inputNote\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Note</label>");
+		out.print("<label for=\"inputNotes\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Notes</label>");
 		out.print("<div class=\"col-md-10\">");
-		out.print("<textarea class=\"form-control-file\" id=\"inputNote\" rows=8>" + notes + "</textarea>");
+		out.print("<textarea class=\"form-control-file\" id=\"inputNotes\" name=\"txtNotes\" rows=8>" + notes + "</textarea>");
 		out.print("</div>");
 		out.print("</div>");
 		out.print("<script language=\"javascript\" type=\"text/javascript\">");
-		out.print("var editor = CKEDITOR.replace('inputNote');");
+		out.print("var editor = CKEDITOR.replace('inputNotes');");
 		out.print("</script>");
 
 		out.print("<div class=\"form-group row\">");
@@ -359,20 +338,20 @@ public class UserAE extends HttpServlet {
 		// Tìm id để ghi nhận sự cập nhật nếu có
 		int id = Utilities.getIntParam(request, "idForPost");
 
-		// Lấy toàn bộ thông tin trên giao diện
-		String name = request.getParameter("txtUserName");
-		String pass = request.getParameter("txtUserPass");
-		String passConfirm = request.getParameter("txtUserPassConfirm");
+		// Lấy thông tin trên giao diện
+		String username = request.getParameter("txtUserName");
+		String userpass = request.getParameter("txtUserPass");
+		String userpassConfirm = request.getParameter("txtUserPassConfirm");
 		String email = request.getParameter("txtEmail");
 
 		// Kiểm tra
-		if (name != null && pass != null && email != null) {
-			name = name.trim();
-			pass = pass.trim();
-			passConfirm = passConfirm.trim();
+		if (username != null && userpass != null && email != null) {
+			username = username.trim();
+			userpass = userpass.trim();
+			userpassConfirm = userpassConfirm.trim();
 			email = email.trim();
 
-			if (!name.equalsIgnoreCase("") && !pass.equalsIgnoreCase("") && pass.equals(passConfirm)
+			if (!username.equalsIgnoreCase("") && !userpass.equalsIgnoreCase("") && userpass.equals(userpassConfirm)
 					&& !email.equalsIgnoreCase("")) {
 
 				// Lấy tiếp thông tin
@@ -381,11 +360,12 @@ public class UserAE extends HttpServlet {
 				String homePhone = request.getParameter("txtHomePhone");
 				String officePhone = request.getParameter("txtOfficePhone");
 				String mobilePhone = request.getParameter("txtMobilePhone");
+				String notes = request.getParameter("txtNotes");
 
 				// Tao đối tượng lưu trữ thông tin mới
 				UserObject nUser = new UserObject();
-				nUser.setUser_name(name);
-				nUser.setUser_pass(pass);
+				nUser.setUser_name(username);
+				nUser.setUser_pass(userpass);
 				nUser.setUser_email(email);
 
 				nUser.setUser_fullname(Utilities_Support.encode(fullName));
@@ -393,6 +373,7 @@ public class UserAE extends HttpServlet {
 				nUser.setUser_homephone(homePhone);
 				nUser.setUser_officephone(officePhone);
 				nUser.setUser_mobilephone(mobilePhone);
+				nUser.setUser_notes(Utilities_Support.encode(notes));
 
 				// Ngày tạo/sửa tài khoản
 				String date = DateTime.getFullDate("dd:MM:yyyy");
@@ -423,7 +404,7 @@ public class UserAE extends HttpServlet {
 					result = uc.addUser(nUser);
 				}
 
-				// trả về kết nối
+				// trả lại kết nối
 				uc.releaseConnection();
 
 				// kiểm tra kết quả
@@ -432,7 +413,6 @@ public class UserAE extends HttpServlet {
 				} else {
 					response.sendRedirect("/adv/user/ae?err=notok");
 				}
-
 			} else {
 				// Trả về thông báo lỗi
 				response.sendRedirect("/adv/user/ae?err=value");

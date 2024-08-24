@@ -17,38 +17,38 @@ public class LogControl {
 		super.finalize();
 	}
 
-	public void relaeseConnection() {
-		this.log.releaseConnection();
-	}
-	
 	public ConnectionPool getCP() {
 		return this.log.getCP();
 	}
-	
+
+	public void releaseConnection() {
+		this.log.releaseConnection();
+	}
+
 	// ------------------------------------------------
-		public boolean addLog(LogObject item) {
-			return this.log.addLog(item);
-		}
+	public boolean addLog(LogObject item) {
+		return this.log.addLog(item);
+	}
 
-		public boolean editLog(LogObject item) {
-			return this.log.editLog(item);
-		}
+	public boolean editLog(LogObject item) {
+		return this.log.editLog(item);
+	}
 
-		public boolean delLog(LogObject item) {
-			return this.log.delLog(item);
-		}
+	public boolean delLog(LogObject item) {
+		return this.log.delLog(item);
+	}
 
-		// ------------------------------------------------
-		public LogObject getLogObject(short id) {
-			return this.log.getLogObject(id);
-		}
+	// ------------------------------------------------
+	public LogObject getLogObject(short id) {
+		return this.log.getLogObject(id);
+	}
 
-		public String getLogObject(LogObject similar, short page, byte total) {
+	public String viewLogs(LogObject similar, short page, byte total) {
 
-			ArrayList<LogObject> items = new ArrayList<LogObject>();
+		ArrayList<LogObject> items = new ArrayList<LogObject>();
 
-			return LogLibrary.viewLogs(items);
-		}
+		return LogLibrary.viewLogs(items);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

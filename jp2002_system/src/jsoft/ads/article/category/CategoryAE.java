@@ -68,30 +68,35 @@ public class CategoryAE extends HttpServlet {
 		short id = Utilities.getShortParam(request, "id");
 		String name="", notes="", nameEng="";
 		
+		String sectionOptions = null;
+		
 		String title = "<i class=\"fas fa-plus-circle\"></i>";
 		String lblCre = "Create";
 		
 		boolean isEdit = false;
 		
+		// Tìm bộ quản lý kết nối
+		ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
+		
+		// Tạo đối tượng thực thi chức năng
+		CategoryControl cc = new CategoryControl(cp);
+		if(cp==null) {
+			getServletContext().setAttribute("CPool", cc.getCP());
+		}
+		//Lấy cấu trúc tùy chọn chuyên đề
+		sectionOptions = cc.viewSectionOptions(null);
+					
 		if(id>0) {
-			// Tìm bộ quản lý kết nối
-			ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
-			
-			// Tạo đối tượng thực thi chức năng
-			CategoryControl sc = new CategoryControl(cp, "Category");
 			
 			// Xác định đối tượng sửa
-			CategoryObject eSec = new CategoryObject();
-			
-			// Trả lại kết nối
-			sc.releaseConnection();
+			CategoryObject editCategory= cc.getCategoryObject(id);
 			
 			//kiểm tra
-			if(eSec!=null) {
+			if(editCategory!=null) {
 				// Lấy thông tin để sửa
-				name = eSec.getCategory_name();
-				notes = eSec.getCategory_notes();
-				nameEng = eSec.getCategory_name_en();
+				name = editCategory.getCategory_name();
+				notes = editCategory.getCategory_notes();
+				nameEng = editCategory.getCategory_name_en();
 				
 				title = "Cập nhật chuyên mục";
 				lblCre = "Update";
@@ -99,6 +104,9 @@ public class CategoryAE extends HttpServlet {
 				isEdit = true;
 			}
 		}
+		
+		// Trả lại kết nối
+		cc.releaseConnection();
 		
 
 		// Tìm header và include
@@ -109,7 +117,7 @@ public class CategoryAE extends HttpServlet {
 
 		out.print("<div class=\"col-md-10\">");
 		out.print("<div class=\"row mt-flex view-header\">");
-		out.print("<div class=\"col-md-9\">");
+		out.print("<div class=\"col-md-12\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>&nbsp;");
@@ -118,16 +126,6 @@ public class CategoryAE extends HttpServlet {
 		out.print("<li class=\"breadcrumb-item\">"+title+"</li>");
 		out.print("</ol>");
 		out.print("</nav>");
-		out.print("</div>");
-		out.print("<div class=\"col-md-3\">");
-		out.print("<div class=\"view-search\">");
-		out.print("<form class=\"form-inline\">");
-		out.print("<div class=\"form-group\">");
-		out.print("<label for=\"inputKeyword\">Tìm kiếm</label>&nbsp;");
-		out.print("<input type=\"text\" id=\"inputKeyword\" class=\"form-control mx-sm-3\" aria-describedby=\"keywordHelpInline\" placeholder=\"Từ khóa\">");
-		out.print("</div>");
-		out.print("</form>");
-		out.print("</div>");
 		out.print("</div>");
 		out.print("</div>");
 
@@ -150,22 +148,33 @@ public class CategoryAE extends HttpServlet {
 		out.print("</div>");
 		out.print("</div>");
 
-		out.print("<div class=\"form-group row align-items-center\">");
-		out.print("<label for=\"inputNote\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Note</label>");
-		out.print("<div class=\"col-md-10\">");
-		out.print("<textarea class=\"form-control-file\" id=\"inputNote\" name=\"txtNotes\" rows=8>"+notes+"</textarea>");
-		out.print("</div>");
-		out.print("</div>");
-		out.print("<script language=\"javascript\" type=\"text/javascript\">");
-		out.print("var editor = CKEDITOR.replace('inputNote');");
-		out.print("</script>");
-
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"inputNameEng\" class=\"col-md-2 col-form-label text-right\">Name(English)</label>");
 		out.print("<div class=\"col-md-4\">");
-		out.print("<input type=\"text\" class=\"form-control\" id=\"inputNameEng\" name=\"inputNameEng\" value=\""+nameEng+"\" >");
+		out.print("<input type=\"text\" class=\"form-control\" id=\"inputNameEng\" name=\"txtNameEng\" value=\""+nameEng+"\" >");
 		out.print("</div>");
 		out.print("</div>");
+
+		out.print("<div class=\"form-group row\">");
+		out.print("<label for=\"inputName\" class=\"col-md-2 col-form-label text-right\">Section</label>");
+		out.print("<div class=\"col-md-8\">");
+		out.print("<select name=\"slcSection\" class=\"form-control\">");
+		out.print("<option value=0>...</option>");
+		out.print(sectionOptions);
+		out.print("</select>");
+		out.print("</div>");
+		out.print("</div>");
+
+		out.print("<div class=\"form-group row align-items-center\">");
+		out.print("<label for=\"inputNotes\" class=\"col-md-2 col-form-label text-right\" text=\"right\">Notes</label>");
+		out.print("<div class=\"col-md-10\">");
+		out.print("<textarea class=\"form-control-file\" id=\"inputNotes\" name=\"txtNotes\" rows=8>"+notes+"</textarea>");
+		out.print("</div>");
+		out.print("</div>");
+		out.print("<script language=\"javascript\" type=\"text/javascript\">");
+		out.print("var editor = CKEDITOR.replace('inputNotes');");
+		out.print("</script>");
+
 /*		
 		out.print("<div class=\"form-group row\">");
 		out.print("<label for=\"input\" class=\"col-md-2 col-form-label text-right\"></label>");
@@ -176,13 +185,10 @@ public class CategoryAE extends HttpServlet {
 */		
 		out.print("<div class=\"form-group row\">");
 		out.print("<div class=\"col-sm-12 text-center\">");
-		out.print(
-				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveCategory(this.form)\"><i class=\"fas fa-sign-in-alt\"></i>"+lblCre+"</button>&nbsp;");
-		out.print(
-				"<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i>Exit</button>");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnLogin\" onClick=\"saveCategory(this.form)\"><i class=\"fas fa-sign-in-alt\"></i>"+lblCre+"</button>&nbsp;");
+		out.print("<button type=\"button\" class=\"btn btn-primary\" name=\"btnExit\" onClick=\"window.close()\"><i class=\"fas fa-sign-out-alt\"></i>Exit</button>");
 		out.print("</div>");
 		out.print("</div>");
-		out.print("				");
 		out.print("<div class=\"form-group row\">");
 		out.print("<div class=\"col-sm-12 text-right\">");
 		out.print("<a href=\"#\">Tiếng Việt?</a>");
@@ -231,48 +237,55 @@ public class CategoryAE extends HttpServlet {
 		String name = request.getParameter("txtName");
 		String notes = request.getParameter("txtNotes");
 		String nameEng = request.getParameter("txtNameEng");
+		String sectionId = request.getParameter("slcSection");
 		
 		// Kiểm tra
-		if(name!=null && notes!=null && nameEng!=null) {
+		if(name!=null && notes!=null && nameEng!=null && sectionId!=null) {
 			name = name.trim();
 			notes = notes.trim();
 			nameEng = nameEng.trim();
-			if(name.equalsIgnoreCase("") && notes.equalsIgnoreCase("") && nameEng.equalsIgnoreCase("")) {
+			sectionId = sectionId.trim();
+			if(name.equalsIgnoreCase("") && notes.equalsIgnoreCase("") 
+					&& nameEng.equalsIgnoreCase("") && sectionId.equalsIgnoreCase("")) {
 				
 				//Tạo đối tượng lưu thông tin
-				CategoryObject nCategory = new CategoryObject();
-				nCategory.setCategory_name(Utilities_Support.encode(name));
-				nCategory.setCategory_notes(Utilities_Support.encode(notes));
-				nCategory.setCategory_name_en(Utilities_Support.encode(nameEng));
-				//nCategory.setCategory_name(name);
+				CategoryObject newCategory = new CategoryObject();
+				newCategory.setCategory_name(Utilities_Support.encode(name));
+				newCategory.setCategory_notes(Utilities_Support.encode(notes));
+				newCategory.setCategory_name_en(Utilities_Support.encode(nameEng));
+				newCategory.setCategory_section_id(Integer.valueOf(sectionId));
+				
 				
 				//Ngày tạo/sửa chuyên mục
 				String date = DateTime.getFullDate("dd/MM/yyyy");
 				
 				//Tìm thông tin đăng nhập
 				UserObject user = (UserObject) request.getSession().getAttribute("userLogined") ;
-				nCategory.setCategory_created_author_id(user.getUser_id());
+				newCategory.setCategory_created_author_id(user.getUser_id());
 				
 				//Tim bộ quản lý kêt nối
 				ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
 				
 				//Tạo đói tượng thực thi
-				CategoryControl sc = new CategoryControl(cp, "Category");
+				CategoryControl cc = new CategoryControl(cp);
+				if(cp==null) {
+					getServletContext().setAttribute("CPool", cc.getCP());
+				}
 				
 				boolean result;
 				if(id>0) {
 					//act cập nhật
-					nCategory.setCategory_id(id);
-					nCategory.setCategory_last_modified(date);
-					result = sc.editCategory(nCategory);
+					newCategory.setCategory_id(id);
+					newCategory.setCategory_last_modified(date);
+					result = cc.editCategory(newCategory);
 				} else {
 					//act Thêm
-					nCategory.setCategory_last_modified(date);
-					result = sc.addCategory(nCategory);
+					newCategory.setCategory_last_modified(date);
+					result = cc.addCategory(newCategory);
 				}
 				
 				//Trả về kết nối
-				sc.releaseConnection();
+				cc.releaseConnection();
 				
 				//Kiểm tra kết quả
 				if(result) {

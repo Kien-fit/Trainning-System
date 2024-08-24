@@ -4,10 +4,9 @@ import java.sql.*;
 import jsoft.objects.*;
 
 import jsoft.*;
-import jsoft.ads.basic.BasicImpl;
+import jsoft.ads.article.ArticleImpl;
 
-
-public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
+public class ArticleExtendsImpl extends ArticleImpl implements ArticleExtends {
 	
 	public ArticleExtendsImpl(ConnectionPool cp) {
 		super(cp, "ArticleExtends");
@@ -20,7 +19,7 @@ public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
 		String sql = "INSERT INTO tblarticle_extends (";	
 		sql += "ae_text200_1, ";
 		sql += "ae_text200_2, ";
-		sql += "ae_text200_3, ";
+		sql += "ae_text200_3, "; 
 		sql += "ae_text200_4, ";
 		sql += "ae_text200_5, ";
 		sql += "ae_byte_1, ";
@@ -149,9 +148,9 @@ public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
 	public boolean delArticleExtends(ArticleExtendsObject item) {
 		// TODO Auto-generated method stub
 
-//		if(!this.isEmpty(item)) {
-//			return false;
-//		}
+		if(!this.isEmpty(item)) {
+			return false;
+		}
 		
 		String sql = "DELETE FROM tblarticle_extends WHERE ae_id=?";
 		
@@ -177,29 +176,29 @@ public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
 		return false;
 	}
 	
-//	private boolean isEmpty(ArticleExtendsObject item) {
-//		boolean flag = true;
-//		
-//		String sql = "SELECT _id FROM tbl ";
-//		sql += "WHERE (_id="+item.getAe_id()+")";
-//		
-//		ResultSet rs = this.gets(sql);
-//		if(rs!=null) {
-//			try {
-//				if(rs.next()) {
-//					flag = false;
-//				}
-//				
-//				rs.close();
-//				
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		return flag;
-//	}
+	private boolean isEmpty(ArticleExtendsObject item) {
+		boolean flag = true;
+		
+		String sql = "SELECT customer_id FROM tblcustomer ";
+		sql += "WHERE (customer_articleextends_id="+item.getAe_id()+")";
+		
+		ResultSet rs = this.gets(sql);
+		if(rs!=null) {
+			try {
+				if(rs.next()) {
+					flag = false;
+				}
+				
+				rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return flag;
+	}
 
 
 	@Override
@@ -214,7 +213,7 @@ public class ArticleExtendsImpl extends BasicImpl implements ArticleExtends {
 	public ResultSet getArticleExtends(ArticleExtendsObject similar, int at, byte total) {
 		// TODO Auto-generated method stub
 		
-		String sql = "SELECT *FROM tblae ";
+		String sql = "SELECT * FROM tblae ";
 		sql += "";
 		sql += "ORDER BY ae_id ASC ";
 		sql += "LIMIT " + at + ", " + total;

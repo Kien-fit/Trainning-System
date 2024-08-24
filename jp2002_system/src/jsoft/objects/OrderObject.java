@@ -1,6 +1,6 @@
 package jsoft.objects;
 
-public class OrderObject {
+public class OrderObject extends CustomerObject {
 	
 	private int order_id;
 	private String order_article_id;// Bai viet duoc doc

@@ -68,15 +68,14 @@ public class View extends HttpServlet {
 
 		out.print("<div class=\"col-md-10\">");
 		out.print("<div class=\"row mt-flex view-header\">");
-		out.print("<div class=\"col-md-9\">");
+		out.print("<div class=\"col-md-8\">");
 		out.print("<nav aria-label=\"breadcrumb\">");
 		out.print("<ol class=\"breadcrumb\">");
 		out.print("<li class=\"breadcrumb-item\"><a href=\"/adv/view\">Dashboard</a></li>");
-//		out.print("<li class=\"breadcrumb-item\"><a href=\"#\"><i class=\"fas fa-plus-circle\"></i></a></li>");
 		out.print("</ol>");
 		out.print("</nav>");
 		out.print("</div>");
-		out.print("<div class=\"col-md-3\">");
+		out.print("<div class=\"col-md-4\">");
 		out.print("<div class=\"view-search\">");
 		out.print("<form class=\"form-inline\">");
 		out.print("<div class=\"form-group\">");

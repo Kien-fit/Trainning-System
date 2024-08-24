@@ -4,26 +4,26 @@
 /*==========  ==========*/
 .logo {
 	height: 10vh;
-	background-color: rgba(0,0,0,0.08);
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	background-color: rgba(0, 0, 0, 0.08);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.02);
 	margin-top: 2vh;
 }
 
 /*==========  ==========*/
 .account {
 	height: 10vh;
-	background-color: rgba(0,0,0,0.03);
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	background-color: rgba(0, 0, 0, 0.03);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.02);
 	margin-top: 2vh;
 }
 
-.account i{
+.account i {
 	text-align: center;
 	font-size: 8vh;
 	margin: 1vh 0 0 1vw;
 }
 
-.account h6{
+.account h6 {
 	margin-top: 1vh;
 }
 
@@ -31,64 +31,72 @@
 .menu {
 	margin-top: 3vh;
 	height: auto;
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.02);
 }
 
 /*==========  ==========*/
 .view-header {
 	margin-top: 3vh;
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.02);
 }
 
 .view-search {
-	padding: 0.28rem 0;
-    margin-bottom: 1rem;
-    background-color: #e9ecef;
-    border-radius: 0.25rem;
+	padding: 0.28rem 0.4rem;
+	margin-bottom: 1rem;
+	background-color: #e9ecef;
+	border-radius: 0.25rem;
 }
 
 .view-content {
 	height: auto;
-	min-height: 55vh;
-	background-color: rgba(225,255,255,0.2);
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	background-color: rgba(255, 255, 255, 0.02);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.02);
 }
+
 .view-content table {
 	width: 100%;
 	border-top: 1px solid white;
 	border-left: 1px solid white;
 }
-.view-content table th, .view table td {
+
+.view-content table th,
+.view-content table td {
 	border-right: 1px solid white;
 	border-bottom: 1px solid white;
 }
-.view-content table th{
+
+.view-content table th {
 	padding: 10px 0;
 	text-align: center;
-	background: rgba(0,0,0,0.3);
-	color: #ffffff;	
+	background: rgba(0, 0, 0, 0.3);
+	color: #ffffff;
 }
-.view-content table td{
+
+.view-content table td {
 	padding: 5px 1px;
 }
-.view-content table .even{
-	background: rgba(0,0,0,0.08);
+
+.view-content table .even {
+	background: rgba(0, 0, 0, 0.08);
 }
-.view-content table .NO, .view table .ED, .view table .ID { width: 3vw; text-align: center; }
-.view-content table .NAME{ width: 10vw; font-weight: bold; }
-.view-content table .ADDRESS{ width: 20vw; }
-.view-content table .PHONE, .view table .LOGINED{ text-align: center; }
-.view-content table .IMAGE{ width: 10vw; }
 
+.view-content table .NO,
+.view-content table .ED,
+.view-content table .ID {
+	width: 3vw;
+	text-align: center;
+}
 
-.view-pagination{
+.view-pagination {
 	margin-top: 1rem;
+	display: none;
 }
+
 /*========== FOOTER ==========*/
 .footer {
 	margin: 3vh 0 2vh 0;
-	height: 15vh;
+	height: 12vh;
 	text-align: center;
-	background-color: rgba(0,0,0,0.05);
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.02);
+	background-color: rgba(0, 0, 0, 0.05);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.02);
 }

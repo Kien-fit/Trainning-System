@@ -50,10 +50,8 @@ function checkPass(fn) {
 
 	var isOke = false;
 	var isOke2 = false;
-
 	//
 	message = "";
-
 	//
 	pass = pass.trim();
 	if (pass == "") {
@@ -78,7 +76,8 @@ function checkPass(fn) {
 		view1.style.color = "blue";
 		return true;
 	}
-//==============================
+	//==============================
+	pass2 = pass2.trim();
 	if (pass2 != pass) {
 		message = "Mật khẩu không khớp.";
 	} else {
@@ -143,9 +142,7 @@ function generateRole(fn) {
 		}
 
 		role += "<div class=\"col-md-4\">";
-		role += "<input class=\"form-check-input\" type=\"checkbox\" id=\"chk"
-				+ i
-				+ "\" disabled name=\"chkCheck\" onclick=\"checkPermis(this.form)\">";
+		role += "<input class=\"form-check-input\" type=\"checkbox\" id=\"chk" + i + "\" disabled name=\"chkCheck\" onclick=\"checkPermis(this.form)\">";
 		role += "<label class=\"form-check-label\" for=\"chk" + i + "\">";
 		role += roles[i];
 		role += "</label>";

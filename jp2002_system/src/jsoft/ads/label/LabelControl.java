@@ -16,39 +16,39 @@ public class LabelControl {
 		this.lm = null;
 		super.finalize();
 	}
-
-	public void releaseConnection() {
-		this.lm.releaseConnection();
-	}
 	
 	public ConnectionPool getCP() {
 		return this.lm.getCP();
 	}
 
+	public void releaseConnection() {
+		this.lm.releaseConnection();
+	}
+
 	// ------------------------------------------------
-		public boolean addLabel(LabelObject item) {
-			return this.lm.addLabel(item);
-		}
+	public boolean addLabel(LabelObject item) {
+		return this.lm.addLabel(item);
+	}
 
-		public boolean editLabel(LabelObject item) {
-			return this.lm.editLabel(item);
-		}
+	public boolean editLabel(LabelObject item) {
+		return this.lm.editLabel(item);
+	}
 
-		public boolean delLabel(LabelObject item) {
-			return this.lm.delLabel(item);
-		}
+	public boolean delLabel(LabelObject item) {
+		return this.lm.delLabel(item);
+	}
 
-		// ------------------------------------------------
-		public LabelObject getLabelObject(int id) {
-			return this.lm.getLabelObject(id);
-		}
+	// ------------------------------------------------
+	public LabelObject getLabelObject(int id) {
+		return this.lm.getLabelObject(id);
+	}
 
-		public String getLabelObject(LabelObject similar, short page, byte total) {
+	public String viewLabels(LabelObject similar, short page, byte total) {
 
-			ArrayList<LabelObject> items = new ArrayList<LabelObject>();
+		ArrayList<LabelObject> items = new ArrayList<LabelObject>();
 
-			return LabelLibrary.viewLabels(items);
-		}
+		return LabelLibrary.viewLabels(items);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

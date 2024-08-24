@@ -41,7 +41,7 @@ public class ProductModel {
 	}
 
 	// **************************************************
-	public ProductObject getProductObject(short id) {
+	public ProductObject getProductObject(int id) {
 		ProductObject item = null;
 
 		// Lấy dữ liệu
@@ -131,14 +131,40 @@ public class ProductModel {
 
 		return items;
 	}
+	public ArrayList<ProductCategoryObject> getProductCategoryObjects(ProductCategoryObject similar) {
 
+		ArrayList<ProductCategoryObject> items = new ArrayList<>();
+
+		ProductCategoryObject item = null;
+
+		// Lấy dữ liệu
+		ResultSet rs = this.sp.getProductCategories(similar);
+		if (rs != null) {
+			try {
+				while (rs.next()) {
+					item = new ProductCategoryObject();
+					item.setPc_id(rs.getInt("pc_id"));
+					item.setPc_name(rs.getString("pc_name"));
+					
+					items.add(item);
+				}
+
+				rs.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return items;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		// Tạo bộ quản lý kết nối
 		ConnectionPool cp = new ConnectionPoolImpl();
 
-		// Tạo đối tượng thực thii chức năng mới Model
+		// Tạo đối tượng thực thi chức năng mới Model
 		ProductModel um = new ProductModel(cp);
 
 		ArrayList<ProductObject> Products = um.getProductObjects(null, (short) 1, (byte) 10);

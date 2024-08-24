@@ -78,12 +78,12 @@ public class CategoryImpl extends SectionImpl implements Category {
 		sql += "category_name=?, ";
 		sql += "category_section_id=?, ";
 		sql += "category_notes=?, ";
-//		sql += "category_created_date=?, ";
+
 		sql += "category_manager_id=?, ";
 		sql += "category_enable=?, ";
-		sql += "category_delete=?, ";
+
 		sql += "category_last_modified=?, ";
-//		sql += "category_created_author_id=?, ";
+
 		sql += "category_image=?, ";
 		sql += "category_name_en=?, ";
 		sql += "category_language=? ";
@@ -98,17 +98,17 @@ public class CategoryImpl extends SectionImpl implements Category {
 			pre.setString(1, item.getCategory_name());
 			pre.setInt(2, item.getCategory_section_id());
 			pre.setString(3, item.getCategory_notes());
-//			pre.setString(4, item.getCategory_created_date());
+
 			pre.setInt(4, item.getCategory_manager_id());
 			pre.setBoolean(5, item.isCategory_enable());
-			pre.setBoolean(6, item.isCategory_delete());
-			pre.setString(7, item.getCategory_last_modified());
-//			pre.setInt(9, item.getCategory_created_author_id());
-			pre.setString(8, item.getCategory_image());
-			pre.setString(9, item.getCategory_name_en());
-			pre.setByte(10, item.getCategory_language());
+
+			pre.setString(6, item.getCategory_last_modified());
+
+			pre.setString(7, item.getCategory_image());
+			pre.setString(8, item.getCategory_name_en());
+			pre.setByte(9, item.getCategory_language());
 			
-			pre.setInt(11, item.getCategory_id());
+			pre.setInt(10, item.getCategory_id());
 			
 			return this.add(pre);
 			
@@ -121,10 +121,8 @@ public class CategoryImpl extends SectionImpl implements Category {
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			
-		}
-		
+			}			
+		}	
 		
 		return false;
 	}
@@ -137,11 +135,15 @@ public class CategoryImpl extends SectionImpl implements Category {
 			return false;
 		}
 		
-		String sql = "DELETE FROM tblcategory WHERE category_id=?";
+		String sql = "UPDATE tblcategory SET ";
+		sql += "category_delete=1, ";
+		sql += "category_last_modified=? ";
+		sql += "WHERE category_id=?";
 		
 		try {
 			PreparedStatement pre = this.con.prepareStatement(sql);
-			pre.setInt(1, item.getCategory_id());
+			pre.setString(1, item.getCategory_last_modified());
+			pre.setInt(2, item.getCategory_id());
 			
 			return this.del(pre);
 
@@ -165,7 +167,7 @@ public class CategoryImpl extends SectionImpl implements Category {
 		boolean flag = true;
 		
 		String sql = "SELECT article_id FROM tblarticle ";
-		sql += "WHERE (article_category_id="+item.getCategory_id()+")";
+		sql += "WHERE ((article_category_id="+item.getCategory_id()+") AND (category_enable=1) AND (category_delete=0))";
 		
 		ResultSet rs = this.gets(sql);
 		if(rs!=null) {
@@ -191,24 +193,35 @@ public class CategoryImpl extends SectionImpl implements Category {
 
 		String sql = "SELECT * FROM tblcategory ";
 		sql += "LEFT JOIN tblsection ON category_section_id=section_id ";
-		sql += "WHERE category_id=?";
+		sql += "WHERE ((category_id=?) AND (category_enable=1) AND (category_delete=0))";
+
 
 		return this.get(sql, id);
 	}
-
+	
 	@Override
 	public ResultSet getCategories(CategoryObject similar, int at, byte total) {
 		// TODO Auto-generated method stub
-
+		
 		String sql = "SELECT * FROM tblcategory ";
 		sql += "LEFT JOIN tblsection ON category_section_id=section_id ";
-		sql += "";
+		sql += "WHERE ((category_enable=1) AND (category_delete=0))";
 		sql += "ORDER BY category_name ASC ";
 		sql += "LIMIT " + at + ", " + total;
 		
 		return this.gets(sql);
 	}
 
+	@Override
+	public ResultSet getSections(SectionObject similar) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT section_id, section_name FROM tblsection ";	
+		sql += "WHERE ((section_enable=1) AND (section_delete=0))";
+		sql += "ORDER BY section_name ASC ";
+
+		return this.gets(sql);
+	}
+	
 	public static void main(String[] args) {
 		// Tạo đối tượng quản lý kết nối
 		ConnectionPool cp = new ConnectionPoolImpl();
@@ -241,5 +254,4 @@ public class CategoryImpl extends SectionImpl implements Category {
 		}
 
 	}
-
 }

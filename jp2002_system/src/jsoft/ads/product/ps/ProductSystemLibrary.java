@@ -36,4 +36,15 @@ public class ProductSystemLibrary {
 		return tmp;
 	}
 
+	public static String viewUserOptions(ArrayList<UserObject> items) {
+		String tmp = "";
+		
+		for(UserObject item:items) {
+			tmp+= "<option value=\""+item.getUser_id()+"\">";
+			tmp+= item.getUser_name() +" ("+item.getUser_fullname()+")";
+			tmp+= "</option>";
+		}
+		
+		return tmp;
+	}
 }
